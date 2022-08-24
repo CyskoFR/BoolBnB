@@ -24,6 +24,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+
+        //qui va il task scheduler:
+        //https://laravel.com/docs/7.x/scheduling#defining-schedules
+        //creare un new command per terminare le promozioni: php artisan make:command CheckPromotionStatus
+        //https://laravel.com/docs/7.x/artisan#writing-commands
         // $schedule->command('inspire')->hourly();
     }
 
