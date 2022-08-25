@@ -28,8 +28,10 @@ class CreateMessagesTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::dropIfExists('messages');
-    }
+    public function down(){
+    Schema::table('apartments', function(Blueprint $table){
+        $table->dropForeign(['apartment_id']);
+        $table->dropIfExists('messages');
+    });
+}
 }
