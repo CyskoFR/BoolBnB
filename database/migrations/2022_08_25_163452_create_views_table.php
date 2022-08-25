@@ -28,6 +28,9 @@ class CreateViewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('views');
+        Schema::table('apartments', function(Blueprint $table){
+            $table->dropForeign(['apartment_id']);
+            $table->dropIfExists('views');
+        });
     }
 }
