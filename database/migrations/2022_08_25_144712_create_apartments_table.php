@@ -18,7 +18,7 @@ class CreateApartmentsTable extends Migration
             //fk users
              $table->foreignId('user_id')->constrained()->onDelete('cascade');
             // fk categories **** da fixare cascade => set null ****
-             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade')->nullable();
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
             $table->string('name');
             $table->tinyInteger('rooms')->unsigned(); // da 0 a 255
             $table->tinyInteger('beds')->unsigned();
@@ -42,8 +42,8 @@ class CreateApartmentsTable extends Migration
     public function down()
     {
         Schema::table('apartments', function(Blueprint $table){
-            $table->dropForeign(['category_id']);
             $table->dropForeign(['user_id']);
+            $table->dropForeign(['category_id']);
             $table->dropIfExists('apartments');
         });
     }
