@@ -22,3 +22,6 @@ class CategoriesTableSeeder extends Seeder
         }
     }
 }
+
+
+
