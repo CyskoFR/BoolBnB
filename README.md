@@ -125,6 +125,6 @@ If you don't feel like reading, [Laracasts](https://laracasts.com) can help.
 -   Creazione seeder:
     > `php artisan make:seeder (Table-name)TableSeeder`
 -   Esegue seed specifico per la classe passata come parametro --class:
-    > `php artisan db:seed --class:(Table-name)TableSeeder`
+    > `php artisan db:seed --class=(Table-name)Seeder`
 -   Seed globale del database (va settato a mano):
     > `php artisan db:seed`
