@@ -11,6 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        //seeder globale database
+         $this->call(
+            [SponsorshipsTableSeeder::class,
+            CategoriesTableSeeder::class, 
+            ServicesTableSeeder::class]);
     }
 }
