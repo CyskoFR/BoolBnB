@@ -17,7 +17,7 @@ class CreateApartmentsTable extends Migration
             $table->id();
             //fk users
              $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            // fk categories **** da fixare cascade => set null ****
+            // fk categories
             $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
             $table->string('name');
             $table->tinyInteger('rooms')->unsigned(); // da 0 a 255
