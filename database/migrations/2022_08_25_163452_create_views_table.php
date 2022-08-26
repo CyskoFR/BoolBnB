@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateViewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('views', function (Blueprint $table) {
             $table->id();
-            $table->string('email', 50 )->unique();
-            $table->string('password');
-            $table->string('first_name', 50);
-            $table->string('last_name', 50);
-            $table->date('birth_date');
+            $table->ipAddress('visitor_ip');
+            $table->foreignId('apartment_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +28,9 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::table('apartments', function(Blueprint $table){
+            $table->dropForeign(['apartment_id']);
+            $table->dropIfExists('views');
+        });
     }
 }
