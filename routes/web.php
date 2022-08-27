@@ -20,7 +20,7 @@ Route::middleware('auth')
     ->name('admin.')
     ->prefix('admin')
     ->group(function(){
-        Route::get('/home', 'HomeController@index')->name('home');
+        Route::get('/dashboard', 'HomeController@index')->name('dashboard');
         Route::resource('apartments', 'ApartmentController');
     });
 
