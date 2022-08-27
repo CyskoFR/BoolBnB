@@ -27,7 +27,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.apartments.create' );
     }
 
     /**
@@ -38,7 +38,7 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // richiesta post per create apartment al database
     }
 
     /**
@@ -47,9 +47,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ApartmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.apartments.edit');
     }
 
     /**
@@ -81,8 +81,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Apartment $apartment)
     {
-        //
+        $apartment->delete();
+        return redirect('admin.apartments.index');
     }
 }
