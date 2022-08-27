@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Apartment;
+use App\Category;
+use App\Service;
 
 class ApartmentController extends Controller
 {
@@ -27,7 +29,10 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $services = Service::all();
+
+        return view('admin.apartments.create', compact('categories', 'services') );
     }
 
     /**
@@ -38,7 +43,7 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // richiesta post per create apartment al database
     }
 
     /**
@@ -47,9 +52,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
@@ -60,7 +65,7 @@ class ApartmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.apartments.edit');
     }
 
     /**
@@ -81,8 +86,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Apartment $apartment)
     {
-        //
+        $apartment->delete();
+        return redirect('admin.apartments.index');
     }
 }

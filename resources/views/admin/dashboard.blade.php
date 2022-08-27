@@ -16,8 +16,9 @@
 
                     {{ __('You are logged in!') }}
                 </div>
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <a href="{{route('admin.apartments.index')}}">Index Appartamenti</a>
+                    <a href="{{route('admin.apartments.create')}}">Aggiungi un' appartamento</a>
                 </div>
             </div>
         </div>
