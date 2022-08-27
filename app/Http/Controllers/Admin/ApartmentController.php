@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Apartment;
+use App\Category;
+use App\Service;
 
 class ApartmentController extends Controller
 {
@@ -27,7 +29,10 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('admin.apartments.create' );
+        $categories = Category::all();
+        $services = Service::all();
+
+        return view('admin.apartments.create', compact('categories', 'services') );
     }
 
     /**

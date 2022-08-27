@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- @dd($apartment) --}}
+-- @dd($apartment->user) --
 <div class="container text-capitalize">
     <h1 class="text-center">dettaglio appartamento in back-office</h1>
     <h2>{{$apartment->name}}</h2>
