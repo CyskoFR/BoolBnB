@@ -9,12 +9,15 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                     @endif
 
                     {{ __('You are logged in!') }}
+                </div>
+                <div class="card-body">
+                    <a href="{{route('admin.apartments.index')}}">Index Appartamenti</a>
                 </div>
             </div>
         </div>
