@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container text-capitalize">
+<div class="container text-capitalize " id="index">
     <h1 class="text-center">questo e' l'index degli apartments</h1>
     @foreach ($apartments as $apartment)
     <a href="{{route('admin.apartments.show', $apartment)}}

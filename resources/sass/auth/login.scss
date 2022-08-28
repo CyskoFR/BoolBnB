@@ -1,0 +1,27 @@
+div #login {
+    background-color: $bg-primary-dark;
+    .card {
+        border: 2px solid $primary-green;
+    }
+    .card-header {
+        background-color: $bg-secondary-dark;
+        color: $text-gray-light;
+        font-weight: bold;
+        border-bottom: 1px solid $primary-green;
+    }
+    .card-body {
+        background-color: $bg-secondary-dark;
+        color: $text-gray-light;
+        font-weight: bold;
+        button {
+            background-color: $primary-green-light;
+            border: 1px solid $primary-green-light;
+
+            &:hover {
+                background-color: whitesmoke;
+                border: 1px solid $primary-green-light;
+                color: $text-gray-dark;
+            }
+        }
+    }
+}
