@@ -49,19 +49,29 @@ class ApartmentController extends Controller
         // richiesta post per create apartment al database
 
         //validazione
-        
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'rooms' => 'required|integer|min:1|max:255',
+            'beds' => 'required|integer|min:1|max:255',
+            'bathrooms' => 'required|integer|min:1|max:255',
+            'description' => 'required|string|max:65535',
+            'size' => 'required|integer|min:10|max:65535',
+            'full_address' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,bmp,png',
+            'is_visible' => 'sometimes|accepted',
+            'category_id' => 'required|exists:categories,id',
+            'services' => 'sometimes|exists:services,id'
+        ]);
         //store
         $data = $request->all();
+        //fetch geo data appartamento
         $indirizzo = $data['full_address'];
         $geo = Http::get("https://api.tomtom.com/search/2/search/{$indirizzo}.json", [
-            'key' => env('API_KEY_TOMTOM'),
+            'key' => 'RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2',
             'countrySet' => 'IT'
         ]);
         
         $geo_json = json_decode($geo);
-
-
-        //curl 'https://api.tomtom.com/search/2/search/Via madonna della salute 13a.json?key=RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2%countrySet=IT
         
         //creazione appartamento
         $apartment = new Apartment();
