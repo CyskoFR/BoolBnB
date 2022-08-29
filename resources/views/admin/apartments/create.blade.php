@@ -72,7 +72,7 @@
             <div class="custom-control custom-checkbox col-6 col-md-4 col-lg-2 ">
                 <input type="checkbox" class="custom-control-input" name="services[]" value="{{$service->id}}"
                     id="{{$service->id}}">
-                <label class="custom-control-label" for="customCheck1">{{$service->name}}</label>
+                <label class="custom-control-label" for="{{$service->id}}">{{$service->name}}</label>
             </div>
             @endforeach
         </div>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Apartment;
 use App\Category;
 use App\Service;
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
@@ -44,6 +45,36 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         // richiesta post per create apartment al database
+
+        //validazione
+        
+        //store
+        $data = $request->all();
+
+        //creazione appartamento
+        $apartment = new Apartment();
+        $apartment->name = $data['name'];
+        $apartment->rooms = $data['rooms'];
+        $apartment->beds = $data['beds'];
+        $apartment->bathrooms = $data['bathrooms'];
+        $apartment->description = $data['description'];
+        $apartment->size = $data['size'];
+        $apartment->full_address = $data['full_address'];
+        $apartment->latitude = 12.111;
+        $apartment->longitude = 112.12313;
+        $apartment->image = 'sdnhfksdnhfsdfnsd.com';
+        $apartment->is_visible = isset($data['is_visible']);
+        //foreign key
+        $apartment->user_id = Auth::id();
+        $apartment->category_id = $data['category_id'];
+        $apartment->save();
+        //pivot servizi
+        if(isset($data['services'])){
+            $apartment->services()->sync($data['services']);
+        }
+
+        return redirect()->route('admin.apartments.index');
+
     }
 
     /**
