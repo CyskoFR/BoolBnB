@@ -121,8 +121,10 @@ class ApartmentController extends Controller
     {
         $categories = Category::all();
         $services = Service::all();
-
-        return view('admin.apartments.edit',  compact('categories', 'services' ,'apartment'));
+        $apartmentServices = $apartment->services->map(function ($item) {
+            return $item->id;
+        })->toArray();
+        return view('admin.apartments.edit',  compact('categories', 'apartmentServices', 'services' ,'apartment'));
     }
 
     /**
