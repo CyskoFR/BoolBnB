@@ -9,6 +9,7 @@ use App\Apartment;
 use App\Category;
 use App\Service;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -62,7 +63,7 @@ class ApartmentController extends Controller
         $apartment->full_address = $data['full_address'];
         $apartment->latitude = 12.111;
         $apartment->longitude = 112.12313;
-        $apartment->image = 'sdnhfksdnhfsdfnsd.com';
+        $apartment->image = Storage::put('images', $data['image']);
         $apartment->is_visible = isset($data['is_visible']);
         //foreign key
         $apartment->user_id = Auth::id();

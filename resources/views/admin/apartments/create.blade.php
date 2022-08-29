@@ -92,7 +92,7 @@
             </div>
             <div class="custom-file">
                 <input type="file" name="image" class="custom-file-input" id="input-image">
-                <label class="custom-file-label" for="input-image">Scegli un file...</label>
+                <label class="custom-file-label" for="input-image">Inserisci qui l'immagine...</label>
             </div>
         </div>
         {{-- check-box: is_visible --}}
