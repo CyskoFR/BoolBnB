@@ -117,9 +117,12 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( Apartment $apartment)
     {
-        return view('admin.apartments.edit');
+        $categories = Category::all();
+        $services = Service::all();
+
+        return view('admin.apartments.edit',  compact('categories', 'services' ,'apartment'));
     }
 
     /**
