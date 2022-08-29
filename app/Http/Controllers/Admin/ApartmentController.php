@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
 use App\Apartment;
@@ -51,7 +52,17 @@ class ApartmentController extends Controller
         
         //store
         $data = $request->all();
+        $indirizzo = $data['full_address'];
+        $geo = Http::get("https://api.tomtom.com/search/2/search/{$indirizzo}.json", [
+            'key' => 'RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2',
+            'countrySet' => 'IT'
+        ]);
+        
+        $geo_json = json_decode($geo);
 
+
+        //curl 'https://api.tomtom.com/search/2/search/Via madonna della salute 13a.json?key=RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2%countrySet=IT
+        
         //creazione appartamento
         $apartment = new Apartment();
         $apartment->name = $data['name'];
@@ -60,9 +71,9 @@ class ApartmentController extends Controller
         $apartment->bathrooms = $data['bathrooms'];
         $apartment->description = $data['description'];
         $apartment->size = $data['size'];
-        $apartment->full_address = $data['full_address'];
-        $apartment->latitude = 12.111;
-        $apartment->longitude = 112.12313;
+        $apartment->full_address = $indirizzo;
+        $apartment->latitude = $geo_json->results[0]->position->lat;
+        $apartment->longitude = $geo_json->results[0]->position->lon;
         $apartment->image = Storage::put('images', $data['image']);
         $apartment->is_visible = isset($data['is_visible']);
         //foreign key
@@ -86,6 +97,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+
         return view('admin.apartments.show', compact('apartment'));
     }
 
