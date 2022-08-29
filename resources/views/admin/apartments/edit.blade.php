@@ -3,14 +3,15 @@
 @section('content')
 {{-- @dd($categories, $services) --}}
 <div class="container ">
-    <h1 class="text-center">Creazione dell'appartamento</h1>
-    <form method="POST" action="{{route('admin.apartments.store')}}" enctype="multipart/form-data">
+    <h1 class="text-center">Edit dell'appartamento</h1>
+    <form method="POST" action="{{route('admin.apartments.update', $apartment)}}" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
 
         {{-- text input : titolo --}}
         <div class="form-group">
             <label for="input-name">Titolo dell' annuncio:</label>
-            <input type="text" name="name" value=" {{ old('name') ? old('name') : $apartment->name }}"
+            <input type="text" name="name" value=" {{ old('name', $apartment->name)}}"
                 class=" form-control" id="input-name" placeholder="Inserisci qui il titolo dell'annuncio..."
                 class="@error('name') is-invalid @enderror">
             <small id="input-name-help" class="form-text text-muted">Max 255 caratteri</small>
@@ -28,7 +29,7 @@
                 <option selected disabled> -- seleziona categoria -- </option>
                 @foreach ($categories as $category)
                 {{-- da fare old --}}
-                <option value="{{$category->id}}" {{ old("category_id")==$category->id ? "selected" :""
+                <option value="{{$category->id}}" {{ old("category_id", $apartment->category_id)==$category->id ? "selected" :""
                     }}>{{$category->name}}</option>
                 @endforeach
             </select>
@@ -113,7 +114,7 @@
             @foreach ($services as $service)
             <div class="custom-control custom-checkbox col-6 col-md-4 col-lg-2 ">
                 <input type="checkbox" class="custom-control-input @error('services') is-invalid @enderror"
-                    name="services[]" {{ in_array( $service->id , old('services', [])) ? "checked" :"" }}
+                    name="services[]" {{ in_array( $service->id , old('services', $apartmentServices)) ? "checked" : "" }}
                 value="{{$service->id}}"
                 id="{{$service->id}}">
                 <label class="custom-control-label" for="{{$service->id}}">{{$service->name}}</label>
@@ -127,7 +128,7 @@
         {{-- Input Text: full_address --}}
         <div class="form-group py-3">
             <label for="input-address">Indirizzo completo:</label>
-            <input type="text" name="full_address" value="{{old('full_address')}}"
+            <input type="text" name="full_address" value="{{old('full_address', $apartment->full_address)}}"
                 class="form-control @error('full_address') is-invalid @enderror" id="input-address"
                 placeholder="Inserisci qui l' indirizzo del locale...">
             @error('full_address')
@@ -142,7 +143,7 @@
                 <span class="input-group-text">Immagine</span>
             </div>
             <div class="custom-file">
-                <input type="file" value="{{old('image')}}" name="image"
+                <input type="file" value="{{old('image', $apartment->image)}}" name="image"
                     class="custom-file-input  @error('image') is-invalid @enderror" id="input-image">
                 <label class="custom-file-label" for="input-image">Inserisci l'immagine</label>
             </div>
@@ -153,13 +154,13 @@
         {{-- check-box: is_visible --}}
         <div class="form-check py-3">
             <input type="checkbox" name="is_visible" class="form-check-input @error('is_visible') is-invalid @enderror"
-                id="exampleCheck1">
+                id="exampleCheck1" {{old("is_visible", $apartment->is_visible) ? "checked" : ""}}>
             <label class="form-check-label" for="exampleCheck1">Pubblica</label>
         </div>
         @error('is_visible')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Salva modifiche</button>
     </form>
 
 

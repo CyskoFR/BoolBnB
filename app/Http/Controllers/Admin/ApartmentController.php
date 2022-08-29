@@ -121,8 +121,10 @@ class ApartmentController extends Controller
     {
         $categories = Category::all();
         $services = Service::all();
-
-        return view('admin.apartments.edit',  compact('categories', 'services' ,'apartment'));
+        $apartmentServices = $apartment->services->map(function ($item) {
+            return $item->id;
+        })->toArray();
+        return view('admin.apartments.edit',  compact('categories', 'apartmentServices', 'services' ,'apartment'));
     }
 
     /**
@@ -132,9 +134,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Apartment $apartment)
     {
-        //
+        return redirect()->route('admin.apartments.index');
     }
 
     /**

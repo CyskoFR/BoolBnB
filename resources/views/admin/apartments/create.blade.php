@@ -152,7 +152,7 @@
         {{-- check-box: is_visible --}}
         <div class="form-check py-3">
             <input type="checkbox" name="is_visible" class="form-check-input @error('is_visible') is-invalid @enderror"
-                id="exampleCheck1">
+                id="exampleCheck1" {{old("is_visible") ? "checked" : ""}}>
             <label class="form-check-label" for="exampleCheck1">Pubblica</label>
         </div>
         @error('is_visible')
