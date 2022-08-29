@@ -54,7 +54,7 @@ class ApartmentController extends Controller
         $data = $request->all();
         $indirizzo = $data['full_address'];
         $geo = Http::get("https://api.tomtom.com/search/2/search/{$indirizzo}.json", [
-            'key' => 'RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2',
+            'key' => env('API_KEY_TOMTOM'),
             'countrySet' => 'IT'
         ]);
         
