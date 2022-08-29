@@ -3,9 +3,10 @@
 @section('content')
 {{-- @dd($categories, $services) --}}
 <div class="container ">
-    <h1 class="text-center">Creazione dell'appartamento</h1>
-    <form method="POST" action="{{route('admin.apartments.store')}}" enctype="multipart/form-data">
+    <h1 class="text-center">Edit dell'appartamento</h1>
+    <form method="POST" action="{{route('admin.apartments.update', $apartment)}}" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
 
         {{-- text input : titolo --}}
         <div class="form-group">
@@ -159,7 +160,7 @@
         @error('is_visible')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Salva modifiche</button>
     </form>
 
 
