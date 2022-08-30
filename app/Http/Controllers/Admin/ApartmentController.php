@@ -74,25 +74,25 @@ class ApartmentController extends Controller
         $geo_json = json_decode($geo);
         
         //creazione appartamento
-        $apartment = new Apartment();
-        $apartment->name = $data['name'];
-        $apartment->rooms = $data['rooms'];
-        $apartment->beds = $data['beds'];
-        $apartment->bathrooms = $data['bathrooms'];
-        $apartment->description = $data['description'];
-        $apartment->size = $data['size'];
-        $apartment->full_address = $indirizzo;
-        $apartment->latitude = $geo_json->results[0]->position->lat;
-        $apartment->longitude = $geo_json->results[0]->position->lon;
-        $apartment->image = Storage::put('images', $data['image']);
-        $apartment->is_visible = isset($data['is_visible']);
+        $newApartment = new Apartment();
+        $newApartment->name = $data['name'];
+        $newApartment->rooms = $data['rooms'];
+        $newApartment->beds = $data['beds'];
+        $newApartment->bathrooms = $data['bathrooms'];
+        $newApartment->description = $data['description'];
+        $newApartment->size = $data['size'];
+        $newApartment->full_address = $indirizzo;
+        $newApartment->latitude = $geo_json->results[0]->position->lat;
+        $newApartment->longitude = $geo_json->results[0]->position->lon;
+        $newApartment->image = Storage::put('images', $data['image']);
+        $newApartment->is_visible = isset($data['is_visible']);
         //foreign key
-        $apartment->user_id = Auth::id();
-        $apartment->category_id = $data['category_id'];
-        $apartment->save();
+        $newApartment->user_id = Auth::id();
+        $newApartment->category_id = $data['category_id'];
+        $newApartment->save();
         //pivot servizi
         if(isset($data['services'])){
-            $apartment->services()->sync($data['services']);
+            $newApartment->services()->sync($data['services']);
         }
 
         return redirect()->route('admin.apartments.index');
@@ -136,6 +136,61 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
+        //validazione
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'rooms' => 'required|integer|min:1|max:255',
+            'beds' => 'required|integer|min:1|max:255',
+            'bathrooms' => 'required|integer|min:1|max:255',
+            'description' => 'required|string|max:65535',
+            'size' => 'required|integer|min:10|max:65535',
+            'full_address' => 'required|string|max:255',
+            'image' => 'image|mimes:jpeg,bmp,png',
+            'is_visible' => 'sometimes|accepted',
+            'category_id' => 'required|exists:categories,id',
+            'services' => 'sometimes|exists:services,id'
+        ]);
+
+        $data = $request->all();
+        //fetch geo data appartamento
+        $geo = '';
+        $indirizzo = $data['full_address'];
+        //se l'indirizzo cambia, rieseguo la richiesta, altrimenti no
+        if ($apartment->full_address != $indirizzo) {
+            $geo = Http::get("https://api.tomtom.com/search/2/search/{$indirizzo}.json", [
+                'key' => 'RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2',
+                'countrySet' => 'IT'
+            ]);
+        }
+        $geo_json = json_decode($geo);
+
+        //update appartamento
+        $apartment->name = $data['name'];
+        $apartment->rooms = $data['rooms'];
+        $apartment->beds = $data['beds'];
+        $apartment->bathrooms = $data['bathrooms'];
+        $apartment->description = $data['description'];
+        $apartment->size = $data['size'];
+        $apartment->full_address = $indirizzo;
+        $apartment->latitude = $geo_json->results[0]->position->lat ?? $apartment->latitude;
+        $apartment->longitude = $geo_json->results[0]->position->lon ?? $apartment->longitude;
+        //gestione storage image
+        // se l'immagine esiste gia' non e' required e non si aggiorna, non serve l'old sul blade
+        if(isset($data['image'])){
+        Storage::delete('images' , $apartment->image);
+        $apartment->image = Storage::put('images', $data['image']);
+        }
+        $apartment->is_visible = isset($data['is_visible']);
+        //foreign key
+        $apartment->user_id = Auth::id();
+        $apartment->category_id = $data['category_id'];
+        $apartment->save();
+        //pivot servizi
+        if(isset($data['services'])){
+            $apartment->services()->sync($data['services']);
+        }
+        
+
         return redirect()->route('admin.apartments.index');
     }
 
@@ -146,8 +201,10 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Apartment $apartment)
-    {
+    {   
+        Storage::delete('images' , $apartment->image);
         $apartment->delete();
-        return redirect('admin.apartments.index');
+
+        return redirect()->route('admin.apartments.index');
     }
 }

@@ -15,11 +15,17 @@
             longitudine {{$apartment->longitude}}
         </li>
     </ul>
-
+    <img class="img-fluid" src="{{asset('storage/'.$apartment->image)}}" alt="">
     <div id="actions">
         <a class="btn btn-primary" href="{{route('admin.apartments.edit', $apartment)}}">Modifica</a>
         {{-- form per il destroy --}}
-        {{-- <a class="btn btn-danger" href="{{route('admin.apartments.edit', $apartment)}}">Modifica</a> --}}
+        <form action="{{route('admin.apartments.destroy', $apartment)}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger">Elimina Appartamento</button>
+
+        </form>
+
     </div>
 </div>
 @endsection
