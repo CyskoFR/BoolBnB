@@ -11,8 +11,8 @@
         {{-- text input : titolo --}}
         <div class="form-group">
             <label for="input-name">Titolo dell' annuncio:</label>
-            <input type="text" name="name" value=" {{ old('name', $apartment->name)}}"
-                class=" form-control" id="input-name" placeholder="Inserisci qui il titolo dell'annuncio..."
+            <input type="text" name="name" value=" {{ old('name', $apartment->name)}}" class=" form-control"
+                id="input-name" placeholder="Inserisci qui il titolo dell'annuncio..."
                 class="@error('name') is-invalid @enderror">
             <small id="input-name-help" class="form-text text-muted">Max 255 caratteri</small>
         </div>
@@ -29,7 +29,8 @@
                 <option selected disabled> -- seleziona categoria -- </option>
                 @foreach ($categories as $category)
                 {{-- da fare old --}}
-                <option value="{{$category->id}}" {{ old("category_id", $apartment->category_id)==$category->id ? "selected" :""
+                <option value="{{$category->id}}" {{ old("category_id", $apartment->category_id)==$category->id ?
+                    "selected" :""
                     }}>{{$category->name}}</option>
                 @endforeach
             </select>
@@ -114,7 +115,8 @@
             @foreach ($services as $service)
             <div class="custom-control custom-checkbox col-6 col-md-4 col-lg-2 ">
                 <input type="checkbox" class="custom-control-input @error('services') is-invalid @enderror"
-                    name="services[]" {{ in_array( $service->id , old('services', $apartmentServices)) ? "checked" : "" }}
+                    name="services[]" {{ in_array( $service->id , old('services', $apartmentServices)) ? "checked" : ""
+                }}
                 value="{{$service->id}}"
                 id="{{$service->id}}">
                 <label class="custom-control-label" for="{{$service->id}}">{{$service->name}}</label>
@@ -135,6 +137,7 @@
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
+        <img class="img-fluid d-block" src="{{ asset('storage/'.$apartment->image)}} " alt="apartment photo">
         {{-- input file immagine --}}
         <label for="input-image">Scegli l'immagine di copertina del tuo annuncio:</label>
         <div class="input-group mb-3">
@@ -143,8 +146,8 @@
                 <span class="input-group-text">Immagine</span>
             </div>
             <div class="custom-file">
-                <input type="file" value="{{old('image', $apartment->image)}}" name="image"
-                    class="custom-file-input  @error('image') is-invalid @enderror" id="input-image">
+                <input type="file" name="image" class="custom-file-input  @error('image') is-invalid @enderror"
+                    id="input-image">
                 <label class="custom-file-label" for="input-image">Inserisci l'immagine</label>
             </div>
         </div>
@@ -162,8 +165,5 @@
         @enderror
         <button type="submit" class="btn btn-primary">Salva modifiche</button>
     </form>
-
-
-
 </div>
 @endsection

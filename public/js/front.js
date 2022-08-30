@@ -141,7 +141,11 @@ var staticRenderFns = [function () {
 
   return _c("main", [_c("div", {
     staticClass: "container"
-  }, [_c("h1", [_vm._v("Questa e' la home del sito")])])]);
+  }, [_c("h1", [_vm._v("Questa e' la home del sito")]), _vm._v(" "), _c("a", {
+    attrs: {
+      href: "/login"
+    }
+  }, [_vm._v(" login")])])]);
 }];
 render._withStripped = true;
 
