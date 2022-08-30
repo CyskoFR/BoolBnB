@@ -1,35 +1,56 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
-div #login {
+section#login {
   background-color: #1a1a1a;
 }
 
-div #login .card {
+section#login .card {
   border: 2px solid #42b883;
 }
 
-div #login .card-header {
+section#login .card-header {
   background-color: #242424;
   color: #e1e1e1;
   font-weight: bold;
   border-bottom: 1px solid #42b883;
 }
 
-div #login .card-body {
+section#login .card-body {
   background-color: #242424;
   color: #e1e1e1;
   font-weight: bold;
 }
 
-div #login .card-body button {
+section#login .card-body button {
   background-color: #42d392;
   border: 1px solid #42d392;
 }
 
-div #login .card-body button:hover {
+section#login .card-body button:hover {
   background-color: whitesmoke;
   border: 1px solid #42d392;
   color: #4e4e4e;
+}
+
+section#create-apartment {
+  background-color: #1a1a1a;
+  color: #e1e1e1;
+}
+
+section#create-apartment label {
+  color: #e1e1e1;
+  background-color: #242424;
+}
+
+section#create-apartment input,
+section#create-apartment select,
+section#create-apartment textarea,
+section#create-apartment .wrapper-input {
+  border: 2px solid #42d392;
+}
+
+section#create-apartment {
+  background-color: #1a1a1a;
 }
 
 /*!

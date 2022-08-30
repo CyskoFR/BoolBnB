@@ -1,0 +1,15 @@
+section#create-apartment {
+    background-color: $bg-primary-dark;
+    color: $text-gray-light;
+
+    label {
+        color: $text-gray-light;
+        background-color: $bg-secondary-dark;
+    }
+    input,
+    select,
+    textarea,
+    .wrapper-input {
+        border: 2px solid $primary-green-light;
+    }
+}
