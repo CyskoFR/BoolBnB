@@ -39,18 +39,125 @@ section#create-apartment {
 
 section#create-apartment label {
   color: #e1e1e1;
-  background-color: #242424;
+}
+
+section#create-apartment .wrapper-input {
+  border: 2px solid #42d392;
+  overflow: hidden;
 }
 
 section#create-apartment input,
-section#create-apartment select,
-section#create-apartment textarea,
-section#create-apartment .wrapper-input {
-  border: 2px solid #42d392;
+section#create-apartment select {
+  background-color: #242424;
+  color: #e1e1e1;
 }
 
-section#create-apartment {
+section#create-apartment input::-moz-placeholder, section#create-apartment select::-moz-placeholder {
+  color: #e1e1e1;
+}
+
+section#create-apartment input::placeholder,
+section#create-apartment select::placeholder {
+  color: #e1e1e1;
+}
+
+section#create-apartment input[type=checkbox] + label {
+  background-color: transparent;
+}
+
+section#create-apartment span.input-group-text {
+  background-color: #242424;
+  color: #e1e1e1;
+}
+
+section#create-apartment label[for=category_id],
+section#create-apartment label[for=input-image],
+section#create-apartment label[for=input-image]::after,
+section#create-apartment input[type=file],
+section#create-apartment textarea {
+  border: none;
+  color: #e1e1e1;
+  background-color: #242424;
+}
+
+section#create-apartment label[for=input-image]::after {
+  border-left: 1px solid #e1e1e1;
+}
+
+section#create-apartment button {
+  color: #e1e1e1;
+  background-color: #42d392;
+  border: 1px solid #42d392;
+}
+
+section#create-apartment button:hover {
+  background-color: #e1e1e1;
+  border: 1px solid #42d392;
+  color: #4e4e4e;
+}
+
+section#edit-apartment {
   background-color: #1a1a1a;
+  color: #e1e1e1;
+}
+
+section#edit-apartment label {
+  color: #e1e1e1;
+}
+
+section#edit-apartment .wrapper-input {
+  border: 2px solid #42d392;
+  overflow: hidden;
+}
+
+section#edit-apartment input,
+section#edit-apartment select {
+  background-color: #242424;
+  color: #e1e1e1;
+}
+
+section#edit-apartment input::-moz-placeholder, section#edit-apartment select::-moz-placeholder {
+  color: #e1e1e1;
+}
+
+section#edit-apartment input::placeholder,
+section#edit-apartment select::placeholder {
+  color: #e1e1e1;
+}
+
+section#edit-apartment input[type=checkbox] + label {
+  background-color: transparent;
+}
+
+section#edit-apartment span.input-group-text {
+  background-color: #242424;
+  color: #e1e1e1;
+}
+
+section#edit-apartment label[for=category_id],
+section#edit-apartment label[for=input-image],
+section#edit-apartment label[for=input-image]::after,
+section#edit-apartment input[type=file],
+section#edit-apartment textarea {
+  border: none;
+  color: #e1e1e1;
+  background-color: #242424;
+}
+
+section#edit-apartment label[for=input-image]::after {
+  border-left: 1px solid #e1e1e1;
+}
+
+section#edit-apartment button {
+  color: #e1e1e1;
+  background-color: #42d392;
+  border: 1px solid #42d392;
+}
+
+section#edit-apartment button:hover {
+  background-color: #e1e1e1;
+  border: 1px solid #42d392;
+  color: #4e4e4e;
 }
 
 /*!
