@@ -8,6 +8,13 @@
 @import "auth/login.scss";
 
 @import "back-office/show-apartment.scss";
+@import "back-office/create-apartment.scss";
+@import "back-office/edit-apartment.scss";
+@import "back-office/index-apartment.scss";
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
+
+// header {
+//     background-color: $bg-primary-dark;
+// }
