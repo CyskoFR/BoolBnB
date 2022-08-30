@@ -10,6 +10,7 @@ use App\Apartment;
 use App\Category;
 use App\Service;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
@@ -21,7 +22,8 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
+        $apartments = Apartment::query()->where('user_id', Auth::id())->get();
+
         return view('admin.apartments.index', compact('apartments'));
     }
 
@@ -107,7 +109,10 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-
+        //403 se entro in un appartamento non mio
+        if($apartment->user_id != Auth::id()){
+            abort(403, 'non hai il permesso di entrare qui');
+        }
         return view('admin.apartments.show', compact('apartment'));
     }
 
@@ -119,6 +124,9 @@ class ApartmentController extends Controller
      */
     public function edit( Apartment $apartment)
     {
+        if($apartment->user_id != Auth::id()){
+            abort(403, 'non hai il permesso di entrare qui');
+        }
         $categories = Category::all();
         $services = Service::all();
         $apartmentServices = $apartment->services->map(function ($item) {
@@ -136,6 +144,9 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
+        if($apartment->user_id != Auth::id()){
+            abort(403, 'non hai il permesso di entrare qui');
+        }
         //validazione
         $request->validate([
             'name' => 'required|string|max:255',
@@ -202,6 +213,9 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {   
+        if($apartment->user_id != Auth::id()){
+            abort(403, 'non hai il permesso di entrare qui');
+        }
         Storage::delete('images' , $apartment->image);
         $apartment->delete();
 
