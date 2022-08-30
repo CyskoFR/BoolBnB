@@ -1,5 +1,37 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
+div #login {
+  background-color: #1a1a1a;
+}
+
+div #login .card {
+  border: 2px solid #42b883;
+}
+
+div #login .card-header {
+  background-color: #242424;
+  color: #e1e1e1;
+  font-weight: bold;
+  border-bottom: 1px solid #42b883;
+}
+
+div #login .card-body {
+  background-color: #242424;
+  color: #e1e1e1;
+  font-weight: bold;
+}
+
+div #login .card-body button {
+  background-color: #42d392;
+  border: 1px solid #42d392;
+}
+
+div #login .card-body button:hover {
+  background-color: whitesmoke;
+  border: 1px solid #42d392;
+  color: #4e4e4e;
+}
+
 /*!
  * Bootstrap v4.6.2 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors

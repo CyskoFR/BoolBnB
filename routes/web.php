@@ -20,10 +20,8 @@ Route::middleware('auth')
     ->name('admin.')
     ->prefix('admin')
     ->group(function(){
-        Route::get('/home', 'HomeController@index')->name('home');
-        Route::resource('posts', 'PostsController');
-        Route::resource('categories', 'CategoriesController');
-        Route::resource('tags', 'TagsController');
+        Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+        Route::resource('apartments', 'ApartmentController');
     });
 
 Route::get('{any?}',function(){

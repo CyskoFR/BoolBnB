@@ -141,7 +141,11 @@ var staticRenderFns = [function () {
 
   return _c("main", [_c("div", {
     staticClass: "container"
-  }, [_c("h1", [_vm._v("Questa e' la home del sito")])])]);
+  }, [_c("h1", [_vm._v("Questa e' la home del sito")]), _vm._v(" "), _c("a", {
+    attrs: {
+      href: "/login"
+    }
+  }, [_vm._v(" login")])])]);
 }];
 render._withStripped = true;
 
@@ -15929,7 +15933,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/olic/progetto finale/BoolBnB/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /home/albertomarcon/Progetto Finale/BoolBnB/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })
