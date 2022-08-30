@@ -129,10 +129,36 @@
             <input type="text" name="full_address" value="{{old('full_address')}}"
                 class="form-control @error('full_address') is-invalid @enderror" id="input-address"
                 placeholder="Inserisci qui l' indirizzo del locale...">
+            <button id="check-address">Controlla Indirizzo</button>
             @error('full_address')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
+        {{-- <script>
+            let statusAddress; 
+            const input = document.getElementById('input-address');
+            const btnCheck = document.getElementById('check-address');
+            btnCheck.addEventListener('click',(e)=>{
+
+                e.preventDefault();
+
+                let inpuText = input.value;
+                
+                axios.get(`https://api.tomtom.com/search/2/search/${inpuText}.json?key=RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2`)
+                .then((response) => {
+                    //response.json();
+                    let test = response.json();
+                    console.log(test.value.results.length);
+                    statusAddress = test.value.results.length == 0 ? true : false;
+                    //console.log(statusAddress);
+                    //console.log(response);)
+                }); 
+            });
+
+            if(statusAddress != 200){
+
+            }
+        </script> --}}
         {{-- input file immagine --}}
         <label for="input-image">Scegli l'immagine di copertina del tuo annuncio:</label>
         <div class="input-group mb-3">
@@ -152,7 +178,7 @@
         {{-- check-box: is_visible --}}
         <div class="form-check py-3">
             <input type="checkbox" name="is_visible" class="form-check-input @error('is_visible') is-invalid @enderror"
-                id="exampleCheck1" {{old("is_visible") ? "checked" : ""}}>
+                id="exampleCheck1" {{old("is_visible") ? "checked" : "" }}>
             <label class="form-check-label" for="exampleCheck1">Pubblica</label>
         </div>
         @error('is_visible')
@@ -160,8 +186,5 @@
         @enderror
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
-
-
 </div>
 @endsection
