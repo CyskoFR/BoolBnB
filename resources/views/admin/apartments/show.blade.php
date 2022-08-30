@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- -- @dd($apartment->user) -- --}}
-{{-- @dd($geo_json->results[0]->position->lat); --}}
 <section id="show-apartment">
     <div class="container text-capitalize">
         <h2 class="text-center ">dettaglio appartamento in back-office</h2>
