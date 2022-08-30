@@ -177,8 +177,8 @@ class ApartmentController extends Controller
         //gestione storage image
         // se l'immagine esiste gia' non e' required e non si aggiorna, non serve l'old sul blade
         if(isset($data['image'])){
-        Storage::delete('images' , $apartment->image);
-        $apartment->image = Storage::put('images', $data['image']);
+            Storage::delete('images' , $apartment->image);
+            $apartment->image = Storage::put('images', $data['image']);
         }
         $apartment->is_visible = isset($data['is_visible']);
         //foreign key
