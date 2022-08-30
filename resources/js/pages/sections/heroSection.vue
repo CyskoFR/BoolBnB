@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <section>
         
-    </div>
+    </section>
 </template>
 
 <script>
@@ -10,7 +10,7 @@
 
 export default {
 
-    name: "categoryTag",
+    name: "heroSection",
 
     components: { 
 
