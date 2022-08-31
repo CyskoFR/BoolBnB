@@ -1,13 +1,22 @@
-@extends('layouts.app')
+@extends('layouts.back')
 
 @section('content')
 <section id="show-apartment">
     <div class="container text-capitalize">
-        <h2 class="text-center ">dettaglio appartamento in back-office</h2>
-        <h1 class="text-center py-4">{{$apartment->name}}</h1>
-        <img class="img-fluid" src="{{asset('storage/'.$apartment->image)}}" alt="">
-        <h2>{{$apartment->full_address}}</h2>
-        <h4>geodata:</h4>
+        <h1 class="text-start py-2">{{$apartment->name}}</h1>
+        <h2 class="text-start py-1">{{$apartment->full_address}}</h2>
+        <img class="img-fluid rounded" src="{{asset('storage/'.$apartment->image)}}" alt="">
+        <h4 class="text-start py-1">{{$apartment->category->name}}</h4>
+        <p>{{$apartment->size}}mq - camere {{$apartment->rooms}} - letti  {{$apartment->beds}} - bagni {{$apartment->bathrooms}}</p>
+        <h4>Informazioni</h4>
+        <p>{{$apartment->description}}</p>
+        <h4>Serzizi</h4>
+        <ul>
+            @foreach ($apartment->services as $service)
+            <li class="px-2">{{$service->name}}</li>
+            @endforeach
+        </ul>
+        <h4>Posizione</h4>
         <ul>
             <li>
                 latitudine {{$apartment->latitude}}
@@ -16,35 +25,15 @@
                 longitudine {{$apartment->longitude}}
             </li>
         </ul>
-        <h4>Categoria:</h4>
-        <p>{{$apartment->category->name}}</p>
-        <h4>Descrizione:</h4>
-        <p>{{$apartment->description}}</p>
-        <h4>Informazioni:</h4>
-        <ul>
-            <li>Letti: {{$apartment->beds}}</li>
-            <li>Bagni: {{$apartment->bathrooms}}</li>
-            <li>Camere: {{$apartment->rooms}}</li>
-            <li>Dimensioni: {{$apartment->size}} m^2</li>
-        </ul>
-        <h4>Serzizi:</h4>
-        <ul class="d-flex list-unstyled">
-            @foreach ($apartment->services as $service)
-            <li class="px-2">{{$service->name}}</li>
-            @endforeach
-
-        </ul>
         <div class="d-flex py-2" id="actions">
             <a class="btn btn-primary" href="{{route('admin.apartments.edit', $apartment)}}">Modifica</a>
             {{-- form per il destroy --}}
-            <form action="{{route('admin.apartments.destroy', $apartment)}}" method="POST">
+            <form class="px-2" action="{{route('admin.apartments.destroy', $apartment)}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger">Elimina Appartamento</button>
-
             </form>
-
-        </div>
+        </div>   
     </div>
 </section>
 

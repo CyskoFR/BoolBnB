@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.back')
 
 @section('content')
 {{-- @dd($categories, $services) --}}
 <section id="create-apartment">
-    <div class="container ">
+    <div class="container p-3">
         <h1 class="text-center">Creazione dell'appartamento</h1>
         <form method="POST" action="{{route('admin.apartments.store')}}" enctype="multipart/form-data">
             @csrf

@@ -1,5 +1,4 @@
 section#index-apartment {
-
     color: $text-gray-dark;
     background-color: $bg-primary-dark;
 
@@ -24,4 +23,11 @@ section#index-apartment {
         border-radius: 20px;
         margin-right: 10px;
     }
+
+    .buttons {
+        min-width: 200px; 
+    }
+        
 }
+
+

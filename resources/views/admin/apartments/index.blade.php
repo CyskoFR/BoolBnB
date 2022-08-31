@@ -6,11 +6,11 @@
         <h1 class="text-center mt-3 mb-3 text-light">Benvenuto {{ Auth::user()->first_name }}</h1>
         
         <a class="align-self-center" href="{{route('admin.apartments.create')}}">
-            <button class="btn mb-4"><b>Crea un nuovo appartamento</b></button>
+            <button class="btn mb-4"><b>Inserisci un nuovo appartamento</b></button>
         </a>
 
         @foreach ($apartments as $apartment)
-        <div class="apartment mb-3 p-3 d-flex justify-content-between align-items-center">
+        <div class="apartment mb-3 py-5 px-3 d-flex justify-content-between align-items-center">
             <div>
                 <a href="{{route('admin.apartments.show', $apartment)}}">
                     <h2>{{$apartment->name}}</h2>
@@ -31,8 +31,9 @@
         @endforeach
 
         <a href="/">
-            <button class="btn"><b>Home</b></button>
+            <button class="btn mt-2"><b>Home</b></button>
         </a>
+        
     </div>
 </section>
 @endsection

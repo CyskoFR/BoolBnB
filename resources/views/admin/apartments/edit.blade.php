@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.back')
 
 @section('content')
-<section id="edit-apartment">
+<section id="edit-apartment" class="p-3">
     {{-- @dd($categories, $services) --}}
     <div class="container ">
         <h1 class="text-center">Edit dell'appartamento</h1>
@@ -140,7 +140,7 @@
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <img class="img-fluid d-block" src="{{ asset('storage/'.$apartment->image)}} " alt="apartment photo">
+            <img class="img-fluid d-block mb-3" src="{{ asset('storage/'.$apartment->image)}} " alt="apartment photo">
             {{-- input file immagine --}}
             <span class="d-block pb-1">Scegli l'immagine di copertina del tuo annuncio:</span>
             <div class="input-group mb-3 wrapper-input  rounded">
