@@ -19,3 +19,5 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('apartments', 'Api\ApartmentController@index');
+
+Route::post('message' , 'Api\MessageController@store');
