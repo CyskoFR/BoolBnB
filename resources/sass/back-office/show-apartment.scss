@@ -1,2 +1,14 @@
 section#show-apartment {
+    background-color: $bg-primary-dark;
+    color: $text-gray-dark; 
+
+    h1, h4 {
+        color: $text-gray-light;
+    }
+
+    img {
+        max-height: 200px;
+    }
 }
+
+

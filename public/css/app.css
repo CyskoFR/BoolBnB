@@ -32,6 +32,20 @@ section#login .card-body button:hover {
   color: #4e4e4e;
 }
 
+section#show-apartment {
+  background-color: #1a1a1a;
+  color: #4e4e4e;
+}
+
+section#show-apartment h1,
+section#show-apartment h4 {
+  color: #e1e1e1;
+}
+
+section#show-apartment img {
+  max-height: 200px;
+}
+
 section#create-apartment {
   background-color: #1a1a1a;
   color: #e1e1e1;
