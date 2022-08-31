@@ -24,8 +24,8 @@
 <body>
     <nav class="main-nav navbar navbar-expand-md navbar-light bg-black shadow-sm border-bottom border-light">
         <div class="container">
-            <a class="navbar-brand text-light" href="{{ url('/') }}">
-                Logo
+            <a class="navbar-brand text-light" href="/">
+                <img class="logo" src="{{asset('images/logo_boolbnb.png')}}">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
