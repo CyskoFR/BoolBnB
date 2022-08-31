@@ -23,7 +23,7 @@ export default {
     },
 
     created() {
-        axios.get('http://localhost:8000/api/categories')
+        axios.get('/api/categories')
             .then((response) => {
                 this.categories = response.data;
             });
