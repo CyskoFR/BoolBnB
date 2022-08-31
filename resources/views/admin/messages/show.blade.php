@@ -3,6 +3,7 @@
 @section('content')
 <section id="show-messages" class="p-3">
 
-    @dd($message->apartment)
+    {{($message->apartment->user->email)}}
+    {{$message->text}}
 </section>
 @endsection
