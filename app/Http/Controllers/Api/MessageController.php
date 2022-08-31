@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\MessageReceivedMail;
 use App\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class MessageController extends Controller
 {
@@ -32,6 +34,11 @@ class MessageController extends Controller
          $newMessage->full_name = $data['full_name'];
          $newMessage->text = $data['text'];
          $newMessage->save();
+
+         //indirizzo email del proprietario
+         $mailto = $newMessage->apartment->user->email;
+         //invio mail
+         Mail::to($mailto)->send(new MessageReceivedMail($newMessage));
     }
 
 }
