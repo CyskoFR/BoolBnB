@@ -1,6 +1,13 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 
+// Font Awesome
+
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+
 // Variables
 @import "variables";
 
@@ -24,3 +31,19 @@
 // header {
 //     background-color: $bg-primary-dark;
 // }
+
+//  header 
+.main-nav {
+    background-color: $bg-primary-dark;
+}
+
+.logo {
+    height: 38px;
+}
+
+#navbarDropdown {
+    font-size: 40px;
+    color: $primary-green-light;
+}
+
+
