@@ -22,6 +22,9 @@ Route::middleware('auth')
     ->group(function(){
         Route::get('/dashboard', 'HomeController@index')->name('dashboard');
         Route::resource('apartments', 'ApartmentController');
+        //index messaggi per il singolo appartamento;
+        Route::get('/apartments/{apartment}/messages', 'MessageController@index')->name('messages');
+        Route::get('/apartments/{apartment}/messages/{message}', 'MessageController@show')->name('message');
     });
 
 Route::get('{any?}',function(){
