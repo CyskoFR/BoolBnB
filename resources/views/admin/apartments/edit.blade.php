@@ -3,7 +3,7 @@
 @section('content')
 <section id="edit-apartment" class="p-3">
     {{-- @dd($categories, $services) --}}
-    <div class="container ">
+    <div class="container">
         <h1 class="text-center">Edit dell'appartamento</h1>
         <form method="POST" action="{{route('admin.apartments.update', $apartment)}}" enctype="multipart/form-data">
             @csrf
