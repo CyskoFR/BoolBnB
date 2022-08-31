@@ -160,6 +160,32 @@ section#edit-apartment button:hover {
   color: #4e4e4e;
 }
 
+section#index-apartment {
+  color: #4e4e4e;
+  background-color: #1a1a1a;
+}
+
+section#index-apartment .apartment {
+  height: 100px;
+  border-radius: 20px;
+  background-color: #242424;
+}
+
+section#index-apartment .apartment h2 {
+  color: #42d392;
+}
+
+section#index-apartment button {
+  height: 40px;
+  background-color: #42d392;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.main-nav {
+  background-color: #1a1a1a;
+}
+
 /*!
  * Bootstrap v4.6.2 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
