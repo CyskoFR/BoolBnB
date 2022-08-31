@@ -11,6 +11,10 @@ section#index-apartment {
             color: $primary-green-light;
         }
 
+        h2:hover {
+            text-decoration: underline;
+        }
+
     }
 
     button {
