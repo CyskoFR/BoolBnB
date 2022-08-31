@@ -11,8 +11,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 cacert.pem
-/public/js/app.js
-/public/js/front.js
-/public/css/app.css
+/public/js
+/public/css
 /public/mix-manifest.json
 /public/fonts
