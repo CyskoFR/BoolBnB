@@ -13,7 +13,7 @@ import MainComponent from './components/MainComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
 
 export default {
-    name: "Home",
+    name: "BnbView",
     components: { HeaderComponent, MainComponent, FooterComponent }
 };
 </script>
