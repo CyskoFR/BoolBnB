@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('apartments', 'Api\ApartmentController@index');
 
+Route::get('categories', 'Api\CategoryController@index');
 
 //store dei messaggi
 Route::post('message' , 'Api\MessageController@store');
