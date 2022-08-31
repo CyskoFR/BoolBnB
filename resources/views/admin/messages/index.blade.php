@@ -9,6 +9,7 @@
                 <h3>{{$message->mail}}</h3>
                 <h3>{{$message->full_name}}</h3>
                 <p>{{$message->text}}</p>
+                fix
             </div>
         </a>
         @endforeach
