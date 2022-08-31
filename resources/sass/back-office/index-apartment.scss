@@ -1,2 +1,26 @@
 section#index-apartment {
+    color: $text-gray-dark;
+    background-color: $bg-primary-dark;
+
+    .apartment {
+        height: 100px;
+        border-radius: 20px;
+        background-color: $bg-secondary-dark;
+
+        h2 {
+            color: $primary-green-light;
+        }
+
+    }
+
+    button {
+        height: 40px;
+        background-color: $primary-green-light;
+        border-radius: 20px;
+        margin-right: 10px;
+    }
+}
+
+.main-nav {
+    background-color: $bg-primary-dark;
 }
