@@ -14,7 +14,11 @@ import FooterComponent from './components/FooterComponent.vue';
 
 export default {
     name: "Home",
-    components: { HeaderComponent, MainComponent, FooterComponent }
+    components: { 
+        HeaderComponent, 
+        MainComponent, 
+        FooterComponent 
+    }
 };
 </script>
 
