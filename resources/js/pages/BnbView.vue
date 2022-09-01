@@ -48,7 +48,7 @@ export default {
 	},
 
     created() {
-        axios.get('http://localhost:8000/api/apartment', {
+        axios.get('/api/apartment', {
             params: {
                 Id: this.Id,
             }
@@ -57,7 +57,7 @@ export default {
                 this.apartments = response.data;
             });
 
-        axios.get('http://localhost:8000/api/service', {
+        axios.get('/api/service', {
             params: {
                 Id: this.Id,
             }

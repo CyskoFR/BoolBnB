@@ -48,8 +48,7 @@ export default {
     height: 4.375rem;
     background-color: $bg-primary-dark;
     padding: 1rem;
-    border-bottom: 1px solid white;
-}
+    border-bottom: 1px solid $text-gray-dark;}
 
 .logo {
     height: 100%;

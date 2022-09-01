@@ -1,9 +1,9 @@
 <template>
-    <main>
+    <section class="main">
         <CategorySection/>
         <HeroSection/>
         <ApartmentSection/>
-    </main>
+    </section>
 </template>
 
 <script>
@@ -29,9 +29,8 @@ export default {
 
 @import '../../../sass/variables';
 
-main {
+.main {
     background-color: $bg-primary-dark;
-    height: 100vh;
 }
 
 </style>

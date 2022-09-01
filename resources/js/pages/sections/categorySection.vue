@@ -39,7 +39,7 @@ export default {
     .category_section {
         align-items: flex-start;
         background-color: $bg-secondary-dark;
-        border: 1px solid $text-gray-dark;
+        border-bottom: 1px solid $text-gray-dark;
         overflow: auto;
     }
 
