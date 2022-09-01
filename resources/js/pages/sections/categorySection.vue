@@ -41,6 +41,7 @@ export default {
         background-color: $bg-secondary-dark;
         border: 1px solid $text-gray-dark;
         overflow: auto;
+        justify-content: space-between;
     }
 
 </style>
