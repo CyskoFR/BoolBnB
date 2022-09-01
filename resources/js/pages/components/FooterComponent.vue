@@ -1,9 +1,9 @@
 <template>
     <footer>
-        <div class="container footer_component py-3">
+        <div class="container footer_component py-3 ">
             <div class="row">
-                <div class="col-xl-3 col-md-6 col-xs-12">
-                    <h5>Assistenza</h5>
+                <div class="col-12 col-sm-6 col-lg-3 text-center text-sm-left">
+                    <h6>Assistenza</h6>
                     <ul>
                         <li><a href="#">Centro Assistenza</a></li>
                         <li><a href="#">Accessibilità per tutti</a></li>
@@ -14,16 +14,16 @@
                         <li><a href="#">La nostra risposta all'emergenza COVID-19</a></li>
                     </ul>
                 </div>
-                <div class="col-xl-3 col-md-6 col-xs-12">
-                    <h5>Community</h5>
+                <div class="col-12 col-sm-6 col-lg-3 text-center text-sm-left">
+                    <h6>Community</h6>
                     <ul>
                         <li><a href="#">Boolbnb.org: un rifugio sicuro</a></li>
                         <li><a href="#">Supporta i rifugiati ukraini</a></li>
                         <li><a href="#">Contro la discriminazione</a></li>
                     </ul>
                 </div>
-                <div class="col-xl-3 col-md-6 col-xs-12">
-                    <h5>Ospitare</h5>
+                <div class="col-12 col-sm-6 col-lg-3 text-center text-sm-left">
+                    <h6>Ospitare</h6>
                     <ul>
                         <li><a href="#">Prova a ospitare</a></li>
                         <li><a href="#">AirCover per gli host</a></li>
@@ -32,8 +32,8 @@
                         <li><a href="#">Come ospitare responsabilmente</a></li>
                     </ul>
                 </div>
-                <div class="col-xl-3 col-md-6 col-xs-12">
-                    <h5>Boolbnb</h5>
+                <div class="col-12 col-sm-6 col-lg-3 text-center text-sm-left">
+                    <h6>Boolbnb</h6>
                     <ul>
                         <li><a href="#">Newsroom</a></li>
                         <li><a href="#">Scopri le nuove funzionalità</a></li>
@@ -44,19 +44,20 @@
                     </ul>
                 </div>
             </div>
-            <div class="row d-flex py-3">
-                <div class="col-6">
-                    <span>© 2022 Boolbnb, Inc.</span>
-                    <span>Privacy ·</span>
-                    <span>Termini ·</span>
-                    <span>Dettagli dell'azienda</span>
+            <div class="row text-center text-md-left d-flex align-items-center">
+                <div class="col-12 col-md-6 mb-2">
+                    <small>© 2022 Boolbnb, Inc. · 
+                        <a href="#">Privacy</a> · 
+                        <a href="#">Termini</a> · 
+                        <a href="#">Dettagli dell'azienda</a>
+                    </small>
                 </div>
-                <div class="social_media col-xl-6 col-md-6 col-xs-12 d-flex">
-                    
-                    <a href="https://www.facebook.com/"><img src="../../../img/facebook.jpg" alt="facebook"></a>
-                    <a href="https://www.instagram.com/"><img src="../../../img/instagram.jpg" alt="instagram"></a>
-                    <a href="https://twitter.com/"><img src="../../../img/twitter.jpg" alt="twitter"></a>
-                    <a href="https://www.youtube.com/"><img src="../../../img/youtube.png" alt="youtube"></a>
+                <div class="social_media col-12 col-md-6 d-flex justify-content-center justify-content-md-end align-middle">
+                    Seguici sui social
+                    <a target="_blank" href="https://www.facebook.com/"><img src="../../../img/facebook.jpg" alt="facebook"></a>
+                    <a target="_blank" href="https://www.instagram.com/"><img src="../../../img/instagram.jpg" alt="instagram"></a>
+                    <a target="_blank" href="https://twitter.com/"><img src="../../../img/twitter.jpg" alt="twitter"></a>
+                    <a target="_blank" href="https://www.youtube.com/"><img src="../../../img/youtube.png" alt="youtube"></a>
                 </div>
             </div>
         </div>
@@ -93,20 +94,27 @@ footer {
         li {
             cursor: pointer;
             margin-bottom: .25rem;
+            font-size: .75rem;
         }
 
-        a {
-            text-decoration: none;
-            color: $text-gray-light;
-        }
+    }
+
+    a {
+        text-decoration: none;
+        color: $text-gray-dark;;
+    }
+
+    a:hover {
+        color: $text-gray-light;
     }
 }
 .social_media {
-    justify-content: end;
-
+    // p {
+    //     vertical-align: middle;
+    // }
     img {
-        width: 1.875rem;
-        border-radius: .5rem;
+        width: 1.25rem;
+        border-radius: 4px;
         cursor: pointer;
         margin: 0 .5rem;
         transition: 0.3s;
