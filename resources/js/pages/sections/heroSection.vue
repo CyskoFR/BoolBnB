@@ -1,14 +1,16 @@
 <template>
     <section class="hero_section container-fluid">
         <div class="hero_row row d-flex">
-            <div class="hero_searchbar_box col-12 col-md-5">
+
+            <div class="hero_searchbar_container col-12 col-md-5">
                 <nav class="navbar navbar-light bg-light">
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <form class="hero_searchbar_box form-inline d-flex">
+                        <input class="hero_searchbar form-control mr-sm-2" type="search" placeholder="Cerca il tuo posto preferito" aria-label="Search">
+                        <button class="hero_search_button btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
                     </form>
                 </nav>
             </div>
+
             <div class="hero_img_container d-none d-md-block col-md-7">
                 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                     <div class="carousel-inner">
@@ -62,6 +64,7 @@ export default {
     max-width: 120rem;
     justify-content: center;
     text-align: center;
+    align-items: center;
 
 }
 
