@@ -13,12 +13,12 @@ const router = new VueRouter({
     mode: "history",
     routes: [
         {
-            path: "/home",
+            path: "/",
             name: "home",
             component: Home,
         },
         {
-            path: "/bnb-view",
+            path: "/bnb-view/data/:id",
             name: "bnb-view",
             component: BnbView,
         },
