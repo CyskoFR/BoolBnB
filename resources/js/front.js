@@ -1,8 +1,7 @@
 //richiedi vue nella finestra
 window.Vue = require("vue");
-//importo axios globalmente
-window.axios = require('axios');
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+//importo globalmente bootstrap che comprende Axios
+require("./bootstrap");
 //importa il componente App ,speciale , in una cartella a parte chiamata views, il resto delle pagine si trova in pages e i componenti singolo in components
 import App from "./views/App";
 //import del file routes.js

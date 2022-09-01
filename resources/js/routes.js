@@ -5,15 +5,27 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 //sezione di import delle View (Vue components)
 import Home from "./pages/Home";
+import BnbView from "./pages/BnbView";
+import SearchPage from "./pages/SearchPage";
 
 //settings delle rotte
 const router = new VueRouter({
     mode: "history",
     routes: [
         {
-            path: "/",
+            path: "/home",
             name: "home",
             component: Home,
+        },
+        {
+            path: "/bnb-view",
+            name: "bnb-view",
+            component: BnbView,
+        },
+        {
+            path: "/search-page",
+            name: "search-page",
+            component: SearchPage,
         },
     ],
 });
