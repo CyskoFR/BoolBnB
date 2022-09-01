@@ -18,7 +18,7 @@ const router = new VueRouter({
             component: Home,
         },
         {
-            path: "/bnb-view",
+            path: "/bnb-view/data/:id",
             name: "bnb-view",
             component: BnbView,
         },
