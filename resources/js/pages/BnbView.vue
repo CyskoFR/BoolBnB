@@ -2,31 +2,40 @@
     <main>
         <HeaderComponent/>
         <div>
-            <div class="container pt-3" v-for="apartment in apartments" :key="apartment.id">
-                <h1 class="">{{apartment.name}}</h1>
-                <h2>{{apartment.full_address}}</h2>
-                <img class="apartment_img pt-3" :src="`/storage/${apartment.image}`" :alt="apartment.name">
-                <h4 class="pt-5">Informazioni su questo spazio:</h4>
-                <p class="pt-2">{{apartment.description}}</p>
-                <div class="d-flex info">
-                    <div>
-                        <h5>{{apartment.rooms}} camere |</h5>
+            <div class="container bnb-container p-3" v-for="apartment in apartments" :key="apartment.id">
+                <h3 class="">{{apartment.name}}</h3>
+                <h6>{{apartment.full_address}}</h6>
+                <div class="row">
+                    <div class="col p-3">
+                        <img class="apartment_img" :src="`/storage/${apartment.image}`" :alt="apartment.name">
                     </div>
-                    <div>
-                        <h5>{{apartment.beds}} letti |</h5>
-                    </div>
-                    <div>
-                        <h5>{{apartment.bathrooms}} bagni |</h5>
-                    </div>
-                    <div>
-                        <h5>{{apartment.size}} metri quadri</h5>
+                    
+                    <div class="col p-3">
+                        <h5>Informazioni su questo spazio:</h5>
+                        <p>{{apartment.description}}</p>
+                        <div class="d-flex info">
+                            <div>
+                                <h5>{{apartment.rooms}} camere |</h5>
+                            </div>
+                            <div>
+                                <h5>{{apartment.beds}} letti |</h5>
+                            </div>
+                            <div>
+                                <h5>{{apartment.bathrooms}} bagni |</h5>
+                            </div>
+                            <div>
+                                <h5>{{apartment.size}} metri quadri</h5>
+                            </div>
+                        </div>
+
+                        <div class="mt-5">
+                            <h5>Cosa troverai:</h5>
+                            <div class="services d-flex" v-for="service in services" :key="service.id">
+                                <h5>{{service.name}}</h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <h5 class="pt-2">Cosa troverai:</h5>
-                <ul class="services" v-for="service in services" :key="service.id">
-                    <li><h5>{{service.name}}</h5></li>
-                </ul>
             </div>
 	    </div>
     </main>
@@ -73,23 +82,37 @@ export default {
 @import '../../sass/variables';
 
 main {
+    height: 100vh;
     background-color: $bg-primary-dark;
 
+    .bnb-container {
+        background-color: $bg-secondary-dark;
+        margin-top: 50px;
+    }
+
     .apartment_img {
-    height: 500px;
-    width: 500px;
+        height: 400px;
+        max-width: 532px;
     }
 
     .info * {
-    margin-right: 5px;
+    margin-right: 3px;
+    }
+
+    .info * * {
+        font-size: 15px;
     }
 
     h1, h3, h4, h5, p, li {
         color: $text-gray-light;
     }
 
-    h2 {
+    h6 {
         color: $text-gray-dark;
+    }
+
+    .services * {
+        font-size: 15px;
     }
 }
 

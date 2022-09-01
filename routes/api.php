@@ -22,6 +22,8 @@ Route::get('apartments', 'Api\ApartmentController@index');
 
 Route::get('apartment/{any?}', 'Api\ApartmentController@getApartment');
 
+Route::get('apartment-category/{any?}', 'Api\ApartmentController@getApartmentsInCategory');
+
 Route::get('service/{any?}', 'Api\ApartmentController@getServices');
 
 Route::get('categories', 'Api\CategoryController@index');
