@@ -4,7 +4,7 @@
 <section id="index-apartment" class="p-3">
     <div class="container text-capitalize d-flex flex-column" id="index">
         <h1 class="text-center mt-3 mb-3 text-light">Benvenuto {{ Auth::user()->first_name }}</h1>
-        
+
         <a class="align-self-center" href="{{route('admin.apartments.create')}}">
             <button class="btn mb-4"><b>Inserisci un nuovo appartamento</b></button>
         </a>
@@ -19,7 +19,7 @@
                 <h3>{{$apartment->full_address}}</h3>
             </div>
             <div class="buttons">
-                <a href="">
+                <a href="{{route('admin.messages', $apartment)}}">
                     <button class="btn">Messaggi</button>
                 </a>
 
@@ -33,7 +33,7 @@
         <a href="/">
             <button class="btn mt-2"><b>Home</b></button>
         </a>
-        
+
     </div>
 </section>
 @endsection
