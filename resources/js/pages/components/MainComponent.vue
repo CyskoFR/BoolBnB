@@ -1,8 +1,8 @@
 <template>
     <main>
         <CategorySection/>
-        <ApartmentSection/>
         <HeroSection/>
+        <ApartmentSection/>
     </main>
 </template>
 
