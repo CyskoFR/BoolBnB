@@ -19,6 +19,8 @@
 @import "back-office/edit-apartment.scss";
 @import "back-office/index-apartment.scss";
 
+// Messages
+@import "back-office/index-messages.scss";
 // Sponsorships
 @import "back-office/index-sponsorships.scss";
 
@@ -35,7 +37,7 @@
 //     background-color: $bg-primary-dark;
 // }
 
-//  header 
+//  header
 .main-nav {
     background-color: $bg-primary-dark;
 }
@@ -48,5 +50,3 @@
     font-size: 40px;
     color: $primary-green-light;
 }
-
-

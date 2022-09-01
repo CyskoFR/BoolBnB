@@ -1,0 +1,41 @@
+section#index-messages {
+    color: $text-gray-dark;
+    background-color: $bg-primary-dark;
+    h1 {
+        color: $text-gray-light;
+    }
+    .message-header {
+        height: 100px;
+        border-radius: 20px;
+        border: 2px solid $primary-green;
+        background-color: $bg-secondary-dark;
+
+        h4 {
+            color: $primary-green-light;
+        }
+
+        h4:hover {
+            text-decoration: underline;
+        }
+
+        h5 {
+            color: $text-gray-light;
+        }
+    }
+    .message-body {
+        background-color: $bg-primary-light;
+        color: $text-gray-light;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+    button {
+        height: 40px;
+        background-color: $primary-green-light;
+        border-radius: 20px;
+        margin-right: 10px;
+    }
+
+    .buttons {
+        min-width: 200px;
+    }
+}
