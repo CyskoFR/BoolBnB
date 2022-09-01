@@ -25,6 +25,8 @@ Route::middleware('auth')
         //index messaggi per il singolo appartamento;
         Route::get('/apartments/{apartment}/messages', 'MessageController@index')->name('messages');
         Route::get('/apartments/{apartment}/messages/{message}', 'MessageController@show')->name('message');
+        //index sponsorships;
+        Route::get('sponsorships', 'SponsorshipController@index')->name('sponsorships');
     });
 
 Route::get('{any?}',function(){

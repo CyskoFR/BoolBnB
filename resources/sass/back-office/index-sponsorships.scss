@@ -1,0 +1,27 @@
+section#index-sponsorships {
+    color: $text-gray-dark;
+    background-color: $bg-primary-dark;
+
+    .sponsorship {
+        background-color: $primary-green-light;
+        color: $text-gray-light;
+        width: 800px;
+        border: 1px solid $primary-green;
+        border-radius: 45px;
+        cursor: pointer;
+
+        a {
+            text-decoration: none;
+            color:$text-gray-light;
+        }
+    }
+
+    .sponsorship:hover {
+        background-color: $text-gray-light ;
+        color: $text-gray-dark;
+        
+        a {
+            color: $text-gray-dark;
+        }
+    }
+}
