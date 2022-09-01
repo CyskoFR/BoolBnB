@@ -19,7 +19,7 @@
                 <h3>{{$apartment->full_address}}</h3>
             </div>
             <div class="buttons">
-                <a href="">
+                <a href="{{route('admin.messages', $apartment)}}">
                     <button class="btn">Messaggi</button>
                 </a>
 
