@@ -6,12 +6,13 @@
             <div class="header_user d-flex align-items-center justify-content-center">
                 <div class="dropdown">
                     <button class="user_dropdown btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        nome utente
+                        Area personale
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Area personale</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" href="/login">Accedi</a>
+                        <a class="dropdown-item" href="/register">Registrati</a>
+                        <!-- <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Logout</a> -->
                     </div>
                 </div>
                 <div class="header_user_icon d-flex align-items-center justify-content-center">

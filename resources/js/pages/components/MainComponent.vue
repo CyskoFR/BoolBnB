@@ -2,6 +2,7 @@
     <main>
         <CategorySection/>
         <ApartmentSection/>
+        <HeroSection/>
     </main>
 </template>
 
@@ -9,6 +10,7 @@
 
 import CategorySection from '../sections/categorySection.vue';
 import ApartmentSection from '../sections/apartmentSection.vue';
+import HeroSection from '../sections/heroSection.vue';
 
 export default {
 
@@ -17,6 +19,7 @@ export default {
     components: { 
         ApartmentSection,
         CategorySection,
+        HeroSection,
     }
 };
 
