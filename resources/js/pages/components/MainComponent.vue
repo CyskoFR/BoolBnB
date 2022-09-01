@@ -1,18 +1,21 @@
 <template>
     <main>
         <CategorySection/>
+        <ApartmentSection/>
     </main>
 </template>
 
 <script>
 
 import CategorySection from '../sections/categorySection.vue';
+import ApartmentSection from '../sections/apartmentSection.vue';
 
 export default {
 
     name: "MainComponent",
 
     components: { 
+        ApartmentSection,
         CategorySection,
     }
 };

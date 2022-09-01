@@ -17,7 +17,7 @@
         <p>{{$apartment->size}}mq - camere {{$apartment->rooms}} - letti  {{$apartment->beds}} - bagni {{$apartment->bathrooms}}</p>
         <h4 class="text-start">Informazioni</h4>
         <p>{{$apartment->description}}</p>
-        <h4>Serzizi</h4>
+        <h4>Servizi</h4>
         <ul>
             @foreach ($apartment->services as $service)
             <li class="px-2">{{$service->name}}</li>

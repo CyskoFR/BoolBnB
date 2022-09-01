@@ -20,7 +20,7 @@
             </div>
             <div class="buttons">
                 <a href="">
-                    <button class="btn">Messaggi</button>
+                    <button class="btn"><b>Messaggi</b></button>
                 </a>
 
                 <a href="{{route('admin.apartments.edit', $apartment)}}">
