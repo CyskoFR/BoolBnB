@@ -75,7 +75,7 @@ class ApartmentController extends Controller
         
         $geo_json = json_decode($geo);
         
-        $url_image = "https://api.tomtom.com/map/1/staticimage?key=RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2&zoom=1&center={$geo_json->results[0]->position->lon},{$geo_json->results[0]->position->lat}&format=png&layer=basic&style=main&width=800&height=600";
+        $url_image = "https://api.tomtom.com/map/1/staticimage?key=RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2&zoom=16&center={$geo_json->results[0]->position->lon},{$geo_json->results[0]->position->lat}&format=png&layer=basic&style=main&width=800&height=600";
         //creazione appartamento
         $newApartment = new Apartment();
         $newApartment->name = $data['name'];
