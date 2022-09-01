@@ -84,7 +84,7 @@ export default {
 @import '../../../sass/variables';
 
 footer {
-    background-color: $bg-primary-dark;
+    background-color: $bg-secondary-dark;
     color: $text-gray-light;
 
     ul {
