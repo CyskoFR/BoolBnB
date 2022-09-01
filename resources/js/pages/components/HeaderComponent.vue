@@ -9,14 +9,15 @@
                         nome utente
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Area personale</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Logout</a>
                     </div>
                 </div>
                 <div class="header_user_icon d-flex align-items-center justify-content-center">
                     <font-awesome-icon icon="fa-regular fa-user" />
                 </div>
+                
             </div>
         </div>
     </header>
@@ -55,9 +56,8 @@ export default {
 .user_dropdown {
     color: $text-gray-light;
 }
-
-.user_dropdown {
-    color: $text-gray-light;
+.user_dropdown:focus, .user_dropdown:active {
+    box-shadow: none !important;
 }
 
 .header_user_icon {

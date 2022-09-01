@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- stylesheet specifica per la SPA --}}
     <link rel="stylesheet" href="{{asset('css/front.css')}}">
-    <title>Home BoolBnB</title>
+    <title>BoolBnB</title>
 </head>
 
 <body>
