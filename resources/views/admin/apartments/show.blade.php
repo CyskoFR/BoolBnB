@@ -3,13 +3,13 @@
 @section('content')
 <section id="show-apartment">
     <div class="container text-capitalize">
-        <div class=" d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center py-3">
             <div class="title_addres">
                 <h2 class="pt-4">{{$apartment->name}}</h2>
                 <h5 class="text-start flex-wrap">{{$apartment->full_address}}</h5>
             </div>
-            <div class="upgrade rounded pt-3 pb-3 py-2 px-2">
-                <a href="#">upgrade!</a>
+            <div class="rombo">
+                <div class="upgrade"><a href="#">upgrade!</a></div>
             </div>
         </div>
         <img class="img-fluid rounded" src="{{asset('storage/'.$apartment->image)}}" alt="">
@@ -33,7 +33,8 @@
                 longitudine {{$apartment->longitude}}
             </li>
         </ul>
-        <div class="d-flex py-2" id="actions">
+        <img src="{{$apartment->map_image}}" alt="">
+        <div class="d-flex py-3" id="actions">
             <a href="{{route('admin.apartments.edit', $apartment)}}">
                 <button class="btn update_button">Modifica</button></a>
             {{-- form per il destroy --}}
@@ -43,7 +44,6 @@
                 <button class="btn btn-danger">Elimina Appartamento</button>
             </form>
         </div>
-        <img src="{{$apartment->map_image}}" alt="">
     </div>
 </section>
 
