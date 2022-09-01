@@ -1,12 +1,14 @@
 <template>
     <main>
         <CategorySection/>
+        <HeroSection/>
     </main>
 </template>
 
 <script>
 
 import CategorySection from '../sections/categorySection.vue';
+import HeroSection from '../sections/heroSection.vue';
 
 export default {
 
@@ -14,6 +16,7 @@ export default {
 
     components: { 
         CategorySection,
+        HeroSection,
     }
 };
 
