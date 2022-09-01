@@ -2,12 +2,51 @@ section#show-apartment {
     background-color: $bg-primary-dark;
     color: $text-gray-dark; 
 
-    h1, h4 {
+    h1, h2, h4 {
         color: $text-gray-light;
+        margin-bottom: 0;
     }
 
     img {
-        max-height: 200px;
+        max-height: 18.75rem;
+    }
+
+    .update_button {
+        background-color: $primary-green-light;
+        color: $text-gray-light;
+    }
+
+    .update_button:hover {
+        background-color: $text-gray-light;
+        color: $text-gray-dark;
+    }
+
+    @mixin rombo($diagonaleMaggiore, $angoloDiBase) {
+        width:$diagonaleMaggiore;
+        height:$diagonaleMaggiore; 
+        transform:rotate(45deg) skew($angoloDiBase, $angoloDiBase);
+    }
+    .rombo {
+        @include rombo(80px, 3deg);
+        position: relative;
+        margin-top: 30px;
+        border-radius: 10px;
+        border: 1px solid $yellow;
+        background: rgb(66,211,172);
+        background: linear-gradient(90deg, rgba(66,211,172,1) 23%, rgba(5,231,182,1) 40%, rgba(24,225,187,1) 51%, rgba(66,211,197,1) 76%);
+
+        .upgrade {
+            position: absolute;
+            transform:rotate(-45deg); 
+            margin-top: 20px;
+
+            a {
+                text-decoration: none;
+                color: $yellow;
+                font-size: large;
+                font-weight: bold;
+            }
+        }
     }
 }
 
