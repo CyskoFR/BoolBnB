@@ -1,9 +1,7 @@
 <template>
     <div class="category_tag d-flex text-center">
-        <a :href="`/search-page/data/${category.id}`">
-            <img class="category_img" :src="category.image_src" :alt="category.name">
-            <p>{{category.name}}</p>
-        </a>
+        <img class="category_img" :src="category.image_src" :alt="category.name">
+        <p>{{category.name}}</p>
     </div>
 </template>
 

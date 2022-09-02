@@ -42,11 +42,4 @@ class ApartmentController extends Controller
 
         return $services;
     }
-
-    public function getApartmentsInCategory(Request $request) 
-    {
-        $id = $request->all();
-        $apartments = Apartment::query()->where('category_id', $id)->get();
-        return $apartments;
-    }
 }
