@@ -86,6 +86,7 @@ export default {
 footer {
     background-color: $bg-secondary-dark;
     color: $text-gray-light;
+    border-top: 1px solid $text-gray-dark;
 
     ul {
         list-style: none;
@@ -109,9 +110,7 @@ footer {
     }
 }
 .social_media {
-    // p {
-    //     vertical-align: middle;
-    // }
+
     img {
         width: 1.25rem;
         border-radius: 4px;
