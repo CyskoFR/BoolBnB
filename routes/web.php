@@ -24,7 +24,8 @@ Route::middleware('auth')
         Route::resource('apartments', 'ApartmentController');
         //index messaggi per il singolo appartamento;
         Route::get('/apartments/{apartment}/messages', 'MessageController@index')->name('messages');
-        Route::get('/apartments/{apartment}/messages/{message}', 'MessageController@show')->name('message');
+        Route::get('/apartments/{apartment}/messages/{message}', 'MessageController@show')->name('message.show');
+        Route::delete('/apartments/{apartment}/messages/{message}', 'MessageController@destroy')->name('message.destroy');
         //index sponsorships;
         Route::get('sponsorships', 'SponsorshipController@index')->name('sponsorships');
     });
