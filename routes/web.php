@@ -27,7 +27,7 @@ Route::middleware('auth')
         Route::get('/apartments/{apartment}/messages/{message}', 'MessageController@show')->name('message.show');
         Route::delete('/apartments/{apartment}/messages/{message}', 'MessageController@destroy')->name('message.destroy');
         //index sponsorships;
-        Route::get('sponsorships', 'SponsorshipController@index')->name('sponsorships');
+        Route::get('/apartments/{apartment}/sponsorships', 'SponsorshipController@index')->name('sponsorships');
     });
 
 Route::get('{any?}',function(){

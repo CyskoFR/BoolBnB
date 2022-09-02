@@ -59,4 +59,14 @@ section#index-sponsorships {
         background: rgb(194,140,43);
         background: linear-gradient(0deg, rgba(194,140,43,1) 0%, rgba(161,101,29,1) 42%, rgba(164,83,18,1) 94%);
     }
+
+    .update_button {
+        background-color: $primary-green-light;
+        color: $text-gray-light;
+    }
+
+    .update_button:hover {
+        background-color: $text-gray-light;
+        color: $text-gray-dark;
+    }
 }

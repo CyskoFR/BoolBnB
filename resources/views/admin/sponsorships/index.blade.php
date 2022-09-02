@@ -32,6 +32,8 @@
                 <div>2,99 €</div>
             </div>
         </div>
+        <a href="{{route('admin.apartments.show', $apartment)}}">
+            <button class="btn update_button my-3">Ci voglio ripensare</button></a>
     </div>
 </section>
 @endsection
