@@ -50,14 +50,18 @@ class ApartmentController extends Controller
         $final_address_lat = $final_address['lat'];
         $final_address_lon = $final_address['lon'];
         //dd( $final_address_lat, $final_address_lon);
-        $boundries = $this->fetchBoundries($final_address_lat, $final_address_lon, 10);   
-        dd($boundries);
+        $boundries = $this->fetchBoundries($final_address_lat, $final_address_lon, 20);   
+
+        //split sulle category
         if(!isset($data['category_id'])){
         $apartments = Apartment::query()
         ->where([
             ['rooms','>=', $data['rooms'] ?? 1],
             ['beds','>=', $data['beds'] ?? 1],
-            []
+            ['latitude','>=',$boundries['lat']['0'] ],
+            ['latitude','<=',$boundries['lat']['1'] ],
+            ['longitude','>=',$boundries['log']['0'] ],
+            ['longitude','<=',$boundries['log']['1'] ],
             ])
             //->with('category', 'user', 'services')
         ->get();
@@ -67,7 +71,11 @@ class ApartmentController extends Controller
             ->where([
                 ['rooms','>=', $data['rooms'] ?? 1],
                 ['beds','>=', $data['beds'] ?? 1],
-                ['category_id'] , $data['category_id']                
+                ['category_id'] , $data['category_id'],
+                ['latitude','>=',$boundries['lat']['0'] ],
+                ['latitude','<=',$boundries['lat']['1'] ],
+                ['longitude','>=',$boundries['log']['0'] ],
+                ['longitude','<=',$boundries['log']['1'] ],               
                 ])
                 //->with('category', 'user', 'services')
             ->get();
@@ -92,6 +100,8 @@ class ApartmentController extends Controller
 
         return $apartment;
     }
+    
+    //HELPERS
 
     // thanks to http://janmatuschek.de/LatitudeLongitudeBoundingCoordinates#Longitude
     public function fetchBoundries(float $lat_deg, float $lon_deg , int $distance ){
