@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
+
+//models
 use App\Apartment;
-use App\Service;
 
 class ApartmentController extends Controller
 {
@@ -25,6 +27,7 @@ class ApartmentController extends Controller
     //Singolo appartemento
     public function searchApartment(Request $request)
     {
+        // validazione richiesta get
         $request->validate([
             'full_address' => 'required|string|max:255',
             'rooms' => 'integer|min:1|max:255',
@@ -32,13 +35,40 @@ class ApartmentController extends Controller
             'category_id' => 'exists:categories,id',
             'services' => 'sometimes|exists:services,id'
         ]);
+        //fetch dei dati
+        $data = $request->all();
+        //geolocalizzazione indirizzo
+        $rawAddress = $data['full_address'];
+        $geoResponse = Http::get("https://api.tomtom.com/search/2/search/{$rawAddress}.json", [
+            'key' => 'RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2',
+        ])->json();
 
-        $request->all();
+        //cast float to string 
+        $final_address = $geoResponse['results']['0']['position'];
+        $final_address_lat = number_format($final_address['lat'],5,'.','');
+        $final_address_lon = number_format($final_address['lon'],5,'.','');
+        //dd( $final_address_lat, $final_address_lon);
 
+        //
+        $geometry_list  =json_encode([
+            "type" => "CIRCLE",
+            "position" => "{$final_address_lat},{$final_address_lon}",
+            "radius" => "20000" 
+        ]);
+        dd($geometry_list);
+        $result = Http::get("https://api.tomtom.com/search/2/geometrySearch/.json?", [
+            'key' => 'RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2',
+            'geometryList' => "{$geometry_list}",
+            ]);
+        dd($result);
+        $apartments = Apartment::query()
+        ->where('rooms', $data['rooms'])
+        ->orWhere('category_id', $data['category_id'])
+        ->orWhere('beds', $data['beds'])
+        ->with('user', 'category', 'services')
+        ->get();
 
-        $apartment = Apartment::all();
-
-        return $apartment;
+        return $apartments;
     }
 
 
