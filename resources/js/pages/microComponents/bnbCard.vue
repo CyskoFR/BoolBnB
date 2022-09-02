@@ -32,7 +32,7 @@ export default {
         height: 300px;
         border-radius: 20px;
         background-color: lightgray;
-        border: 4px solid $primary-green;
+        border: 1px solid $primary-green;
         overflow: hidden;
         margin-left: 10px;
         margin-right: 10px;
