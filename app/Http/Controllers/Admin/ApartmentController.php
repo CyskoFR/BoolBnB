@@ -10,7 +10,6 @@ use App\Apartment;
 use App\Category;
 use App\Service;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
