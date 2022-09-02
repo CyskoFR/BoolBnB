@@ -30,7 +30,7 @@
 
                         <div class="mt-5">
                             <h5>Cosa troverai:</h5>
-                            <div class="services d-flex" v-for="service in services" :key="service.id">
+                            <div class="services d-flex" v-for="service in apartment.services" :key="service.id">
                                 <h5>{{service.name}}</h5>
                             </div>
                         </div>
@@ -64,15 +64,6 @@ export default {
         })
             .then((response) => {
                 this.apartments = response.data;
-            });
-
-        axios.get('/api/service', {
-            params: {
-                Id: this.Id,
-            }
-        })
-            .then((response) => {
-                this.services = response.data;
             });
     }
 }

@@ -27,12 +27,12 @@ class ApartmentController extends Controller
     public function getApartment(Request $request)
     {
         $id = $request->all();
-        $apartment = Apartment::query()->where('id', $id)->get();
+        $apartment = Apartment::query()->where('id', $id)->with('user', 'category', 'services')->get();
 
         return $apartment;
     }
 
-    public function getServices(Request $request)
+   /* public function getServices(Request $request)
     {
         $id = $request->all();
         $apartment = Apartment::find($id);
@@ -41,5 +41,5 @@ class ApartmentController extends Controller
         })->get();
 
         return $services;
-    }
+    }*/
 }
