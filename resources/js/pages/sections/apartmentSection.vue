@@ -23,7 +23,7 @@ export default {
     },
 
     created() {
-        axios.get('http://localhost:8000/api/apartments')
+        axios.get('/api/apartments')
             .then((response) => {
                 this.apartments = response.data;
             });
