@@ -1,7 +1,7 @@
 <template>
     <main>
         <HeaderComponent/>
-        <MainComponent/>
+        <MainComponent class="main_component"/>
         <FooterComponent/>
     </main>
 </template>
@@ -24,6 +24,11 @@ export default {
 
 <style lang="scss" scoped>
     main {
+        display: flex;
+        flex-direction: column;
         min-height: 100vh;
+    }
+    .main_component {
+        flex-grow: 1;
     }
 </style>

@@ -1,8 +1,9 @@
 <template>
     <header>
         <div class="header_component container-fluid d-flex justify-content-between align-items-center">
-            <img class="logo" src="../../../img/logo_boolbnb.png" alt="logo">
-
+            <a class="logo_link" href="/">
+                <img class="logo_img" src="../../../img/logo_boolbnb.png" alt="logo">
+            </a>
             <div class="header_user d-flex align-items-center justify-content-center">
                 <div class="dropdown">
                     <button class="user_dropdown btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -44,13 +45,19 @@ export default {
 
 @import '../../../sass/variables';
 
+header {
+    background-color: $bg-primary-dark;
+    border-bottom: 1px solid $text-gray-dark;
+}
+
 .header_component {
     height: 4.375rem;
+    max-width: 125rem;
     background-color: $bg-primary-dark;
     padding: 1rem;
-    border-bottom: 1px solid $text-gray-dark;}
+}
 
-.logo {
+.logo_link, .logo_img {
     height: 100%;
 }
 
