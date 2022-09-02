@@ -1,17 +1,38 @@
 section#index-sponsorships {
     color: $text-gray-dark;
     background-color: $bg-primary-dark;
-    height: 100vh;
+    min-height: 50rem;
+
+    .hidden {
+        display: none;
+    }
+
+    .gold {
+        color: #ffd700;
+    }
+
+    .silver {
+        color: #8b8b8b;
+    }
+
+    .bronze {
+        color: #a45312;
+    }
 
     .sponsorship {
         background-color: $bg-secondary-dark;
         color: $primary-green-light;
         width: 600px;
-        border: 1px solid $primary-green;
-        border-radius: 30px;
+        border: 0.0625rem solid $primary-green;
+        border-radius: 1.875rem;
         font-size: large;
         font-weight: bold;
         cursor: pointer;
+    }
+
+    .sponsorship:hover{
+        background-color: $primary-green-light;
+        color: $text-gray-light;
     }
 
     @mixin rombo($diagonaleMaggiore, $angoloDiBase) {
@@ -27,22 +48,16 @@ section#index-sponsorships {
         border-radius: 10px;
         background: rgb(66,211,172);
         background: linear-gradient(90deg, rgba(66,211,172,1) 23%, rgba(5,231,182,1) 40%, rgba(24,225,187,1) 51%, rgba(66,211,197,1) 76%);
-    }
-
-    .label, .label_bronze {
-        position: absolute;
-        font-size: large;
-        font-weight: bold;
-        transform:rotate(-45deg);
-        margin-top: 23px; 
-    }
-
-    .label_bronze {
-        margin-left: 5px;
+        display: flex;
+        justify-content: center;
     }
 
     .label {
-        margin-left: 13px;
+        font-size: large;
+        font-weight: bold;
+        transform:rotate(-45deg);
+        margin-top: 0.3125rem;
+        margin-left: 0.25rem;
     }
 
     .gold .rombo {
@@ -57,16 +72,30 @@ section#index-sponsorships {
 
     .bronze .rombo {
         background: rgb(194,140,43);
-        background: linear-gradient(0deg, rgba(194,140,43,1) 0%, rgba(161,101,29,1) 42%, rgba(164,83,18,1) 94%);
+        background: linear-gradient(0deg, rgba(194,140,43,1) 0%, rgba(161,101,29,1) 42%, rgb(164, 83, 18) 94%);
     }
 
-    .update_button {
+    .comeback_button {
         background-color: $primary-green-light;
         color: $text-gray-light;
     }
 
-    .update_button:hover {
+    .comeback_button:hover {
         background-color: $text-gray-light;
         color: $text-gray-dark;
+    }
+
+
+    @media screen and (max-width: 700px) {
+        .sponsorship {
+            flex-wrap: wrap;
+            width: 60vw;
+        }
+        .rombo {
+            display: none;
+        }
+        .hidden {
+            display: block;
+        }
     }
 }
