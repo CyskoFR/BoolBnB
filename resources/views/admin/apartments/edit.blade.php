@@ -167,6 +167,8 @@
             @error('is_visible')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
+            <a href="{{route('admin.apartments.index')}}">
+                <button class="btn update_button mx-2">Indietro</button></a>
             <button type="submit" class="btn btn-primary">Salva modifiche</button>
         </form>
     </div>

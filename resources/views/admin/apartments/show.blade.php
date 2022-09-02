@@ -9,7 +9,7 @@
                 <h5 class="text-start flex-wrap">{{$apartment->full_address}}</h5>
             </div>
             <div class="rombo">
-                <div class="upgrade"><a href="#">upgrade!</a></div>
+                <div class="upgrade"><a href="{{route('admin.sponsorships', $apartment)}}">upgrade!</a></div>
             </div>
         </div>
         <img class="img-fluid rounded" src="{{asset('storage/'.$apartment->image)}}" alt="">
@@ -38,10 +38,12 @@
             https://www.google.com/maps/embed/v1/view?key=AIzaSyCQ7RWBFjqduEmJrdQxabkp5w1nc0KXZeM&center={$apartment->latitude},{$apartment->longitude}&zoom=18&maptype=satellite"}}">
         </iframe>
         <div class="d-flex py-3" id="actions">
+            <a href="{{route('admin.apartments.index')}}">
+            <button class="btn update_button mx-2">Indietro</button></a>
             <a href="{{route('admin.apartments.edit', $apartment)}}">
                 <button class="btn update_button">Modifica</button></a>
             {{-- form per il destroy --}}
-            <form class="px-2" action="{{route('admin.apartments.destroy', $apartment)}}" method="POST">
+            <form class="mx-2" action="{{route('admin.apartments.destroy', $apartment)}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger">Elimina Appartamento</button>
