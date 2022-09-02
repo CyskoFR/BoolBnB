@@ -150,7 +150,8 @@
                 <div class="custom-file">
                     <input type="file" name="image" class="custom-file-input  @error('image') is-invalid @enderror"
                         id="input-image">
-                    <label class="custom-file-label" for="input-image">Inserisci l'immagine</label>
+                    <label class="custom-file-label" for="input-image">
+                        {{basename($apartment->image)}}</label>
                 </div>
             </div>
             @error('image')

@@ -7,7 +7,7 @@
         <div>
             <div class="message-header row  mb-3 mb-md-0 justify-content-between align-items-center ">
                 <div class=" col-6 pl-3 text-truncate  col-6 d-flex flex-column align-items-start">
-                    <a href="{{route('admin.message', [$message->apartment, $message])}}">
+                    <a href="{{route('admin.message.show', [$message->apartment, $message])}}">
                         <h4 class="pt-2 pb-1">{{$message->full_name}}</h4>
                     </a>
                     <h5 class="d-none d-md-block">{{$message->mail}}</h5>

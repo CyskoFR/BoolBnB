@@ -33,7 +33,10 @@
                 longitudine {{$apartment->longitude}}
             </li>
         </ul>
-        <img src="{{$apartment->map_image}}" alt="">
+        <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade" src="{{"
+            https://www.google.com/maps/embed/v1/view?key=AIzaSyCQ7RWBFjqduEmJrdQxabkp5w1nc0KXZeM&center={$apartment->latitude},{$apartment->longitude}&zoom=18&maptype=satellite"}}">
+        </iframe>
         <div class="d-flex py-3" id="actions">
             <a href="{{route('admin.apartments.edit', $apartment)}}">
                 <button class="btn update_button">Modifica</button></a>
