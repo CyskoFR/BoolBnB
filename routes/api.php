@@ -26,6 +26,8 @@ Route::get('service/{any?}', 'Api\ApartmentController@getServices');
 
 Route::get('categories', 'Api\CategoryController@index');
 
+Route::get('services', 'Api\ServiceController@index');
+
 //store dei messaggi
 Route::post('message' , 'Api\MessageController@store');
 

@@ -23,7 +23,7 @@ class ApartmentController extends Controller
      *
      *
      */
-
+    //Singolo appartemento
     public function getApartment(Request $request)
     {
         $id = $request->all();
@@ -31,15 +31,4 @@ class ApartmentController extends Controller
 
         return $apartment;
     }
-
-   /* public function getServices(Request $request)
-    {
-        $id = $request->all();
-        $apartment = Apartment::find($id);
-        $services = Service::whereHas('apartments', function ($query) use ($id) {
-            $query->where('apartment_id', $id);
-        })->get();
-
-        return $services;
-    }*/
 }
