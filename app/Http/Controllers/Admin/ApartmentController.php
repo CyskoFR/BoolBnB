@@ -75,7 +75,6 @@ class ApartmentController extends Controller
         
         $geo_json = json_decode($geo);
         
-        $url_image = "https://api.tomtom.com/map/1/staticimage?key=RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2&zoom=16&center={$geo_json->results[0]->position->lon},{$geo_json->results[0]->position->lat}&format=png&layer=basic&style=main&width=800&height=600";
         //creazione appartamento
         $newApartment = new Apartment();
         $newApartment->name = $data['name'];
@@ -88,7 +87,6 @@ class ApartmentController extends Controller
         $newApartment->latitude = $geo_json->results[0]->position->lat;
         $newApartment->longitude = $geo_json->results[0]->position->lon;
         $newApartment->image = Storage::put('images', $data['image']);
-        $newApartment->map_image = $url_image;
         $newApartment->is_visible = isset($data['is_visible']);
         //foreign key
         $newApartment->user_id = Auth::id();
@@ -177,14 +175,6 @@ class ApartmentController extends Controller
         }
         $geo_json = json_decode($geo);
 
-        if($apartment->longitude && $apartment->latitude){
-            $url_image = "https://api.tomtom.com/map/1/staticimage?key=RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2&zoom=16&center={$apartment->longitude},{$apartment->latitude}&format=png&layer=basic&style=main&width=800&height=600";
-  
-        }else{
-            $url_image = "https://api.tomtom.com/map/1/staticimage?key=RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2&zoom=16&center={$geo_json->results[0]->position->lon},{$geo_json->results[0]->position->lat}&format=png&layer=basic&style=main&width=800&height=600";
-        }
-
-
         //update appartamento
         $apartment->name = $data['name'];
         $apartment->rooms = $data['rooms'];
@@ -201,7 +191,6 @@ class ApartmentController extends Controller
             Storage::delete('images' , $apartment->image);
             $apartment->image = Storage::put('images', $data['image']);
         }
-        $apartment->map_image = $url_image;
         $apartment->is_visible = isset($data['is_visible']);
         //foreign key
         $apartment->user_id = Auth::id();
