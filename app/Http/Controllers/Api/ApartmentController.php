@@ -47,15 +47,11 @@ class ApartmentController extends Controller
         $final_address = $geoResponse['results']['0']['position'];
         $final_address_lat = number_format($final_address['lat'],5,'.','');
         $final_address_lon = number_format($final_address['lon'],5,'.','');
-        //dd( $final_address_lat, $final_address_lon);
 
         //
-        $geometry_list  =json_encode([
-            "type" => "CIRCLE",
-            "position" => "{$final_address_lat},{$final_address_lon}",
-            "radius" => "20000" 
-        ]);
-        dd($geometry_list);
+        $geometry_list="type=CIRCLE,position={$final_address_lat},{$final_address_lon},radius=20000" ;
+     
+        //dd($geometry_list);
         $result = Http::get("https://api.tomtom.com/search/2/geometrySearch/.json?", [
             'key' => 'RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2',
             'geometryList' => "{$geometry_list}",
