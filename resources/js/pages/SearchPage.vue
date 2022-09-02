@@ -1,8 +1,8 @@
 <template>
-    <main>
+    <div>
         <HeaderComponent/>
         <FooterComponent/>
-    </main>
+    </div>
 </template>
 
 <script>

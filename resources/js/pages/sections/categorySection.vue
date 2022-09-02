@@ -26,9 +26,9 @@ export default {
 
     created() {
         axios.get('/api/categories')
-            .then((response) => {
-                this.categories = response.data;
-            });
+        .then((response) => {
+            this.categories = response.data;
+        });
     }
 };
 
