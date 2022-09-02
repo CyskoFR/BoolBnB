@@ -94,7 +94,6 @@ class ApartmentController extends Controller
     //Singolo appartemento
     public function getApartment(Request $request)
     {
-        $this->hello();
         $id = $request->all();
         $apartment = Apartment::query()->where('id', $id)->with('user', 'category', 'services')->get();
 
