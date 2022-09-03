@@ -1,6 +1,11 @@
 @extends('layouts.back')
 
 @section('content')
+{{-- <style>
+    .description-error {
+        color: #FF0000;
+    }
+</style> --}}
 {{-- @dd($categories, $services) --}}
 <section id="create-apartment">
     <div class="container p-3">
@@ -94,9 +99,9 @@
             {{-- Textarea: Descrizione appartamento --}}
             <div class="form-group">
                 <label for="description">Descrizione del locale:</label>
-                <textarea name="description"
+                <textarea name="description" placeholder="Inserire la descrizione dell'appartmento..."
                     class=" wrapper-input form-control @error('description') is-invalid @enderror" id="description"
-                    rows="5">{{ old('description')  != null ? old('description') : "Inserisci descrizione dell' appartamento"}}</textarea>
+                    rows="5">{{ old('description')  != null ? old('description') : ""}}</textarea>
                 @error('description')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -161,11 +166,7 @@
         </form>
     </div>
 </section>
-<style>
-    .error {
-        color: #FF0000;
-    }
-</style>
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 <script>
@@ -177,26 +178,68 @@
                     required: true,
                     maxlength: 255
                 },
-  
-                // code: {
-                //     required: true,
-                // },
-  
-                // description: {
-                //     required: true,
-                // },
+                rooms: {
+                    required: true,
+                    min: 1,
+                    max: 255
+                },
+                beds: {
+                    required: true,
+                    min: 1,
+                    max: 255
+                },
+                bathrooms: {
+                    required: true,
+                    min: 1,
+                    max: 255
+                },
+                size: {
+                    required: true,
+                    min: 10,
+                    max: 65535
+                },
+                description: {
+                    required: true,
+                    maxlength: 65535
+                },
+                full_address: {
+                    required: true,
+                    maxlength: 255
+                },
             },
             messages: {
                 name: {
                     required: "Inserisci il nome dell'annuncio",
                     maxlength: "Lunghezza massima 255 caratteri"
                 },
-                // code: {
-                //     required: "Please enter valid email",
-                // },
-                //  description: {
-                //     required: "Please enter message",
-                // },
+                rooms: {
+                    required: "Inserisci il numero di stanze",
+                    min: 'Minimo una stanza',
+                    max: "Massimo 255 stanze"
+                },
+                beds: {
+                    required: "Inserisci il numero di letti",
+                    min: 'Minimo un letto',
+                    max: "Massimo 255 letti"
+                },
+                bathrooms: {
+                    required: "Inserisci il numero di bagni",
+                    min: 'Minimo un bagno',
+                    max: "Massimo 255 bagni"
+                },
+                size: {
+                    required: "Inserisci le dimensioni del locale",
+                    min: 'Minimo 10 m2',
+                    max: "Massimo 65535 m2 "
+                },
+                description: {
+                    required: "La descrizione del locale e' obbligatoria",
+                    maxlength: "Lunghezza massima 65535 caratteri"
+                },
+                full_address: {
+                    required: "L'indirizzo e' obbligatorio",
+                    maxlength: "Lunghezza massima 255 caratteri"
+                },
             },
         })
     } 
