@@ -18,16 +18,21 @@ section#index-apartment {
     }
 
     button {
-        height: 40px;
+        font-size: .875rem;
         background-color: $primary-green-light;
-        border-radius: 20px;
-        margin-right: 10px;
+        border-radius: .75rem;
+        margin-right: .625rem;
+        &:hover {
+            color: $text-gray-light;
+            background-color: $primary-green-dark;
+            border: 1px solid $primary-green-light;
+        }
     }
 
-    .buttons {
-        min-width: 200px; 
+    .buttons a {
+        min-width: 200px;
+        text-decoration: none;
     }
-        
 }
 
 

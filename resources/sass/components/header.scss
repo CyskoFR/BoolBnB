@@ -1,0 +1,53 @@
+header {
+    background-color: $bg-primary-dark;
+    border-bottom: 1px solid $text-gray-dark;
+    .header_component {
+        height: 4.375rem;
+        max-width: 125rem;
+        background-color: $bg-primary-dark;
+        padding: 1rem 1.5rem;
+    }
+    
+    .logo_link, .logo_img {
+        height: 100%;
+    }
+    
+    .user_dropdown {
+        color: $text-gray-light;
+        font-size: 1rem;
+        &:hover {
+            scale: 105%;
+            color: white;
+        }
+    }
+
+    .user_dropdown:focus, .user_dropdown:active {
+        box-shadow: none !important;
+    }
+
+    .main-nav {
+        padding: 0;
+    }
+    
+    .header_user_icon {
+        height: 2.5rem;
+        width: 2.5rem;
+        border: 2px solid $primary-green;
+        border-radius: 50%;
+    }
+    
+    .fa-user {
+        color: $primary-green;
+    }
+
+    .nav-link {
+        color: $text-gray-light !important;
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0 .375rem;
+        &:hover {
+            scale: 105%;
+            filter: brightness(2);
+        }
+    }
+}

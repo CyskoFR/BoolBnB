@@ -74,7 +74,8 @@ export default {
         font-size: 3.5rem;
         text-align: start;
         margin-bottom: 1.25rem;
-    
+        
+        //color animation
         background: linear-gradient(224deg, #42b883, #155f3e, #3468a3, #aac8e4);
         background-size: 1200% 1200%;
         background-clip: text;
@@ -134,10 +135,10 @@ export default {
 .hero_searchbar_button {
     background-color: $primary-green;
     color: $text-gray-light;
+    font-weight: 600;
     &:hover {
-        background-color: $text-blue-light;
+        background-color: $primary-green-dark;
         border: 1px solid $primary-green-light;
-        color: $text-blue-dark;
     }
 }
 

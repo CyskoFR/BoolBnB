@@ -54,7 +54,7 @@ header {
     height: 4.375rem;
     max-width: 125rem;
     background-color: $bg-primary-dark;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
 }
 
 .logo_link, .logo_img {

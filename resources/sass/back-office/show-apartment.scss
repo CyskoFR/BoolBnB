@@ -8,17 +8,24 @@ section#show-apartment {
     }
 
     img {
-        max-height: 18.75rem;
+        max-height: 20rem;
+        object-fit: cover;
+        border-radius: .5rem;
+        outline: 1px solid $primary-green-dark;
+        outline-offset: .125rem;
+
     }
 
     .update_button {
+        font-size: .875rem;
         background-color: $primary-green-light;
-        color: $text-gray-light;
-    }
-
-    .update_button:hover {
-        background-color: $text-gray-light;
-        color: $text-gray-dark;
+        border-radius: .75rem;
+        margin-right: .625rem;
+        &:hover {
+            color: $text-gray-light;
+            background-color: $primary-green-dark;
+            border: 1px solid $primary-green-light;
+        }
     }
 
     @mixin rombo($diagonaleMaggiore, $angoloDiBase) {
@@ -47,6 +54,11 @@ section#show-apartment {
                 font-weight: bold;
             }
         }
+    }
+    iframe {
+        border-radius: .75rem;
+        outline: 1px solid $text-gray-dark;
+        outline-offset: 1px;
     }
 }
 
