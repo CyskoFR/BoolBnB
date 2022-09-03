@@ -5,7 +5,8 @@
             <img class="apartment_img" :src="`/storage/${apartment.image}`" :alt="apartment.name">
             </a>
         </div>
-        <h5>{{apartment.name}}</h5>
+        <h5 class="apartment_name">{{apartment.name}}</h5>
+        <p class="apartment_address">{{apartment.full_address}}</p>
     </div>
 </template>
 
@@ -24,31 +25,35 @@ export default {
 @import '../../../sass/variables';
 
 .apartment-card {
-
-    margin-bottom: 15px;
+    margin: .75rem;
+    transition: 0.1s;
+    &:hover {
+        scale: 102%;
+    }
     
     .img-container {
         width: 300px;
         height: 300px;
         border-radius: 20px;
-        background-color: lightgray;
+        background-color: $bg-primary-light;
         border: 1px solid $primary-green;
         overflow: hidden;
-        margin-left: 10px;
-        margin-right: 10px;
 
         img {
-            width: 100%;
+            max-width: 100%;
             height: 100%;
+            object-fit: cover;
         }
     }
 
-    h5 {
+    .apartment_name {
         color: $text-gray-light;
-        font-size: 17px;
-        margin-left: 15px;
-        margin-top: 10px;
+        font-size: 1.5rem;
+        margin: .5rem 0 0;
+    }
+    .apartment_address {
+        color: $text-gray-dark;
+        font-size: 1rem;
     }
 }
-    
 </style>

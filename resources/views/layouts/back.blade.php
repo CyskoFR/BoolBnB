@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'BoolBnB Backoffice') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -22,50 +22,55 @@
 </head>
 
 <body>
-    <nav class="main-nav navbar navbar-expand-md navbar-light bg-black shadow-sm border-bottom border-light">
-        <a class="navbar-brand text-light" href="/">
-            <img class="logo" src="{{asset('images/logo_boolbnb.png')}}">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
+    <header>
+        <div class="header_component container-fluid d-flex justify-content-between align-items-center">
+            <a class="logo_link" href="/">
+                <img class="logo_img" src="{{asset('images/logo_boolbnb.png')}}" alt="logo">
+            </a>
+            <nav class="main-nav">
+                <div id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+        
+                    <!-- Right Side Of Navbar -->
+                    <div class="navbar-nav">
+                        <!-- Authentication Links -->
+                        @guest
+                        <div class="nav_box d-flex">
+                            <div class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </div>
+                            @if (Route::has('register'))
+                            <div class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </div>
+                            @endif    
+                        </div>
+                        @else
 
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
-                @guest
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                </li>
-                @if (Route::has('register'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li>
-                @endif
-                @else
-                <li class="nav-item dropdown">
-
-                    <i id="navbarDropdown" class="nav-link far fa-circle-user" href="#" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    </i>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item " href="{{ route('logout') }}" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
+                        <div class="header_user d-flex align-items-center justify-content-center">
+                            <div class="dropdown">
+                                <button class="user_dropdown btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item " href="{{ route('logout') }}" onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>    
+                                </div>
+                            </div>
+                            <div class="header_user_icon d-flex align-items-center fa-regular fa-user justify-content-center"></div>
+                        </div>
+                        @endguest
                     </div>
-                </li>
-                @endguest
-            </ul>
+                </div>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <main>
         @yield('content')

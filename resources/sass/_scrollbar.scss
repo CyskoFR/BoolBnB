@@ -1,0 +1,27 @@
+/* Scroll bar stylings */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(70deg, $primary-green-dark, $primary-blue-dark);
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(70deg, $primary-green, $primary-blue);
+}
+
+/* Works on Firefox Browser */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: $primary-green-dark rgb(238, 238, 238);
+}
