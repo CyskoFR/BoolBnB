@@ -212,9 +212,9 @@ section {
         background-color: $primary-green-light;
         border-radius: .75rem;
         &:hover {
-            background-color: $text-gray-light;
+            color: $text-gray-light;
+            background-color: $primary-green-dark;
             border: 1px solid $primary-green-light;
-            color: $text-blue-dark;
         }
     }
 }

@@ -33,7 +33,7 @@
                 longitudine {{$apartment->longitude}}
             </li>
         </ul>
-        <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen
+        <iframe width="100%" height="300" style="border:0" loading="lazy" allowfullscreen
             referrerpolicy="no-referrer-when-downgrade" src="{{"
             https://www.google.com/maps/embed/v1/view?key=AIzaSyCQ7RWBFjqduEmJrdQxabkp5w1nc0KXZeM&center={$apartment->latitude},{$apartment->longitude}&zoom=18&maptype=satellite"}}">
         </iframe>

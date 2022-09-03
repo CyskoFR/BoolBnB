@@ -2,7 +2,6 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Font Awesome
-
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/solid";
@@ -11,13 +10,18 @@
 // Variables
 @import "variables";
 
+//Scrollbar style
+@import "scrollbar";
+
 // import pages components
 @import "auth/login.scss";
+@import "auth/register.scss";
 
 @import "back-office/show-apartment.scss";
 @import "back-office/create-apartment.scss";
 @import "back-office/edit-apartment.scss";
 @import "back-office/index-apartment.scss";
+@import "components/header.scss";
 
 // Messages
 @import "back-office/index-messages.scss";
@@ -27,26 +31,7 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
-// Font-Awesome
-@import "~@fortawesome/fontawesome-free/scss/fontawesome";
-@import "~@fortawesome/fontawesome-free/scss/regular";
-@import "~@fortawesome/fontawesome-free/scss/solid";
-@import "~@fortawesome/fontawesome-free/scss/brands";
-
-// header {
-//     background-color: $bg-primary-dark;
-// }
-
-//  header
-.main-nav {
+main {
+    min-height: calc(100vh - 71px);
     background-color: $bg-primary-dark;
-}
-
-.logo {
-    height: 38px;
-}
-
-#navbarDropdown {
-    font-size: 40px;
-    color: $primary-green-light;
 }

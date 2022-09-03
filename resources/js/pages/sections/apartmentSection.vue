@@ -1,5 +1,5 @@
 <<template>
-    <section class="apartment_section d-flex justify-content-center flex-row p-3 pt-5">
+    <section class="apartment_section d-flex justify-content-center flex-row p-3">
         <bnbCard :apartment="apartment" v-for="apartment in apartments" :key="apartment.id"/>
     </section>
 </template>
