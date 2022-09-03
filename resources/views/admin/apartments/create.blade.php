@@ -5,7 +5,8 @@
 <section id="create-apartment">
     <div class="container p-3">
         <h1 class="text-center">Creazione dell'appartamento</h1>
-        <form method="POST" action="{{route('admin.apartments.store')}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('admin.apartments.store')}}" enctype="multipart/form-data"
+            onsubmit="return mySubmitFunction(event)">
             @csrf
 
             {{-- text input : titolo --}}
@@ -24,8 +25,8 @@
                 <div class="input-group-prepend rounded-0">
                     <label class="input-group-text border-0" for="category_id">Categoria</label>
                 </div>
-                <select name="category_id" class=" border-0 custom-select @error('category_id') is-invalid @enderror"
-                    id="category_id">
+                <select name="category_id" required
+                    class=" border-0 custom-select @error('category_id') is-invalid @enderror" id="category_id">
                     <option selected disabled> -- seleziona categoria -- </option>
                     @foreach ($categories as $category)
                     <option value="{{$category->id}}" {{ (old("category_id")==$category->id ? "selected":"")
@@ -39,16 +40,17 @@
 
 
             <div class="form-group ">
-                {{-- Number: Numero Stanze --}}
+                {{-- Number: Numero Stanze min="1" step="1" --}}
                 <div class="row pb-2 ">
                     <div class="col">
                         <label for="input-rooms">Stanze</label>
                         <input type="number" value="{{ old('rooms') }}" name="rooms"
                             class=" wrapper-input form-control @error('rooms') is-invalid @enderror" id="input-rooms"
-                            min="1" step="1" placeholder="Inserisci il numero delle stanze...">
+                            placeholder="Inserisci il numero delle stanze...">
                         @error('rooms')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+                        <small id="input-rooms-help" class="form-text text-muted">Massimo 255 stanze</small>
                     </div>
 
                     {{-- Number: Numero Letti --}}
@@ -56,10 +58,11 @@
                         <label for="input-beds">Letti</label>
                         <input type="number" value="{{ old('beds') }}" name="beds"
                             class=" wrapper-input form-control @error('beds') is-invalid @enderror" id="input-beds"
-                            min="1" step="1" placeholder="Inserisci il numero dei letti...">
+                            placeholder="Inserisci il numero dei letti...">
                         @error('beds')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+                        <small id="input-beds-help" class="form-text text-muted">Massimo 255 stanze</small>
                     </div>
 
                 </div>
@@ -68,20 +71,22 @@
                         <label for="input-bathrooms">Bagni</label>
                         <input type="number" value="{{ old('bathrooms') }}" name="bathrooms"
                             class="wrapper-input form-control @error('bathrooms') is-invalid @enderror"
-                            id="input-bathrooms" min="1" step="1" placeholder="Inserisci il numero dei bagni...">
+                            id="input-bathrooms" placeholder="Inserisci il numero dei bagni...">
                         @error('bathrooms')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+                        <small id="input-bathrooms-help" class="form-text text-muted">Massimo 255 bagni</small>
                     </div>
                     {{-- Number: Dimensione --}}
                     <div class="col">
                         <label for="input-size">Dimensioni in M<sup>2</sup> </label>
                         <input type="number" value="{{ old('size') }}" name="size"
                             class=" wrapper-input form-control @error('size') is-invalid @enderror" id="input-size"
-                            min="1" step="1" placeholder="Immetti la dimensione...">
+                            placeholder="Immetti la dimensione...">
                         @error('size')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+                        <small id="input-size-help" class="form-text text-muted"></small>
                     </div>
 
                 </div>
@@ -97,17 +102,6 @@
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-
-            {{-- <script>
-                const message = "Inserisci descrizione dell' appartamento";
-            const textarea = document.getElementById("description");
-            textarea.addEventListener("click", () => {
-                let customMessage = textarea.innerHTML;
-                console.log(message , customMessage);
-                if ((customMessage = message)) textarea.innerText = "";
-                 textarea.innerHTML = customMessage;
-            });
-            </script> --}}
 
             {{-- checkbbox: group servizi --}}
             <div class="row mx-0 justify-content-between" id="servizi">
@@ -137,29 +131,7 @@
                 @enderror
             </div>
             {{-- <script>
-                let statusAddress; 
-            const input = document.getElementById('input-address');
-            const btnCheck = document.getElementById('check-address');
-            btnCheck.addEventListener('click',(e)=>{
 
-                e.preventDefault();
-
-                let inpuText = input.value;
-                
-                axios.get(`https://api.tomtom.com/search/2/search/${inpuText}.json?key=RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2`)
-                .then((response) => {
-                    //response.json();
-                    let test = response.json();
-                    console.log(test.value.results.length);
-                    statusAddress = test.value.results.length == 0 ? true : false;
-                    //console.log(statusAddress);
-                    //console.log(response);)
-                }); 
-            });
-
-            if(statusAddress != 200){
-
-            }
             </script> --}}
             {{-- input file immagine --}}
             <span class="d-block pb-1">Scegli l'immagine di copertina del tuo annuncio:</span>
@@ -173,7 +145,7 @@
                     <label class="custom-file-label rounded-0" for="input-image">Inserisci l'immagine</label>
                 </div>
             </div>
-            @error('image')
+            @error('image')undefined
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             {{-- check-box: is_visible --}}
@@ -186,8 +158,108 @@
             @error('is_visible')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            <button type="submit" class="btn  ">Submit</button>
+            <button class="btn" onclick="">Submit</button>
         </form>
     </div>
 </section>
+
+<script>
+    //HOOKS
+    
+    form = document.querySelector('form');
+
+    /* input text-name validation rule*/
+    function validateNameField(){
+        inputName = document.querySelector('input#input-name').value;
+        inputNameLabel = document.querySelector('small#input-name-help');
+        let errorString = "";
+        if(inputName.length > 255 || inputName.length < 1){
+            inputNameLabel.classList.remove( 'text-muted');
+            inputNameLabel.classList.add( 'text-danger');
+            inputNameLabel.innerText = "Immetti un numero di caratteri compreso da 1 a 255";
+            return false;
+        }else{
+        inputNameLabel.classList.add( 'text-muted');
+        inputNameLabel.classList.remove( 'text-danger');
+        inputNameLabel.innerText = "Max 255 caratteri";
+        return true;
+        }
+    }
+    /* input number-rooms validation rule*/
+    function validateRoomsField(){
+        inputRooms = document.querySelector('input#input-rooms').value;
+        inputRoomsLabel = document.querySelector('small#input-rooms-help');
+        let errorString = "";
+        if(inputRooms > 254 || inputRooms < 1){
+            inputRoomsLabel.classList.remove( 'text-muted');
+            inputRoomsLabel.classList.add( 'text-danger');
+            inputRoomsLabel.innerText = 'Inserisci numero intero di stanze compreso da 1 a 255';
+            return false;
+        }else{  
+            inputRoomsLabel.classList.add( 'text-muted');
+            inputRoomsLabel.classList.remove( 'text-danger');
+            inputRoomsLabel.innerText = 'Massimo 255 stanze';
+            return true;
+        }
+    }
+    function validateBedsField(){
+        inputBeds = document.querySelector('input#input-beds').value;
+        inputBedsLabel = document.querySelector('small#input-beds-help');
+        let errorString = "";
+        if(inputBeds > 254 || inputBeds < 1){
+            inputBedsLabel.classList.remove( 'text-muted');
+            inputBedsLabel.classList.add( 'text-danger');
+            inputBedsLabel.innerText = 'Inserisci numero intero di letti compreso da 1 a 255';
+            return false;
+        }else{  
+            inputBedsLabel.classList.add( 'text-muted');
+            inputBedsLabel.classList.remove( 'text-danger');
+            inputBedsLabel.innerText = 'Massimo 255 letti';
+            return true;
+        }
+    }
+    function validateBathroomsField(){
+        inputBathrooms = document.querySelector('input#input-bathrooms').value;
+        inputBathroomsLabel = document.querySelector('small#input-bathrooms-help');
+        let errorString = "";
+        if(inputBathrooms > 254 || inputBathrooms < 1){
+            inputBathroomsLabel.classList.remove( 'text-muted');
+            inputBathroomsLabel.classList.add( 'text-danger');
+            inputBathroomsLabel.innerText = 'Inserisci numero intero di bagni compreso da 1 a 255';
+            return false;
+        }else{  
+            inputBathroomsLabel.classList.add( 'text-muted');
+            inputBathroomsLabel.classList.remove( 'text-danger');
+            inputBathroomsLabel.innerText = 'Massimo 255 bagni';
+            return true;
+        }
+    }
+    function validateSizeField(){
+        inputSize = document.querySelector('input#input-size').value;
+        inputSizeLabel = document.querySelector('small#input-size-help');
+        let errorString = "";
+        if(inputSize > 254 || inputSize < 10){
+            inputSizeLabel.classList.remove( 'text-muted');
+            inputSizeLabel.classList.add( 'text-danger');
+            inputSizeLabel.innerText = 'Inserisci uan dimensione compresa tra 11 a 255';
+            return false;
+        }else{  
+            inputSizeLabel.classList.add( 'text-muted');
+            inputSizeLabel.classList.remove( 'text-danger');
+            inputSizeLabel.innerText = 'Massimo 65535';
+            return true;
+        }
+    }
+    function mySubmitFunction(e) {
+    e.preventDefault();
+    console.log(validateNameField());
+    console.log(validateRoomsField());
+    console.log(validateBedsField());
+    console.log(validateBathroomsField());
+    console.log(validateSizeField());
+    return true;
+}
+
+
+</script>
 @endsection
