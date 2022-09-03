@@ -206,6 +206,10 @@
                     required: true,
                     maxlength: 255
                 },
+                image: {
+                    required: true,
+                    //accept: "image/*"
+                },
             },
             messages: {
                 name: {
@@ -239,6 +243,9 @@
                 full_address: {
                     required: "L'indirizzo e' obbligatorio",
                     maxlength: "Lunghezza massima 255 caratteri"
+                },
+                image: {
+                    required: "Il file 'e obbligatorio e deve essere un immagine",
                 },
             },
         })
