@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Apartment;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Mockery\Undefined;
 
 class ApartmentController extends Controller
@@ -38,10 +39,11 @@ class ApartmentController extends Controller
             'category_id' => 'exists:categories,id',
             'services' => 'sometimes|exists:services,id'
         ]);
-        //fetch dei dati
-        $data = $request->all();
-        //geolocalizzazione indirizzo
-        $rawAddress = $data['full_address'];
+
+        /* ----------
+        geodata fetching 
+        -----------*/
+        $rawAddress = $request->input('full_address');
         $geoResponse = Http::get("https://api.tomtom.com/search/2/search/{$rawAddress}.json", [
             'key' => 'RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2',
         ])->json();
@@ -51,38 +53,29 @@ class ApartmentController extends Controller
         $final_address_lon = $final_address['lon'];
         //dd( $final_address_lat, $final_address_lon);
         $boundries = $this->fetchBoundries($final_address_lat, $final_address_lon, 20);   
+        /* ----------
+        query builder 
+        -----------*/
+        $rooms = $request->input('rooms');
+        $beds = $request->input('beds');
+        $category_id = $request->input('category_id');
+        $services = $request->input('services');
 
-        //split sulle category
-        if(!isset($data['category_id'])){
         $apartments = Apartment::query()
-        ->where([
-            ['rooms','>=', $data['rooms'] ?? 1],
-            ['beds','>=', $data['beds'] ?? 1],
-            ['latitude','>=',$boundries['lat']['0'] ],
-            ['latitude','<=',$boundries['lat']['1'] ],
-            ['longitude','>=',$boundries['log']['0'] ],
-            ['longitude','<=',$boundries['log']['1'] ],
-            ])
-            //->with('category', 'user', 'services')
+        ->when($rooms, function($query, $rooms){
+            return $query->where('rooms', $rooms); 
+        })
+        ->when($beds, function($query, $beds){
+            return $query->where('beds', $beds); 
+        })
+        ->when($category_id, function($query, $category_id){
+            return $query->where('category_id', $category_id); 
+        })
+        ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
+        ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1']))
+        ->with('category', 'user', 'services')
         ->get();
-        return $apartments;
-        }else{
-            $apartments = Apartment::query()
-            ->where([
-                ['rooms','>=', $data['rooms'] ?? 1],
-                ['beds','>=', $data['beds'] ?? 1],
-                ['category_id'] , $data['category_id'],
-                ['latitude','>=',$boundries['lat']['0'] ],
-                ['latitude','<=',$boundries['lat']['1'] ],
-                ['longitude','>=',$boundries['log']['0'] ],
-                ['longitude','<=',$boundries['log']['1'] ],               
-                ])
-                //->with('category', 'user', 'services')
-            ->get();
-            return $apartments;
-
-        }
-        
+        return $apartments;    
     }
 
 

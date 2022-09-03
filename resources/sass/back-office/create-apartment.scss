@@ -31,7 +31,7 @@ section#create-apartment {
     input[type="file"],
     textarea {
         border: none;
-        color: $text-gray-light;
+        //color: $text-gray-light;
         background-color: $bg-secondary-dark;
     }
     label[for="input-image"]::after {
