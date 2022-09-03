@@ -5,8 +5,7 @@
 <section id="create-apartment">
     <div class="container p-3">
         <h1 class="text-center">Creazione dell'appartamento</h1>
-        <form method="POST" action="{{route('admin.apartments.store')}}" enctype="multipart/form-data"
-            onsubmit="return mySubmitFunction(event)">
+        <form method="POST" action="{{route('admin.apartments.store')}}" enctype="multipart/form-data">
             @csrf
 
             {{-- text input : titolo --}}
@@ -163,10 +162,10 @@
     </div>
 </section>
 
-<script>
+{{-- <script>
     //HOOKS
     
-    form = document.querySelector('form');
+    
 
     /* input text-name validation rule*/
     function validateNameField(){
@@ -202,6 +201,7 @@
             return true;
         }
     }
+    /* input number-beds validation rule*/
     function validateBedsField(){
         inputBeds = document.querySelector('input#input-beds').value;
         inputBedsLabel = document.querySelector('small#input-beds-help');
@@ -218,6 +218,7 @@
             return true;
         }
     }
+    /* input number-bathrooms validation rule*/
     function validateBathroomsField(){
         inputBathrooms = document.querySelector('input#input-bathrooms').value;
         inputBathroomsLabel = document.querySelector('small#input-bathrooms-help');
@@ -234,6 +235,7 @@
             return true;
         }
     }
+    /* input number-size validation rule*/
     function validateSizeField(){
         inputSize = document.querySelector('input#input-size').value;
         inputSizeLabel = document.querySelector('small#input-size-help');
@@ -250,16 +252,16 @@
             return true;
         }
     }
-    function mySubmitFunction(e) {
-    e.preventDefault();
-    console.log(validateNameField());
-    console.log(validateRoomsField());
-    console.log(validateBedsField());
-    console.log(validateBathroomsField());
-    console.log(validateSizeField());
-    return true;
-}
+
+    form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+    if(validateNameField() && validateNameField() && validateRoomsField() && validateBedsField() && validateBathroomsField() &&validateSizeField()){
+        e.preventDefault();
+        return;
+    }
+ });
 
 
-</script>
+
+</script> --}}
 @endsection
