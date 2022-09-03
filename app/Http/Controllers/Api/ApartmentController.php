@@ -59,6 +59,7 @@ class ApartmentController extends Controller
         $rooms = $request->input('rooms');
         $beds = $request->input('beds');
         $category_id = $request->input('category_id');
+        $services = $request->input('services');
 
         $apartments = Apartment::query()
         ->when($rooms, function($query, $rooms){
@@ -70,13 +71,9 @@ class ApartmentController extends Controller
         ->when($category_id, function($query, $category_id){
             return $query->where('category_id', $category_id); 
         })
-        ->where([
-            ['latitude','>=',$boundries['lat']['0'] ],
-            ['latitude','<=',$boundries['lat']['1'] ],
-            ['longitude','>=',$boundries['log']['0'] ],
-            ['longitude','<=',$boundries['log']['1'] ],
-            ])
-            ->with('category', 'user', 'services')
+        ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
+        ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1']))
+        ->with('category', 'user', 'services')
         ->get();
         return $apartments;    
     }
