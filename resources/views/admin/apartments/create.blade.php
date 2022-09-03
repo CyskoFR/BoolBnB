@@ -5,7 +5,7 @@
 <section id="create-apartment">
     <div class="container p-3">
         <h1 class="text-center">Creazione dell'appartamento</h1>
-        <form method="POST" action="{{route('admin.apartments.store')}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('admin.apartments.store')}}" enctype="multipart/form-data" id="form-create">
             @csrf
 
             {{-- text input : titolo --}}
@@ -161,107 +161,44 @@
         </form>
     </div>
 </section>
-
-{{-- <script>
-    //HOOKS
-    
-    
-
-    /* input text-name validation rule*/
-    function validateNameField(){
-        inputName = document.querySelector('input#input-name').value;
-        inputNameLabel = document.querySelector('small#input-name-help');
-        let errorString = "";
-        if(inputName.length > 255 || inputName.length < 1){
-            inputNameLabel.classList.remove( 'text-muted');
-            inputNameLabel.classList.add( 'text-danger');
-            inputNameLabel.innerText = "Immetti un numero di caratteri compreso da 1 a 255";
-            return false;
-        }else{
-        inputNameLabel.classList.add( 'text-muted');
-        inputNameLabel.classList.remove( 'text-danger');
-        inputNameLabel.innerText = "Max 255 caratteri";
-        return true;
-        }
+<style>
+    .error {
+        color: #FF0000;
     }
-    /* input number-rooms validation rule*/
-    function validateRoomsField(){
-        inputRooms = document.querySelector('input#input-rooms').value;
-        inputRoomsLabel = document.querySelector('small#input-rooms-help');
-        let errorString = "";
-        if(inputRooms > 254 || inputRooms < 1){
-            inputRoomsLabel.classList.remove( 'text-muted');
-            inputRoomsLabel.classList.add( 'text-danger');
-            inputRoomsLabel.innerText = 'Inserisci numero intero di stanze compreso da 1 a 255';
-            return false;
-        }else{  
-            inputRoomsLabel.classList.add( 'text-muted');
-            inputRoomsLabel.classList.remove( 'text-danger');
-            inputRoomsLabel.innerText = 'Massimo 255 stanze';
-            return true;
-        }
-    }
-    /* input number-beds validation rule*/
-    function validateBedsField(){
-        inputBeds = document.querySelector('input#input-beds').value;
-        inputBedsLabel = document.querySelector('small#input-beds-help');
-        let errorString = "";
-        if(inputBeds > 254 || inputBeds < 1){
-            inputBedsLabel.classList.remove( 'text-muted');
-            inputBedsLabel.classList.add( 'text-danger');
-            inputBedsLabel.innerText = 'Inserisci numero intero di letti compreso da 1 a 255';
-            return false;
-        }else{  
-            inputBedsLabel.classList.add( 'text-muted');
-            inputBedsLabel.classList.remove( 'text-danger');
-            inputBedsLabel.innerText = 'Massimo 255 letti';
-            return true;
-        }
-    }
-    /* input number-bathrooms validation rule*/
-    function validateBathroomsField(){
-        inputBathrooms = document.querySelector('input#input-bathrooms').value;
-        inputBathroomsLabel = document.querySelector('small#input-bathrooms-help');
-        let errorString = "";
-        if(inputBathrooms > 254 || inputBathrooms < 1){
-            inputBathroomsLabel.classList.remove( 'text-muted');
-            inputBathroomsLabel.classList.add( 'text-danger');
-            inputBathroomsLabel.innerText = 'Inserisci numero intero di bagni compreso da 1 a 255';
-            return false;
-        }else{  
-            inputBathroomsLabel.classList.add( 'text-muted');
-            inputBathroomsLabel.classList.remove( 'text-danger');
-            inputBathroomsLabel.innerText = 'Massimo 255 bagni';
-            return true;
-        }
-    }
-    /* input number-size validation rule*/
-    function validateSizeField(){
-        inputSize = document.querySelector('input#input-size').value;
-        inputSizeLabel = document.querySelector('small#input-size-help');
-        let errorString = "";
-        if(inputSize > 254 || inputSize < 10){
-            inputSizeLabel.classList.remove( 'text-muted');
-            inputSizeLabel.classList.add( 'text-danger');
-            inputSizeLabel.innerText = 'Inserisci uan dimensione compresa tra 11 a 255';
-            return false;
-        }else{  
-            inputSizeLabel.classList.add( 'text-muted');
-            inputSizeLabel.classList.remove( 'text-danger');
-            inputSizeLabel.innerText = 'Massimo 65535';
-            return true;
-        }
-    }
-
-    form = document.querySelector('form');
-    form.addEventListener('submit', (e) => {
-    if(validateNameField() && validateNameField() && validateRoomsField() && validateBedsField() && validateBathroomsField() &&validateSizeField()){
-        e.preventDefault();
-        return;
-    }
- });
-
-
-
-</script> --}}
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script>
+    if ($("#form-create").length > 0) {
+        $("#form-create").validate({
+  
+            rules: {
+                name: {
+                    required: true,
+                    maxlength: 255
+                },
+  
+                // code: {
+                //     required: true,
+                // },
+  
+                // description: {
+                //     required: true,
+                // },
+            },
+            messages: {
+                name: {
+                    required: "Inserisci il nome dell'annuncio",
+                    maxlength: "Lunghezza massima 255 caratteri"
+                },
+                // code: {
+                //     required: "Please enter valid email",
+                // },
+                //  description: {
+                //     required: "Please enter message",
+                // },
+            },
+        })
+    } 
+</script>
 @endsection
