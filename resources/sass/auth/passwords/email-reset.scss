@@ -1,0 +1,43 @@
+section#email_reset {
+    
+    background-color: $bg-primary-dark;
+    color: $text-gray-light;
+    
+    input {
+        border: 2px solid $primary-green;
+    }
+
+    a {
+        text-decoration: none;
+        color: $text-gray-light;
+    }
+
+    a:hover {
+        color: $primary-green;
+    }
+
+    .card {
+        border: 2px solid $primary-green;
+    }
+    .card-header {
+        background-color: $bg-secondary-dark;
+        color: $text-gray-light;
+        font-weight: bold;
+        border-bottom: 1px solid $primary-green;
+    }
+    .card-body {
+        background-color: $bg-secondary-dark;
+        color: $text-gray-light;
+        font-weight: bold;
+        button {
+            background-color: $primary-green-light;
+            border: 1px solid $primary-green-light;
+
+            &:hover {
+                background-color: $primary-green-dark;
+                border: 1px solid $primary-green-light;
+            }
+        }
+    }
+
+}
