@@ -4,10 +4,15 @@
             <a class="logo_link" href="/">
                 <img class="logo_img" src="../../../img/logo_boolbnb.png" alt="logo">
             </a>
+            <div class="mode_toggle" @click="modeToggle" :class="lightLight">
+                <div class="toggle">
+                    <div id="switch" type="checkbox"></div>
+                </div>
+            </div>
             <div class="header_user d-flex align-items-center justify-content-center">
                 <div class="dropdown">
                     <button class="user_dropdown btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Area personale
+                        <b>@Utente da inserire</b>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/login">Accedi</a>
@@ -33,9 +38,43 @@ export default {
 
     name: "HeaderComponent",
 
+    data() {
+        return {
+            lightMode: false
+        }
+    },
+
     components: { 
 
     },
+
+    methods: {
+        light() {
+            document.querySelector('.header_component').classList.add('light_mode')
+            this.lightMode = true
+            this.$emit('light')
+        },
+
+        dark() {
+            document.querySelector('.header_component').classList.remove('light_mode')
+            this.lightMode = false
+            this.$emit('dark')
+        },
+
+        modeToggle() {
+            if(this.lightMode || document.querySelector('.header_component').classList.contains('light_mode')) {
+                this.dark()
+            } else {
+                this.light()
+            }
+        },
+    },
+    
+    computed: {
+        lightLight() {
+            return this.lightMode && 'lightMode_toggled'
+        }
+    }
 
 };
 
@@ -78,5 +117,56 @@ header {
 .fa-user {
     color: $primary-green;
 }
+
+//------------------------- BETA SWITCH ------------------------- //
+.mode_toggle {
+    position: relative;
+    padding: 0;
+    width: 44px;
+    height: 24px;
+    min-width: 44px;
+    background-color: $bg-primary-light;
+    border: 0;
+    border-radius: 24px;
+    outline: 0;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 2;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+    appearance: none;
+    transition: background-color .5s ease;
+
+    .toggle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        margin: auto;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        box-shadow: inset 0 0 0 2px $primary-green-dark;
+        overflow: hidden;
+        transition: transform .5s ease;
+    }
+}
+
+.header_component.light_mode {
+    background-color: whitesmoke;
+    .user_dropdown {
+        color: $bg-primary-light;
+    }
+    .mode_toggle {
+        background-color: $primary-green;
+
+        .toggle {
+            transform: translateX(22px);
+            box-shadow: inset 0 0 0 2px $bg-primary-light;
+        }
+    }
+}
+//------------------------- /BETA SWITCH ------------------------- //
 
 </style>
