@@ -14,7 +14,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Mockery\Undefined;
 
 class ApartmentController extends Controller
-{
+{   
+    public $final_address_lat;
+    public $final_address_lon;
     
     //lista completa appartamenti
     public function index()
@@ -51,6 +53,8 @@ class ApartmentController extends Controller
         $final_address = $geoResponse['results']['0']['position'];
         $final_address_lat = $final_address['lat'];
         $final_address_lon = $final_address['lon'];
+        $this->final_address_lat = $final_address_lat;
+        $this->final_address_lon = $final_address_lon;
         //dd( $final_address_lat, $final_address_lon);
         $boundries = $this->fetchBoundries($final_address_lat, $final_address_lon, 20);   
         /* ----------
@@ -59,23 +63,48 @@ class ApartmentController extends Controller
         $rooms = $request->input('rooms');
         $beds = $request->input('beds');
         $category_id = $request->input('category_id');
-        $services = $request->input('services');
+        $services = explode(',',$request->input('services'));
+        //dd($services);
+        /* ----------
+        test servizi 
+        -----------*/
+        
+        // $apartments = Apartment::query()
+        // //->when($services, function($query, $services){
+        //      ->join('apartment_service', 'id','=','apartment_service.apartment_id')
+        //      ->select('service_id') 
+        // //})
+        // ->get();
+        
+        // return $apartments;
 
         $apartments = Apartment::query()
+        // ->join('apartment_service', 'id','=','apartment_service.apartment_id')
+        // ->select('apartment_id','service_id')
         ->when($rooms, function($query, $rooms){
-            return $query->where('rooms', $rooms); 
+            return $query->where('rooms','>=', $rooms); 
         })
         ->when($beds, function($query, $beds){
-            return $query->where('beds', $beds); 
+            return $query->where('beds','>=', $beds); 
         })
         ->when($category_id, function($query, $category_id){
             return $query->where('category_id', $category_id); 
         })
-        ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
-        ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1']))
-        ->with('category', 'user', 'services')
+        // ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
+        // ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1']))
+        
+        //->with('category', 'user', 'services')
+
+        // ->groupBy('apartment_id')
+        // ->having('service_id' , $services) 
         ->get();
-        return $apartments;    
+        $apartments_with_distance = $apartments->sortBy(function($apartment){
+            return sqrt(
+                    pow(($apartment->latitude - $this->final_address_lat),2)+
+                    pow(($apartment->longitude - $this->final_address_lon),2)
+                );
+            });
+        return $apartments_with_distance;    
     }
 
 
