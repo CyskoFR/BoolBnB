@@ -25,9 +25,14 @@ export default {
 
     created() {
         
-        axios.get('/api/searchbar', {
+        axios.get('/api/apartments/search', {
             params: {
-                param: this.param,
+                'full_address': this.param,
+                'rooms': '',
+                'beds': '',
+                'category_id': '',
+                'services': '',
+                'distance': '',
             }
         })
 
