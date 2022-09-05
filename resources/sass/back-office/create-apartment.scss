@@ -6,8 +6,7 @@ section#create-apartment {
         color: $text-gray-light;
     }
     .wrapper-input {
-        border: 2px solid $primary-green-light;
-        overflow: hidden;
+        border: 2px solid $primary-green-light !important;
     }
     input,
     select {
@@ -17,9 +16,14 @@ section#create-apartment {
             color: $text-gray-light;
         }
     }
-
+    #image {
+        cursor: pointer;
+    }
     input[type="checkbox"] + label {
         background-color: transparent;
+    }
+    input::placeholder {
+        color: $text-gray-dark;;
     }
     span.input-group-text {
         background-color: $bg-secondary-dark;
@@ -31,21 +35,53 @@ section#create-apartment {
     input[type="file"],
     textarea {
         border: none;
-        //color: $text-gray-light;
+        color: $text-gray-light;
         background-color: $bg-secondary-dark;
     }
     label[for="input-image"]::after {
         border-left: 1px solid $text-gray-light;
     }
     button {
-        color: $text-gray-light;
+        font-size: .875rem;
         background-color: $primary-green-light;
-        border: 1px solid $primary-green-light;
-
+        border-radius: .75rem;
+        margin-right: .625rem;
         &:hover {
-            background-color: $text-gray-light;
+            color: $text-gray-light;
+            background-color: $primary-green-dark;
             border: 1px solid $primary-green-light;
-            color: $text-gray-dark;
+        }
+    }
+    a {
+        text-decoration: none;
+    }
+    #servizi_error_box {
+        display: none;
+        background-color: #f6c2c4;
+        color: #90141b;
+        border: 1px solid #90141b;
+        font-size: 1rem;
+        border-radius: 0 0 .375rem .375rem;
+    }
+    label.error {
+        background-color: #f6c2c4;
+        color: #90141b;
+        border: 1px solid #90141b;
+        font-size: 1rem;
+        padding: 0 .9375rem;
+        border-radius: 0 0 .375rem .375rem;
+    }
+    label#category_id-error {
+        align-self: center;
+        margin: 0 .5rem;
+    }
+    .back_button {
+        background-color: $bg-gray-light;
+        margin-top: .5rem;
+        &:hover {
+            color: $text-gray-light;
+            background-color: $bg-gray-dark;
+            border: 1px solid $primary-green-light;
         }
     }
 }

@@ -4,8 +4,8 @@
 <section id="edit-apartment" class="p-3">
     {{-- @dd($categories, $services) --}}
     <div class="container">
-        <h1 class="text-center">Edit dell'appartamento</h1>
-        <form method="POST" action="{{route('admin.apartments.update', $apartment)}}" enctype="multipart/form-data">
+        <h1 class="text-center">Modifica il tuo appartamento</h1>
+        <form id="form_edit" method="POST" action="{{route('admin.apartments.update', $apartment)}}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -45,7 +45,7 @@
                 <div class="row pb-2 ">
                     <div class="col">
                         <label for="input-rooms">Stanze</label>
-                        <input type="number" value="{{ old('rooms') ? old('rooms') : $apartment->rooms }}" name="rooms"
+                        <input type="number" value="{{ old('rooms') ? old('rooms') : $apartment->rooms }}" min="1" name="rooms"
                             class=" wrapper-input form-control @error('rooms') is-invalid @enderror" id="input-rooms"
                             min="1" step="1" placeholder="Inserisci il numero delle stanze...">
                         @error('rooms')
@@ -56,7 +56,7 @@
                     {{-- Number: Numero Letti --}}
                     <div class="col">
                         <label for="input-beds">Letti</label>
-                        <input type="number" value="{{ old('beds') ? old('beds') : $apartment->beds  }}" name="beds"
+                        <input type="number" value="{{ old('beds') ? old('beds') : $apartment->beds  }}" min="1" name="beds"
                             class=" wrapper-input form-control @error('beds') is-invalid @enderror" id="input-beds"
                             min="1" step="1" placeholder="Inserisci il numero dei letti...">
                         @error('beds')
@@ -69,7 +69,7 @@
                     <div class="col">
                         <label for="input-bathrooms">Bagni</label>
                         <input type="number" value="{{  old('bathrooms') ? old('bathrooms') : $apartment->bathrooms }}"
-                            name="bathrooms"
+                            min="1" name="bathrooms"
                             class=" wrapper-input form-control @error('bathrooms') is-invalid @enderror"
                             id="input-bathrooms" min="1" step="1" placeholder="Inserisci il numero dei bagni...">
                         @error('bathrooms')
@@ -78,17 +78,15 @@
                     </div>
                     {{-- Number: Dimensione --}}
                     <div class="col">
-                        <label for="input-size">Dimensioni in m2</label>
-                        <input type="number" value="{{  old('size') ? old('size') : $apartment->size }}" name="size"
+                        <label for="input-size">Dimensioni in metri quadrati</label>
+                        <input type="number" value="{{  old('size') ? old('size') : $apartment->size }}" min="10" name="size"
                             class=" wrapper-input form-control @error('size') is-invalid @enderror" id="input-size"
                             min="1" step="1" placeholder="Immetti la dimensione...">
                         @error('size')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-
                 </div>
-
             </div>
             {{-- Textarea: Descrizione appartamento --}}
             <div class="form-group">
@@ -101,25 +99,12 @@
                 @enderror
             </div>
 
-            {{-- <script>
-                const message = "Inserisci descrizione dell' appartamento";
-            const textarea = document.getElementById("description");
-            textarea.addEventListener("click", () => {
-                let customMessage = textarea.innerHTML;
-                console.log(message , customMessage);
-                if ((customMessage = message)) textarea.innerText = "";
-                 textarea.innerHTML = customMessage;
-            });
-            </script> --}}
-
             {{-- checkbbox: group servizi --}}
             <div class="row mx-0 justify-content-between" id="servizi">
                 @foreach ($services as $service)
-                <div class="custom-control custom-checkbox col-6 col-md-4 col-lg-2 ">
-                    <input type="checkbox" class="custom-control-input @error('services') is-invalid @enderror"
-                        name="services[]" {{ in_array( $service->id , old('services', $apartmentServices)) ? "checked" :
-                    ""
-                    }}
+                <div class="custom-control custom-checkbox col-6 col-md-4 col-lg-2">
+                    <input type="checkbox" class="custom-control-input cb @error('services') is-invalid @enderror"
+                        name="services[]" {{ in_array( $service->id , old('services', $apartmentServices)) ? "checked" : ""}}
                     value="{{$service->id}}"
                     id="{{$service->id}}">
                     <label class="custom-control-label" for="{{$service->id}}">{{$service->name}}</label>
@@ -128,6 +113,48 @@
                     @enderror
                 </div>
                 @endforeach
+
+                <div id="servizi_error_box" class="col-12 mt-2">Inserire almeno un servizio</div>
+
+                <script>
+                    const el = document.getElementsByClassName("cb");
+                    const formEdit = document.getElementById('form_edit');
+                    const servizi = document.getElementById('servizi');
+
+                    servizi.addEventListener('input', (e)=> {
+
+                        let atLeastOneChecked = false;
+
+                        for (i = 0; i < el.length; i++) {
+                            if (el[i].checked === true) {
+                                document.getElementById('servizi_error_box').style.display = "none";
+                                atLeastOneChecked = true;
+                            }
+                        }
+
+                        if (atLeastOneChecked === false) {
+                            document.getElementById('servizi_error_box').style.display = "block";
+                        }
+                    })
+
+                    formEdit.addEventListener('submit', (e)=> {
+
+                        let atLeastOneChecked = false;
+
+                        for (i = 0; i < el.length; i++) {
+                            if (el[i].checked === true) {
+                                atLeastOneChecked = true;
+                            }
+                        }
+
+                        if (atLeastOneChecked === false) {
+                            e.preventDefault()
+                            document.getElementById('servizi_error_box').style.display = "block";
+                            document.getElementById('servizi').scrollIntoView();
+                        }
+                    })
+
+                </script>
             </div>
 
             {{-- Input Text: full_address --}}
@@ -167,11 +194,96 @@
             @error('is_visible')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            <a href="{{route('admin.apartments.index')}}">
-                <button class="btn update_button"><b>Indietro</b></button>
-            </a>
             <button type="submit" class="btn"><b>Salva modifiche</b></button>
         </form>
+        <a href="{{route('admin.apartments.index')}}">
+            <button class="btn back_button"><b>Indietro</b></button>
+        </a>
     </div>
 </section>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+<script>
+    if ($("#form_edit").length > 0) {
+        $("#form_edit").validate({
+
+            rules: {
+                name: {
+                    required: true,
+                    maxlength: 255
+                },
+                rooms: {
+                    required: true,
+                    min: 1,
+                    max: 255
+                },
+                beds: {
+                    required: true,
+                    min: 1,
+                    max: 255
+                },
+                bathrooms: {
+                    required: true,
+                    min: 1,
+                    max: 255
+                },
+                size: {
+                    required: true,
+                    min: 10,
+                    max: 65535
+                },
+                description: {
+                    required: true,
+                    maxlength: 65535
+                },
+                full_address: {
+                    required: true,
+                    maxlength: 255
+                },
+                image: {
+                    required: true,
+                }
+            },
+            messages: {
+                name: {
+                    required: "Inserisci il nome dell'annuncio",
+                    maxlength: "Lunghezza massima 255 caratteri"
+                },
+                rooms: {
+                    required: "Inserisci il numero di stanze",
+                    min: 'Minimo una stanza',
+                    max: "Massimo 255 stanze"
+                },
+                beds: {
+                    required: "Inserisci il numero di letti",
+                    min: 'Minimo un letto',
+                    max: "Massimo 255 letti"
+                },
+                bathrooms: {
+                    required: "Inserisci il numero di bagni",
+                    min: 'Minimo un bagno',
+                    max: "Massimo 255 bagni"
+                },
+                size: {
+                    required: "Inserisci le dimensioni del locale",
+                    min: 'Minimo 10 m2',
+                    max: "Massimo 65535 m2 "
+                },
+                description: {
+                    required: "La descrizione del locale e' obbligatoria",
+                    maxlength: "Lunghezza massima 65535 caratteri"
+                },
+                full_address: {
+                    required: "L'indirizzo e' obbligatorio",
+                    maxlength: "Lunghezza massima 255 caratteri"
+                },
+                image: {
+                    required: "L'immagine é obbligatoria"
+                }
+            },
+        })
+    } 
+</script>
 @endsection
