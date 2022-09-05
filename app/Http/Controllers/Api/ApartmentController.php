@@ -107,7 +107,9 @@ class ApartmentController extends Controller
         if($services !== null){
         $apartments =  $apartments->map(function ($apartment){
              foreach($this->services as $service){
-                if($apartment->services-> contains($service)){
+                if(!$apartment->services->contains($service)){
+                    return ;
+                }else{
                     return $apartment;
                 }
             }
