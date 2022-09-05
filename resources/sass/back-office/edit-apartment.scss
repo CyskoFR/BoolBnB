@@ -21,6 +21,12 @@ section#edit-apartment {
     input[type="checkbox"] + label {
         background-color: transparent;
     }
+    #input-image {
+        cursor: pointer;
+    }
+    input::placeholder {
+        color: $text-gray-dark;;
+    }
     span.input-group-text {
         background-color: $bg-secondary-dark;
         color: $text-gray-light;
@@ -48,7 +54,33 @@ section#edit-apartment {
             border: 1px solid $primary-green-light;
         }
     }
-    form a {
+    a {
         text-decoration: none;
+    }
+
+    #servizi_error_box {
+        display: none;
+        background-color: #f6c2c4;
+        color: #90141b;
+        border: 1px solid #90141b;
+        font-size: 1rem;
+        border-radius: 0 0 .375rem .375rem;
+    }
+    label.error {
+        background-color: #f6c2c4;
+        color: #90141b;
+        border: 1px solid #90141b;
+        border-radius: 0 0 .375rem .375rem;
+        font-size: 1rem;
+        padding: 0 .9375rem;
+    }
+    .back_button {
+        background-color: $bg-gray-light;
+        margin-top: .5rem;
+        &:hover {
+            color: $text-gray-light;
+            background-color: $bg-gray-dark;
+            border: 1px solid $primary-green-light;
+        }
     }
 }

@@ -1,21 +1,16 @@
 @extends('layouts.back')
 
 @section('content')
-{{-- <style>
-    .description-error {
-        color: #FF0000;
-    }
-</style> --}}
 {{-- @dd($categories, $services) --}}
 <section id="create-apartment">
     <div class="container p-3">
-        <h1 class="text-center">Creazione dell'appartamento</h1>
-        <form method="POST" action="{{route('admin.apartments.store')}}" enctype="multipart/form-data" id="form-create">
+        <h1 class="text-center">Crea il tuo appartamento</h1>
+        <form id="form_create" method="POST" action="{{route('admin.apartments.store')}}" enctype="multipart/form-data">
             @csrf
 
             {{-- text input : titolo --}}
             <div class="form-group">
-                <label for="input-name">Titolo dell' annuncio:</label>
+                <label for="input-name">Titolo dell'annuncio:</label>
                 <input type="text" name="name" value="{{ old('name') }}" class="wrapper-input form-control"
                     id="input-name" placeholder="Inserisci qui il titolo dell'annuncio..."
                     class="@error('name') is-invalid @enderror">
@@ -25,12 +20,12 @@
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             {{-- select: category_id --}}
-            <div class="input-group mb-3 wrapper-input rounded-lg">
+            <div class="input-group mb-3 wrapper-input rounded-lg d-flex">
                 <div class="input-group-prepend rounded-0">
                     <label class="input-group-text border-0" for="category_id">Categoria</label>
                 </div>
                 <select name="category_id" required
-                    class=" border-0 custom-select @error('category_id') is-invalid @enderror" id="category_id">
+                    class="border-0 custom-select @error('category_id') is-invalid @enderror" id="category_id">
                     <option selected disabled> -- seleziona categoria -- </option>
                     @foreach ($categories as $category)
                     <option value="{{$category->id}}" {{ (old("category_id")==$category->id ? "selected":"")
@@ -48,7 +43,7 @@
                 <div class="row pb-2 ">
                     <div class="col">
                         <label for="input-rooms">Stanze</label>
-                        <input type="number" value="{{ old('rooms') }}" name="rooms"
+                        <input type="number" value="{{ old('rooms') }}" min="1" name="rooms"
                             class=" wrapper-input form-control @error('rooms') is-invalid @enderror" id="input-rooms"
                             placeholder="Inserisci il numero delle stanze...">
                         @error('rooms')
@@ -60,7 +55,7 @@
                     {{-- Number: Numero Letti --}}
                     <div class="col">
                         <label for="input-beds">Letti</label>
-                        <input type="number" value="{{ old('beds') }}" name="beds"
+                        <input type="number" value="{{ old('beds') }}" min="1" name="beds"
                             class=" wrapper-input form-control @error('beds') is-invalid @enderror" id="input-beds"
                             placeholder="Inserisci il numero dei letti...">
                         @error('beds')
@@ -73,7 +68,7 @@
                 <div class="row pt-2">
                     <div class="col">
                         <label for="input-bathrooms">Bagni</label>
-                        <input type="number" value="{{ old('bathrooms') }}" name="bathrooms"
+                        <input type="number" value="{{ old('bathrooms') }}" min="1" name="bathrooms"
                             class="wrapper-input form-control @error('bathrooms') is-invalid @enderror"
                             id="input-bathrooms" placeholder="Inserisci il numero dei bagni...">
                         @error('bathrooms')
@@ -83,10 +78,10 @@
                     </div>
                     {{-- Number: Dimensione --}}
                     <div class="col">
-                        <label for="input-size">Dimensioni in M<sup>2</sup> </label>
-                        <input type="number" value="{{ old('size') }}" name="size"
+                        <label for="input-size">Dimensioni in metri quadrati</label>
+                        <input type="number" value="{{ old('size') }}" min="10" name="size"
                             class=" wrapper-input form-control @error('size') is-invalid @enderror" id="input-size"
-                            placeholder="Immetti la dimensione...">
+                            placeholder="Inserisci la dimensione del locale...">
                         @error('size')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -110,8 +105,8 @@
             {{-- checkbbox: group servizi --}}
             <div class="row mx-0 justify-content-between" id="servizi">
                 @foreach ($services as $service)
-                <div class="custom-control custom-checkbox col-6 col-md-4 col-lg-2 ">
-                    <input type="checkbox" class="custom-control-input @error('services') is-invalid @enderror"
+                <div class="custom-control custom-checkbox col-6 col-md-4 col-lg-2">
+                    <input type="checkbox" class="custom-control-input cb @error('services') is-invalid @enderror"
                         name="services[]" {{ in_array( $service->id , old('services', [])) ? "checked" :"" }}
                     value="{{$service->id}}"
                     id="{{$service->id}}">
@@ -121,6 +116,49 @@
                     @enderror
                 </div>
                 @endforeach
+                
+                <div id="servizi_error_box" class="col-12 mt-2">Inserire almeno un servizio</div>
+
+                <script>
+                    const el = document.getElementsByClassName("cb");
+                    const formCreate = document.getElementById('form_create');
+                    const servizi = document.getElementById('servizi');
+
+                    servizi.addEventListener('input', (e)=> {
+
+                        let atLeastOneChecked = false;
+
+                        for (i = 0; i < el.length; i++) {
+                            if (el[i].checked === true) {
+                                document.getElementById('servizi_error_box').style.display = "none";
+                                atLeastOneChecked = true;
+                            }
+                        }
+
+                        if (atLeastOneChecked === false) {
+                            document.getElementById('servizi_error_box').style.display = "block";
+                        }
+                    })
+
+                    formCreate.addEventListener('submit', (e)=> {
+
+                        let atLeastOneChecked = false;
+
+                        for (i = 0; i < el.length; i++) {
+                            if (el[i].checked === true) {
+                                atLeastOneChecked = true;
+                            }
+                        }
+
+                        if (atLeastOneChecked === false) {
+                            e.preventDefault()
+                            document.getElementById('servizi_error_box').style.display = "block";
+                            document.getElementById('servizi').scrollIntoView();
+                        }
+                    })
+
+                </script>
+
             </div>
 
             {{-- Input Text: full_address --}}
@@ -134,22 +172,12 @@
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            {{-- <script>
-
-            </script> --}}
             {{-- input file immagine --}}
-            <span class="d-block pb-1">Scegli l'immagine di copertina del tuo annuncio:</span>
-            <div class="input-group mb-3 wrapper-input rounded-lg overflow-hidden">
-                <div class="input-group-prepend ">
-                    <span class="input-group-text d-block border-0 ">Immagine</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" value="{{old('image')}}" name="image"
-                        class="custom-file-input  @error('image') is-invalid @enderror" id="input-image">
-                    <label class="custom-file-label rounded-0" for="input-image">Inserisci l'immagine</label>
-                </div>
+            <div class="input-group mb-3">
+                <label for="image">Scegli l'immagine di copertina del tuo annuncio:</label>
+                <input type="file" class="form-control-file wrapper-input rounded-lg @error('image') is-invalid @enderror" id="image" name="image" value="{{old('image')}}">
             </div>
-            @error('image')undefined
+            @error('image')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             {{-- check-box: is_visible --}}
@@ -162,21 +190,27 @@
             @error('is_visible')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            <button class="btn" onclick="">Submit</button>
+            <button type="submit" class="btn"><b>Crea</b></button>
         </form>
+        <a href="{{route('admin.apartments.index')}}">
+            <button class="btn back_button"><b>Indietro</b></button>
+        </a>
     </div>
 </section>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 <script>
-    if ($("#form-create").length > 0) {
-        $("#form-create").validate({
-  
+    if ($("#form_create").length > 0) {
+        $("#form_create").validate({
+
             rules: {
                 name: {
                     required: true,
                     maxlength: 255
+                },
+                category_id: {
+                    required: true,
                 },
                 rooms: {
                     required: true,
@@ -208,13 +242,15 @@
                 },
                 image: {
                     required: true,
-                    //accept: "image/*"
-                },
+                }
             },
             messages: {
                 name: {
                     required: "Inserisci il nome dell'annuncio",
                     maxlength: "Lunghezza massima 255 caratteri"
+                },
+                category_id: {
+                    required: "Inserisci una categoria",
                 },
                 rooms: {
                     required: "Inserisci il numero di stanze",
@@ -233,7 +269,7 @@
                 },
                 size: {
                     required: "Inserisci le dimensioni del locale",
-                    min: 'Minimo 10 m2',
+                    min: 'Minimo 10 metri quadrati',
                     max: "Massimo 65535 m2 "
                 },
                 description: {
@@ -245,8 +281,8 @@
                     maxlength: "Lunghezza massima 255 caratteri"
                 },
                 image: {
-                    required: "Il file 'e obbligatorio e deve essere un immagine",
-                },
+                    required: "L'immagine é obbligatoria"
+                }
             },
         })
     } 
