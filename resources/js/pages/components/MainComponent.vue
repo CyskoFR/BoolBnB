@@ -1,36 +1,30 @@
 <template>
     <section class="main">
-        <CategorySection/>
-        <HeroSection/>
-        <ApartmentSection/>
+        <CategorySection />
+        <HeroSection />
+        <!-- <ApartmentSection/> -->
     </section>
 </template>
 
 <script>
-
-import CategorySection from '../sections/categorySection.vue';
-import ApartmentSection from '../sections/apartmentSection.vue';
-import HeroSection from '../sections/heroSection.vue';
+import CategorySection from "../sections/categorySection.vue";
+// import ApartmentSection from "../sections/apartmentSection.vue";
+import HeroSection from "../sections/heroSection.vue";
 
 export default {
-
     name: "MainComponent",
 
-    components: { 
-        ApartmentSection,
+    components: {
         CategorySection,
         HeroSection,
-    }
+    },
 };
-
 </script>
 
 <style lang="scss" scoped>
-
-@import '../../../sass/variables';
+@import "../../../sass/variables";
 
 .main {
     background-color: $bg-primary-dark;
 }
-
 </style>

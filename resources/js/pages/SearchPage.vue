@@ -1,44 +1,29 @@
 <template>
     <div>
-        <filter-section></filter-section>
-        <bnbCard
-            :apartment="apartment"
-            v-for="apartment in apartments"
-            :key="apartment.id"
-        />
+        <filter-section v-on:filter-update="emitHandle"></filter-section>
+        <apartment-section :queryInfo="data"></apartment-section>
     </div>
 </template>
 
 <script>
-import bnbCard from "./microComponents/bnbCard.vue";
+import ApartmentSection from "./sections/apartmentSection.vue";
 import FilterSection from "./sections/filterSection.vue";
 
 export default {
     name: "SearchPage",
-    components: { bnbCard, FilterSection },
+    components: { FilterSection, ApartmentSection },
     data() {
         return {
+            data: {},
             apartments: [],
-            param: this.$route.params.param,
         };
     },
 
-    created() {
-        axios
-            .get("/api/apartments/search", {
-                params: {
-                    full_address: this.param,
-                    rooms: null,
-                    beds: null,
-                    category_id: null,
-                    services: null,
-                    distance: null,
-                },
-            })
-
-            .then((response) => {
-                this.apartments = response.data;
-            });
+    created() {},
+    methods: {
+        emitHandle(e) {
+            this.data = e;
+        },
     },
 };
 </script>

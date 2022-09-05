@@ -1,28 +1,28 @@
 <template>
     <div>
         <div class="container">
-            <form @submit.prevent="checkInput">
+            <form @submit.prevent="$emit('filter-update', query)">
                 <input
-                    v-model="full_address"
+                    v-model="query.full_address"
                     type="text"
                     placeholder="indirizzo"
                 />
                 <input
-                    v-model="rooms"
+                    v-model="query.rooms"
                     type="number"
                     placeholder="stanze"
                     min="1"
                     step="1"
                 />
                 <input
-                    v-model="beds"
+                    v-model="query.beds"
                     type="number"
                     placeholder="letti"
                     min="1"
                     step="1"
                 />
                 <input
-                    v-model="distance"
+                    v-model="query.distance"
                     type="number"
                     placeholder="raggio di ricerca"
                     min="1"
@@ -39,22 +39,15 @@ export default {
     name: "filterSection",
     data() {
         return {
-            full_address: this.$route.params.param,
-            rooms: null,
-            beds: null,
-            distance: null,
+            query: {
+                full_address: this.$route.params.param,
+                rooms: null,
+                beds: null,
+                distance: null,
+            },
         };
     },
-    methods: {
-        checkInput() {
-            console.log(
-                this.rooms,
-                this.beds,
-                this.distance,
-                this.full_address
-            );
-        },
-    },
+    methods: {},
 };
 </script>
 
