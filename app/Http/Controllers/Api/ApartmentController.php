@@ -12,11 +12,14 @@ use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Mockery\Undefined;
+use phpDocumentor\Reflection\Types\Void_;
 
 class ApartmentController extends Controller
 {   
     public $final_address_lat;
     public $final_address_lon;
+    public $services;
+    public int $distance;
     
     //lista completa appartamenti
     public function index()
@@ -55,32 +58,35 @@ class ApartmentController extends Controller
         $final_address_lon = $final_address['lon'];
         $this->final_address_lat = $final_address_lat;
         $this->final_address_lon = $final_address_lon;
-        //dd( $final_address_lat, $final_address_lon);
-        $boundries = $this->fetchBoundries($final_address_lat, $final_address_lon, 20);   
+        if($request->input('distance') != null){
+            $this->distance = $request->input('distance');
+        }
+        else{
+            $this->distance = 20;
+        }
+        //dd($this->distance);
+        $boundries = $this->fetchBoundries($final_address_lat, $final_address_lon, $this->distance);   
         /* ----------
         query builder 
         -----------*/
         $rooms = $request->input('rooms');
         $beds = $request->input('beds');
         $category_id = $request->input('category_id');
-        $services = explode(',',$request->input('services'));
-        //dd($services);
+        
         /* ----------
-        test servizi 
+        check esistenza servizi
         -----------*/
-        
-        // $apartments = Apartment::query()
-        // //->when($services, function($query, $services){
-        //      ->join('apartment_service', 'id','=','apartment_service.apartment_id')
-        //      ->select('service_id') 
-        // //})
-        // ->get();
-        
-        // return $apartments;
+        if($request->input('services') != null){
+            $services = explode(',',$request->input('services'));
+            $this->services = $services;
+        }else{
+            $services = null;
+        }
 
+        /* ----------
+        query builder 
+        -----------*/
         $apartments = Apartment::query()
-        // ->join('apartment_service', 'id','=','apartment_service.apartment_id')
-        // ->select('apartment_id','service_id')
         ->when($rooms, function($query, $rooms){
             return $query->where('rooms','>=', $rooms); 
         })
@@ -90,21 +96,38 @@ class ApartmentController extends Controller
         ->when($category_id, function($query, $category_id){
             return $query->where('category_id', $category_id); 
         })
-        // ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
-        // ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1']))
-        
-        //->with('category', 'user', 'services')
-
-        // ->groupBy('apartment_id')
-        // ->having('service_id' , $services) 
+        ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
+        ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
+        ->with('category', 'user', 'services')
         ->get();
-        $apartments_with_distance = $apartments->sortBy(function($apartment){
+        /* ----------
+        check servizi
+        -----------*/
+
+        if($services !== null){
+        $apartments =  $apartments->map(function ($apartment){
+             foreach($this->services as $service){
+                if(!$apartment->services->contains($service)){
+                    return ;
+                }else{
+                    return $apartment;
+                }
+            }
+         })->filter(); 
+        }
+
+        /* ----------
+        sort by distance
+        -----------*/
+
+        $apartments = $apartments->sortBy(function($apartment){
             return sqrt(
                     pow(($apartment->latitude - $this->final_address_lat),2)+
                     pow(($apartment->longitude - $this->final_address_lon),2)
                 );
             });
-        return $apartments_with_distance;    
+
+        return $apartments;    
     }
 
 
