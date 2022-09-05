@@ -175,15 +175,4 @@ class ApartmentController extends Controller
             'log' => [$lon_min_deg, $lon_max_deg]
         ];
     }
-
-    //searchbar
-    public function searchbar(Request $request) {
-
-        $param = $request -> all();
-        $apartments = Apartment::query()->where('name', $param)
-        ->orWhere('full_address', $param)
-        ->get();
-
-        return $apartments;
-    }
 }

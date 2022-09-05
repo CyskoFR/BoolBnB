@@ -30,10 +30,6 @@ Route::get('categories', 'Api\CategoryController@index');
 
 Route::get('services', 'Api\ServiceController@index');
 
-//searchbar
-Route::get('searchbar/{any?}', 'Api\ApartmentController@searchbar');
-
-
 //store dei messaggi
 Route::post('message' , 'Api\MessageController@store');
 
