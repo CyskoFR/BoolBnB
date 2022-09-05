@@ -6,8 +6,8 @@
                 <h1>Le vacanze migliori hanno inizio qui</h1>
                 <nav class="navbar navbar-light bg-light">
                     <form class="hero_searchbar_box form-inline d-flex">
-                        <input class="hero_searchbar form-control" type="search" placeholder="Cerca il tuo posto preferito" aria-label="Search">
-                        <button class="hero_searchbar_button btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+                        <input v-model="search" class="hero_searchbar form-control" type="search" placeholder="Cerca il tuo posto preferito" aria-label="Search">
+                        <button class="hero_searchbar_button btn btn-outline-success my-2 my-sm-0" type="submit" @click.stop.prevent="submit()">Cerca</button>
                     </form>
                 </nav>
             </div>
@@ -45,6 +45,20 @@ export default {
 
     components: { 
 
+    },
+
+    data() {
+
+        return {
+            search: '',
+        };
+    },
+
+    methods: {
+        submit() {
+            this.$router.push("/search-page/data/"+this.search);
+
+        }
     }
 };
 

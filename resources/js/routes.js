@@ -23,7 +23,7 @@ const router = new VueRouter({
             component: BnbView,
         },
         {
-            path: "/search-page",
+            path: "/search-page/data/:param",
             name: "search-page",
             component: SearchPage,
         },
