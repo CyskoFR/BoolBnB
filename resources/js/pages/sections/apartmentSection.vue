@@ -5,7 +5,7 @@
     >
         <bnbCard
             :apartment="apartment"
-            v-for="apartment in apartments"
+            v-for="apartment in observable.apartments"
             :key="apartment.id"
         />
     </section>
@@ -13,20 +13,16 @@
 
 <script>
 import bnbCard from "../microComponents/bnbCard.vue";
+import observable from "../../observable.js";
 
 export default {
     name: "apartmentSection",
-
     components: {
         bnbCard,
     },
-    props: {
-        queryInfo: Object,
-    },
-
     data() {
         return {
-            apartments: [],
+            observable,
         };
     },
     //on startup
@@ -34,14 +30,14 @@ export default {
         axios
             .get("/api/apartments/search", {
                 params: {
-                    full_address: this.$route.params.param,
-                    rooms: null,
-                    beds: null,
-                    distance: null,
+                    full_address: observable.full_address,
+                    rooms: observable.rooms,
+                    beds: observable.beds,
+                    distance: observable.distance,
                 },
             })
             .then((response) => {
-                this.apartments = response.data;
+                observable.apartments = response.data;
                 console.log(response);
             })
             .catch(function (error) {
@@ -49,28 +45,6 @@ export default {
             });
     },
     //when data changes
-    watch: {
-        filteredApartments: function () {
-            axios
-                .get("/api/apartments/search", {
-                    params: {
-                        full_address:
-                            this.queryInfo.full_address ??
-                            this.$route.params.param,
-                        rooms: this.queryInfo.rooms,
-                        beds: this.queryInfo.beds,
-                        distance: this.queryInfo.distance,
-                    },
-                })
-                .then((response) => {
-                    console.log(response);
-                    return (this.apartments = response.data);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        },
-    },
 };
 </script>
 

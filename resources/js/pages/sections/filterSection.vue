@@ -1,28 +1,28 @@
 <template>
     <div>
         <div class="container">
-            <form @submit.prevent="$emit('filter-update', query)">
+            <form @submit.prevent="fetchApartments()">
                 <input
-                    v-model="query.full_address"
+                    v-model="observable.full_address"
                     type="text"
                     placeholder="indirizzo"
                 />
                 <input
-                    v-model="query.rooms"
+                    v-model="observable.rooms"
                     type="number"
                     placeholder="stanze"
                     min="1"
                     step="1"
                 />
                 <input
-                    v-model="query.beds"
+                    v-model="observable.beds"
                     type="number"
                     placeholder="letti"
                     min="1"
                     step="1"
                 />
                 <input
-                    v-model="query.distance"
+                    v-model="observable.distance"
                     type="number"
                     placeholder="raggio di ricerca"
                     min="1"
@@ -35,19 +35,34 @@
 </template>
 
 <script>
+import observable from "../../observable.js";
 export default {
     name: "filterSection",
     data() {
         return {
-            query: {
-                full_address: this.$route.params.param,
-                rooms: null,
-                beds: null,
-                distance: null,
-            },
+            observable,
         };
     },
-    methods: {},
+    methods: {
+        fetchApartments() {
+            axios
+                .get("/api/apartments/search", {
+                    params: {
+                        full_address: observable.full_address,
+                        rooms: observable.rooms,
+                        beds: observable.beds,
+                        distance: observable.distance,
+                    },
+                })
+                .then((response) => {
+                    console.log(response);
+                    observable.apartments = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+    },
 };
 </script>
 

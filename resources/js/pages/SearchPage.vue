@@ -1,7 +1,7 @@
 <template>
     <div>
-        <filter-section v-on:filter-update="emitHandle"></filter-section>
-        <apartment-section :queryInfo="data"></apartment-section>
+        <filter-section></filter-section>
+        <apartment-section></apartment-section>
     </div>
 </template>
 
@@ -14,17 +14,12 @@ export default {
     components: { FilterSection, ApartmentSection },
     data() {
         return {
-            data: {},
             apartments: [],
         };
     },
 
     created() {},
-    methods: {
-        emitHandle(e) {
-            this.data = e;
-        },
-    },
+    methods: {},
 };
 </script>
 
