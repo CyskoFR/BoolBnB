@@ -1,43 +1,67 @@
-<<template>
-    <section class="apartment_section d-flex justify-content-center flex-row p-3">
-        <bnbCard :apartment="apartment" v-for="apartment in apartments" :key="apartment.id"/>
-    </section>
+<
+<template>
+    <div>
+        <section
+            v-if="observable.apartments.length > 0"
+            class="apartment_section d-flex justify-content-center flex-row p-3"
+        >
+            <bnbCard
+                :apartment="apartment"
+                v-for="apartment in observable.apartments"
+                :key="apartment.id"
+            />
+        </section>
+        <section
+            v-else
+            class="apartment_section d-flex justify-content-center flex-row p-3"
+        >
+            cerca un indirizzo decente
+        </section>
+    </div>
 </template>
 
 <script>
-
-import bnbCard from '../microComponents/bnbCard.vue';
+import bnbCard from "../microComponents/bnbCard.vue";
+import observable from "../../observable.js";
 
 export default {
-    
     name: "apartmentSection",
-
     components: {
         bnbCard,
     },
-
     data() {
         return {
-            apartments: []
-        }
+            observable,
+        };
     },
-
+    //on startup
     created() {
-        axios.get('/api/apartments')
+        observable.full_address = this.$route.params.param;
+        axios
+            .get("/api/apartments/search", {
+                params: {
+                    full_address: observable.full_address,
+                    rooms: observable.rooms,
+                    beds: observable.beds,
+                    distance: observable.distance,
+                },
+            })
             .then((response) => {
-                this.apartments = response.data;
+                observable.apartments = response.data;
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
             });
-    }
+    },
+    //when data changes
 };
-
 </script>
 
 <style lang="scss" scoped>
+@import "../../../sass/variables";
 
-@import '../../../sass/variables';
-
-    .apartment_section {
-        flex-wrap: wrap;
-    }
-
+.apartment_section {
+    flex-wrap: wrap;
+}
 </style>

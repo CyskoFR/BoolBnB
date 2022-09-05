@@ -1,50 +1,30 @@
 <template>
     <div>
-        <HeaderComponent/>
-        <bnbCard :apartment="apartment" v-for="apartment in apartments" :key="apartment.id"/>
-        <FooterComponent/>
+        <category-section></category-section>
+        <filter-section></filter-section>
+        <apartment-section></apartment-section>
     </div>
 </template>
 
 <script>
-
-import HeaderComponent from './components/HeaderComponent.vue';
-import FooterComponent from './components/FooterComponent.vue';
-import bnbCard from './microComponents/bnbCard.vue';
+import ApartmentSection from "./sections/apartmentSection.vue";
+import CategorySection from "./sections/categorySection.vue";
+import FilterSection from "./sections/filterSection.vue";
 
 export default {
     name: "SearchPage",
-    components: { HeaderComponent, FooterComponent, bnbCard },
+    components: { FilterSection, ApartmentSection, CategorySection },
     data() {
-
         return {
             apartments: [],
-            param: this.$route.params.param, 
-        }
+        };
     },
 
-    created() {
-        
-        axios.get('/api/apartments/search', {
-            params: {
-                'full_address': this.param,
-                'rooms': '',
-                'beds': '',
-                'category_id': '',
-                'services': '',
-                'distance': '',
-            }
-        })
-
-        .then((response) => {
-            this.apartments = response.data;
-        });
-    }
-
+    created() {},
+    methods: {},
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../../sass/variables';
-    
+@import "../../sass/variables";
 </style>
