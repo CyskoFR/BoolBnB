@@ -1,14 +1,23 @@
 <
 <template>
-    <section
-        class="apartment_section d-flex justify-content-center flex-row p-3"
-    >
-        <bnbCard
-            :apartment="apartment"
-            v-for="apartment in observable.apartments"
-            :key="apartment.id"
-        />
-    </section>
+    <div>
+        <section
+            v-if="observable.apartments.length > 0"
+            class="apartment_section d-flex justify-content-center flex-row p-3"
+        >
+            <bnbCard
+                :apartment="apartment"
+                v-for="apartment in observable.apartments"
+                :key="apartment.id"
+            />
+        </section>
+        <section
+            v-else
+            class="apartment_section d-flex justify-content-center flex-row p-3"
+        >
+            cerca un indirizzo decente
+        </section>
+    </div>
 </template>
 
 <script>
@@ -27,6 +36,7 @@ export default {
     },
     //on startup
     created() {
+        observable.full_address = this.$route.params.param;
         axios
             .get("/api/apartments/search", {
                 params: {

@@ -52,6 +52,7 @@ export default {
                         rooms: observable.rooms,
                         beds: observable.beds,
                         distance: observable.distance,
+                        // category_id: observable.category_id,
                     },
                 })
                 .then((response) => {
