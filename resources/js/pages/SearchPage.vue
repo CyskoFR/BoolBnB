@@ -1,5 +1,6 @@
 <template>
     <div>
+        <filter-section></filter-section>
         <bnbCard
             :apartment="apartment"
             v-for="apartment in apartments"
@@ -10,10 +11,11 @@
 
 <script>
 import bnbCard from "./microComponents/bnbCard.vue";
+import FilterSection from "./sections/filterSection.vue";
 
 export default {
     name: "SearchPage",
-    components: { bnbCard },
+    components: { bnbCard, FilterSection },
     data() {
         return {
             apartments: [],
