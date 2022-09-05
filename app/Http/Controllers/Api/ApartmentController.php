@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 //models
 use App\Apartment;
-use GuzzleHttp\Client;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Mockery\Undefined;
-use phpDocumentor\Reflection\Types\Void_;
 
 class ApartmentController extends Controller
 {   
@@ -42,7 +37,8 @@ class ApartmentController extends Controller
             'rooms' => 'integer|min:1|max:255',
             'beds' => 'integer|min:1|max:255',
             'category_id' => 'exists:categories,id',
-            'services' => 'sometimes|exists:services,id'
+            'services' => 'sometimes|exists:services,id',
+            'distance' => 'integer|min:1'
         ]);
 
         /* ----------
@@ -100,12 +96,13 @@ class ApartmentController extends Controller
         ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
         ->with('category', 'user', 'services')
         ->get();
+
         /* ----------
         check servizi
         -----------*/
 
         if($services !== null){
-        $apartments =  $apartments->map(function ($apartment){
+        $apartments = $apartments->map(function ($apartment){
              foreach($this->services as $service){
                 if(!$apartment->services->contains($service)){
                     return ;
