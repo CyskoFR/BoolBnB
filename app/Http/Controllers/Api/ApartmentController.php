@@ -19,6 +19,7 @@ class ApartmentController extends Controller
     public $final_address_lat;
     public $final_address_lon;
     public $services;
+    public int $distance;
     
     //lista completa appartamenti
     public function index()
@@ -57,21 +58,34 @@ class ApartmentController extends Controller
         $final_address_lon = $final_address['lon'];
         $this->final_address_lat = $final_address_lat;
         $this->final_address_lon = $final_address_lon;
-        //dd( $final_address_lat, $final_address_lon);
-        $boundries = $this->fetchBoundries($final_address_lat, $final_address_lon, 20);   
+        if($request->input('distance') != null){
+            $this->distance = $request->input('distance');
+        }
+        else{
+            $this->distance = 20;
+        }
+        //dd($this->distance);
+        $boundries = $this->fetchBoundries($final_address_lat, $final_address_lon, $this->distance);   
         /* ----------
         query builder 
         -----------*/
         $rooms = $request->input('rooms');
         $beds = $request->input('beds');
         $category_id = $request->input('category_id');
-
+        
+        /* ----------
+        check esistenza servizi
+        -----------*/
         if($request->input('services') != null){
             $services = explode(',',$request->input('services'));
             $this->services = $services;
         }else{
             $services = null;
         }
+
+        /* ----------
+        query builder 
+        -----------*/
         $apartments = Apartment::query()
         ->when($rooms, function($query, $rooms){
             return $query->where('rooms','>=', $rooms); 
@@ -82,11 +96,10 @@ class ApartmentController extends Controller
         ->when($category_id, function($query, $category_id){
             return $query->where('category_id', $category_id); 
         })
-        // ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
-        // ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
+        ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
+        ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
         ->with('category', 'user', 'services')
         ->get();
-        //dd($apartments);
         /* ----------
         check servizi
         -----------*/
@@ -94,7 +107,7 @@ class ApartmentController extends Controller
         if($services !== null){
         $apartments =  $apartments->map(function ($apartment){
              foreach($this->services as $service){
-                if($apartment->services->contains($service)){
+                if($apartment->services-> contains($service)){
                     return $apartment;
                 }
             }
