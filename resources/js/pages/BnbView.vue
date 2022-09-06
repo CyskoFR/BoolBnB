@@ -41,9 +41,8 @@
                                         class="modal-title"
                                         id="exampleModalLongTitle"
                                     >
-                                        Messaggio privato a @{{
-                                            apartment.user.first_name
-                                        }}
+                                        Messaggio privato a
+                                        {{ apartment.user.first_name }}
                                         {{ apartment.user.last_name }}
                                     </h4>
                                     <button
@@ -59,11 +58,50 @@
                                     <form>
                                         <div class="form-group">
                                             <label
+                                                for="email-text"
+                                                class="col-form-label"
+                                                >Il tuo indirizzo email:</label
+                                            >
+                                            <input
+                                                v-model="messageForm.mail"
+                                                v-if="$user"
+                                                type="email"
+                                                class="form-control"
+                                                id="email-text"
+                                            />
+                                            <input
+                                                v-else
+                                                v-model="messageForm.mail"
+                                                type="email"
+                                                class="form-control"
+                                                id="email-text"
+                                            />
+                                            <label
+                                                for="email-text"
+                                                class="col-form-label"
+                                                >Il tuo nome completo:</label
+                                            >
+                                            <input
+                                                v-if="$user"
+                                                v-model="messageForm.full_name"
+                                                type="text"
+                                                class="form-control"
+                                                id="email-text"
+                                            />
+                                            <input
+                                                v-model="messageForm.full_name"
+                                                v-else
+                                                type="text"
+                                                class="form-control"
+                                                id="email-text"
+                                            />
+                                            <label
                                                 for="message-text"
                                                 class="col-form-label"
                                                 >Messaggio:</label
                                             >
                                             <textarea
+                                                v-model="messageForm.text"
                                                 class="form-control"
                                                 id="message-text"
                                             ></textarea>
@@ -79,6 +117,7 @@
                                         Cancella
                                     </button>
                                     <button
+                                        @click="sendMail()"
                                         type="button"
                                         class="modal_send_button btn"
                                     >
@@ -154,9 +193,29 @@ export default {
             Id: this.$route.params.id,
             apartments: [],
             services: [],
+            messageForm: {
+                mail: this.$user.email,
+                full_name: this.$user.first_name + " " + this.$user.last_name,
+                text: "",
+            },
         };
     },
-
+    methods: {
+        sendMail() {
+            axios
+                .post("/api/message/", {
+                    params: {
+                        apartment_id: this.apartments[0].id,
+                        mail: this.messageForm.mail,
+                        full_name: this.messageForm.full_name,
+                        text: this.messageForm.text,
+                    },
+                })
+                .then(function (response) {
+                    console.log(response);
+                });
+        },
+    },
     created() {
         axios
             .get("/api/apartment", {
