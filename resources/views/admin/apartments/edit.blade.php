@@ -242,9 +242,6 @@
                     required: true,
                     maxlength: 255
                 },
-                image: {
-                    required: true,
-                }
             },
             messages: {
                 name: {
@@ -279,9 +276,6 @@
                     required: "L'indirizzo e' obbligatorio",
                     maxlength: "Lunghezza massima 255 caratteri"
                 },
-                image: {
-                    required: "L'immagine é obbligatoria"
-                }
             },
         })
     } 
