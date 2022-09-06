@@ -2,7 +2,7 @@
 <template>
     <div>
         <section
-            v-if="observable.apartments.length > 0"
+            v-if="observable.apartments"
             class="apartment_section d-flex justify-content-center flex-row p-3"
         >
             <bnbCard

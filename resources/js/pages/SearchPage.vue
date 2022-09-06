@@ -1,7 +1,7 @@
 <template>
     <div>
         <category-section></category-section>
-        <filter-section></filter-section>
+        <filter-section class="py-5"></filter-section>
         <apartment-section></apartment-section>
     </div>
 </template>

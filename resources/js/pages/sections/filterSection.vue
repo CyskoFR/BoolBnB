@@ -2,40 +2,62 @@
     <div>
         <div class="container">
             <form @submit.prevent="fetchApartments()">
-                <input
-                    v-model="observable.full_address"
-                    type="text"
-                    placeholder="indirizzo"
-                />
-                <input
-                    v-model="observable.rooms"
-                    type="number"
-                    placeholder="stanze"
-                    min="1"
-                    step="1"
-                />
-                <input
-                    v-model="observable.beds"
-                    type="number"
-                    placeholder="letti"
-                    min="1"
-                    step="1"
-                />
-                <input
-                    v-model="observable.distance"
-                    type="number"
-                    placeholder="raggio di ricerca"
-                    min="1"
-                    step="1"
-                />
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    data-toggle="modal"
-                    data-target="#exampleModalCenter"
-                >
-                    servizi
-                </button>
+                <div class="input-group d-flex flex-column">
+                    <input
+                        class="py-2 px-3"
+                        name="indirizzo"
+                        v-model="observable.full_address"
+                        type="text"
+                        placeholder="indirizzo"
+                    />
+                    <small for="indirizzo">Indirizzo</small>
+                </div>
+                <div class="input-group row align-items-center">
+                    <div class="col-6 col-md-4">
+                        <input
+                            class="py-1 px-2 w-100"
+                            v-model="observable.rooms"
+                            type="number"
+                            placeholder="stanze"
+                            min="1"
+                            step="1"
+                        />
+                        <small class="d-block" for="stanze">Stanze</small>
+                    </div>
+                    <div class="col-6 col-md-4 flex justify-tems-center">
+                        <input
+                            class="py-1 px-2 w-100"
+                            v-model="observable.beds"
+                            type="number"
+                            placeholder="letti"
+                            min="1"
+                            step="1"
+                        />
+                        <small class="d-block" for="stanze">Letti</small>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <input
+                            class="py-1 px-2 w-100"
+                            v-model="observable.distance"
+                            type="number"
+                            placeholder="raggio di ricerca"
+                            min="1"
+                            step="1"
+                        />
+                        <small class="d-block" for="stanze">Raggio in km</small>
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-center py-2">
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#exampleModalCenter"
+                    >
+                        servizi extra
+                    </button>
+                    <button class="btn btn-secondary mx-2">invio</button>
+                </div>
 
                 <!-- Modal -->
                 <div
@@ -76,14 +98,7 @@
                                         :key="service.id"
                                         class="service col-3"
                                     >
-                                        <input
-                                            type="checkbox"
-                                            :name="service.id"
-                                            :id="service.id"
-                                        />
-                                        <label :for="service.id">
-                                            {{ service.name }}</label
-                                        >
+                                        <span> {{ service.name }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +121,6 @@
                         </div>
                     </div>
                 </div>
-                <button>submit</button>
             </form>
         </div>
     </div>
@@ -134,7 +148,7 @@ export default {
                         beds: observable.beds,
                         distance: observable.distance,
                         category_id: observable.category_id,
-                        services: this.selectedServicesString,
+                        //services: this.selectedServicesString ?? null,
                     },
                 })
                 .then((response) => {
