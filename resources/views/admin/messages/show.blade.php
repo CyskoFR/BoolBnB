@@ -9,7 +9,7 @@
     <form action="{{ route('admin.message.destroy', [$message->apartment ,$message]) }}" method="POST">
         @csrf
         @method('DELETE')
-        <button class="btn btn-danger">Elimina Messaggio</button>
+        <button onclick="return confirm('Sei sicuro di voler eliminare questo messaggio?')" class="btn btn-danger">Elimina Messaggio</button>
     </form>
 </section>
 @endsection
