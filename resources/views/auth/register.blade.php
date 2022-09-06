@@ -123,6 +123,7 @@
                 },
                 last_name: {
                     required: true,
+                    maxlength: 50,
                 },
                 email: {
                     required: true,
