@@ -46,7 +46,7 @@
             <form class="mx-2" action="{{route('admin.apartments.destroy', $apartment)}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-danger">Elimina Appartamento</button>
+                <button onclick="return confirm('Sei sicuro di voler eliminare questo annuncio?')" class="btn btn-danger">Elimina Appartamento</button>
             </form>
         </div>
     </div>
