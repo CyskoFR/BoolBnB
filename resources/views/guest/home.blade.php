@@ -17,5 +17,10 @@
     {{-- script che inizializza Vue e esegue l'hook a #root --}}
     <script src="{{asset('js/front.js')}}"></script>
 </body>
+<script>
+    window.Laravel = {!! json_encode([
+        'user' => Auth::user(),
+    ]) !!};
+</script>
 
 </html>
