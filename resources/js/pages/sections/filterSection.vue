@@ -12,7 +12,9 @@
                     />
                     <small for="indirizzo">Indirizzo</small>
                 </div>
-                <div class="input-group row align-items-center">
+                <div
+                    class="input-group row align-items-center justify-content-center"
+                >
                     <div class="col-6 col-md-4">
                         <input
                             class="py-1 px-2 w-100"
@@ -91,14 +93,19 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="row">
+                                <div class="row align-items-center">
                                     <div
                                         @click="selectService(service.id)"
                                         v-for="service in allServices"
                                         :key="service.id"
-                                        class="service col-3"
+                                        class="service col-4"
                                     >
-                                        <span> {{ service.name }}</span>
+                                        <button
+                                            type="button"
+                                            class="w-100 my-2"
+                                        >
+                                            {{ service.name }}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -140,24 +147,44 @@ export default {
     },
     methods: {
         fetchApartments() {
-            axios
-                .get("/api/apartments/search", {
-                    params: {
-                        full_address: observable.full_address,
-                        rooms: observable.rooms,
-                        beds: observable.beds,
-                        distance: observable.distance,
-                        category_id: observable.category_id,
-                        //services: this.selectedServicesString ?? null,
-                    },
-                })
-                .then((response) => {
-                    console.log(response);
-                    observable.apartments = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            if (observable.selectedServices.length == 0) {
+                axios
+                    .get("/api/apartments/search", {
+                        params: {
+                            full_address: observable.full_address,
+                            rooms: observable.rooms,
+                            beds: observable.beds,
+                            distance: observable.distance,
+                            category_id: observable.category_id,
+                        },
+                    })
+                    .then((response) => {
+                        console.log(response);
+                        observable.apartments = response.data;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            } else {
+                axios
+                    .get("/api/apartments/search", {
+                        params: {
+                            full_address: observable.full_address,
+                            rooms: observable.rooms,
+                            beds: observable.beds,
+                            distance: observable.distance,
+                            category_id: observable.category_id,
+                            services: this.selectedServicesString,
+                        },
+                    })
+                    .then((response) => {
+                        console.log(response);
+                        observable.apartments = response.data;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         },
         selectService(id) {
             this.tempServicesArray.has(id)
@@ -184,4 +211,16 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import "~/resources/sass/_variables";
+.modal-body {
+    button {
+        background-color: $bg-primary-light;
+        color: $text-gray-light;
+
+        &:hover {
+            background-color: $primary-green-dark;
+        }
+    }
+}
+</style>
