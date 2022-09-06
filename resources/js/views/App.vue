@@ -12,5 +12,8 @@ import HeaderComponent from "../pages/components/HeaderComponent.vue";
 export default {
     name: "App",
     components: { FooterComponent, HeaderComponent },
+    created() {
+        console.log(this.$user);
+    },
 };
 </script>
