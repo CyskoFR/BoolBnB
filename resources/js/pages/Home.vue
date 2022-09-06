@@ -1,34 +1,27 @@
 <template>
     <main>
-        <HeaderComponent/>
-        <MainComponent class="main_component"/>
-        <FooterComponent/>
+        <MainComponent class="main_component" />
     </main>
 </template>
 
 <script>
-
-import HeaderComponent from './components/HeaderComponent.vue';
-import MainComponent from './components/MainComponent.vue';
-import FooterComponent from './components/FooterComponent.vue';
+import MainComponent from "./components/MainComponent.vue";
 
 export default {
     name: "Home",
-    components: { 
-        HeaderComponent, 
-        MainComponent, 
-        FooterComponent 
-    }
+    components: {
+        MainComponent,
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-    main {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
-    .main_component {
-        flex-grow: 1;
-    }
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.main_component {
+    flex-grow: 1;
+}
 </style>
