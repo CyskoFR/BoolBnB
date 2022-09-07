@@ -1,9 +1,13 @@
 <template>
     <div class="container">
-        <h2>Page not found</h2>
-        <p>
-            <router-link :to="{name: '/'}">Torna all'home page</router-link>
-        </p>
+        <div class="card_404 text-center my-5">
+            <h2>Pagina non trovata</h2>
+            <p class="mt-3">
+                <router-link :to="{name: 'home'}">
+                    <button class="home_button btn mt-2"><b>Home</b></button>
+                </router-link>
+            </p>
+        </div>
     </div>
 </template>
 
@@ -13,6 +17,25 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+@import "../../sass/variables";
+    .container {
+        flex-grow: 1;
+    }
+
+    a {
+        color: $primary-green;
+    }
+    .home_button {
+        font-size: 0.875rem;
+        background-color: $primary-green-light;
+        border-radius: 0.75rem;
+        &:hover {
+            color: $text-gray-light;
+            background-color: $primary-green-dark;
+            border: 1px solid $primary-green-light;
+        }
+    }
 
 </style>
