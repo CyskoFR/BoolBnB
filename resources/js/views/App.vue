@@ -7,31 +7,22 @@
 </template>
 
 <script>
-
 import FooterComponent from "../pages/components/FooterComponent.vue";
 import HeaderComponent from "../pages/components/HeaderComponent.vue";
 
 export default {
-
     name: "App",
-<<<<<<< HEAD
     components: { FooterComponent, HeaderComponent },
     created() {
         console.log(this.$user);
-=======
-
-    components: { 
-        FooterComponent, 
-        HeaderComponent,
->>>>>>> f6c9ce7553306096e662c45c6059532522d81322
     },
 };
 </script>
 
 <style lang="scss" scoped>
-    #app {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 </style>
