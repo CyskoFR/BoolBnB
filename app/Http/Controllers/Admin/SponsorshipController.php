@@ -35,18 +35,17 @@ class SponsorshipController extends Controller
             'privateKey' => env('BRAINTREE_PRIVATE_KEY')
         ]);
 
-
-        $amount = $request->amount;
+        //dd($apartment,$sponsorship, $request);
+        //$amount = $request->amount;
         $nonce = $request->payment_method_nonce;
 
-
         $result = $gateway->transaction()->sale([
-            'amount' => $amount,
+            'amount' => $sponsorship['price'],
             'paymentMethodNonce' => $nonce,
             'customer' => [
-                'firstName' => 'Tony',
-                'lastName' => 'Stark',
-                'email' => 'tony@avengers.com',
+                'firstName' => $apartment->user['first_name'],
+                'lastName' => $apartment->user['last_name'],
+                'email' => $apartment->user['email'],
             ],
             'options' => [
                 'submitForSettlement' => true
@@ -70,6 +69,6 @@ class SponsorshipController extends Controller
             return back()->withErrors('An error occurred with the message: '.$result->message);
         }
 
-        return view('admin.sponsorships.checkout', compact('result'));
+        //return view('admin.sponsorships.checkout', compact('result'));
     }
 }

@@ -28,7 +28,7 @@ Route::middleware('auth')
         Route::delete('/apartments/{apartment}/messages/{message}', 'MessageController@destroy')->name('message.destroy');
         //index sponsorships;
         Route::get('/apartments/{apartment}/sponsorships', 'SponsorshipController@index')->name('sponsorships');
-        Route::post('/apartments/{apartment}/sponsorships/checkout', 'SponsorshipController@checkout')->name('sponsorships.checkout');
+        Route::post('/apartments/{apartment}/sponsorships/{sponsorship}/checkout', 'SponsorshipController@checkout')->name('sponsorships.checkout');
         
     });
 
