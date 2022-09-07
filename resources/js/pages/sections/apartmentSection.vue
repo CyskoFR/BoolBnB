@@ -2,7 +2,7 @@
 <template>
     <div>
         <section
-            v-if="observable.apartments.length > 0"
+            v-if="observable.apartments"
             class="apartment_section d-flex justify-content-center flex-row p-3"
         >
             <bnbCard
@@ -41,9 +41,10 @@ export default {
             .get("/api/apartments/search", {
                 params: {
                     full_address: observable.full_address,
-                    rooms: observable.rooms,
-                    beds: observable.beds,
-                    distance: observable.distance,
+                    // rooms: observable.rooms,
+                    // beds: observable.beds,
+                    // distance: observable.distance,
+                    // services: observable.selectedServices,
                 },
             })
             .then((response) => {
