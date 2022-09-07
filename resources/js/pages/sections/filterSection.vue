@@ -1,8 +1,9 @@
 <template>
     <div>
         <div class="container">
-            <form @submit.prevent="fetchApartments()">
-                <div class="input-group d-flex flex-column">
+            <form class="my-2" @submit.prevent="fetchApartments()">
+                <div class="input-group d-flex flex-column my-2">
+                    <small for="indirizzo">Indirizzo</small>
                     <input
                         class="py-2 px-3"
                         name="indirizzo"
@@ -10,12 +11,12 @@
                         type="text"
                         placeholder="indirizzo"
                     />
-                    <small for="indirizzo">Indirizzo</small>
                 </div>
                 <div
-                    class="input-group row align-items-center justify-content-center"
+                    class="input-group row align-items-center justify-content-center  my-2 mx-0"
                 >
-                    <div class="col-6 col-md-4">
+                    <div class="col-6 col-md-4 my-2">
+                        <small class="d-block" for="stanze">Stanze</small>
                         <input
                             class="py-1 px-2 w-100"
                             v-model="observable.rooms"
@@ -24,9 +25,9 @@
                             min="1"
                             step="1"
                         />
-                        <small class="d-block" for="stanze">Stanze</small>
                     </div>
-                    <div class="col-6 col-md-4 flex justify-tems-center">
+                    <div class="col-6 col-md-4 flex justify-tems-center my-2">
+                        <small class="d-block" for="stanze">Letti</small>
                         <input
                             class="py-1 px-2 w-100"
                             v-model="observable.beds"
@@ -35,9 +36,9 @@
                             min="1"
                             step="1"
                         />
-                        <small class="d-block" for="stanze">Letti</small>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 my-2">
+                        <small class="d-block" for="stanze">Raggio in km</small>
                         <input
                             class="py-1 px-2 w-100"
                             v-model="observable.distance"
@@ -46,19 +47,18 @@
                             min="1"
                             step="1"
                         />
-                        <small class="d-block" for="stanze">Raggio in km</small>
                     </div>
                 </div>
-                <div class="col d-flex justify-content-center py-2">
+                <div class="col d-flex justify-content-center py-2 my-2">
                     <button
                         type="button"
-                        class="btn btn-primary"
+                        class="btn extra_button"
                         data-toggle="modal"
                         data-target="#exampleModalCenter"
                     >
-                        servizi extra
+                        Servizi extra
                     </button>
-                    <button class="btn btn-secondary mx-2">invio</button>
+                    <button class="btn extra_button mx-2">Invio</button>
                 </div>
 
                 <!-- Modal -->
@@ -120,7 +120,7 @@
                                 <button
                                     @click="save()"
                                     type="button"
-                                    class="btn btn-primary"
+                                    class="btn btn-primary save_button"
                                 >
                                     Salva
                                 </button>
@@ -129,6 +129,9 @@
                     </div>
                 </div>
             </form>
+            <a href="/">
+                <button class="home_button btn mt-2"><b>Home</b></button>
+            </a>
         </div>
     </div>
 </template>
@@ -213,14 +216,56 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/resources/sass/_variables";
+
+input {
+    border: 2px solid $primary-green;
+    border-radius: .25rem;
+}
+small {
+    color: $text-gray-dark;
+}
 .modal-body {
     button {
         background-color: $bg-primary-light;
         color: $text-gray-light;
-
+        border-radius: .25rem;
+        word-wrap: break-word;
         &:hover {
             background-color: $primary-green-dark;
         }
     }
 }
+.modal-footer {
+    .save_button {
+        background-color: $primary-green-light;
+        &:hover {
+        color: $text-gray-light;
+        background-color: $primary-green-dark;
+        border: 1px solid $primary-green-light;
+        }
+    }
+}
+.extra_button {
+    font-size: .875rem;
+    background-color: $primary-green-light;
+    border-radius: .75rem;
+    margin-right: .625rem;
+    &:hover {
+        color: $text-gray-light;
+        background-color: $primary-green-dark;
+        border: 1px solid $primary-green-light;
+    }
+}
+.home_button {
+        font-size: 0.875rem;
+        background-color: $primary-green-light;
+        border-radius: 0.75rem;
+        &:hover {
+            color: $text-gray-light;
+            background-color: $primary-green-dark;
+            border: 1px solid $primary-green-light;
+        }
+    }
+
+
 </style>

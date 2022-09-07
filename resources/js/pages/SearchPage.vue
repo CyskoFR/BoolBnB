@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="search_page flex-grow-1">
         <category-section></category-section>
         <filter-section class="py-5"></filter-section>
         <apartment-section></apartment-section>
@@ -27,4 +27,8 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../sass/variables";
+
+.search_page {
+    background-color: $bg-primary-dark;
+}
 </style>

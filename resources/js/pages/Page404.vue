@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <div class="card_404 text-center my-5">
             <h2>Pagina non trovata</h2>
             <p class="mt-3">
@@ -20,8 +20,13 @@ export default {
 <style lang="scss" scoped>
 
 @import "../../sass/variables";
-    .container {
+    .container-fluid {
         flex-grow: 1;
+        background-color: $bg-secondary-dark;
+    }
+
+    h2 {
+        color: $text-gray-light;
     }
 
     a {
