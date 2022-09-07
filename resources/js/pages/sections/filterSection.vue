@@ -94,18 +94,8 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row align-items-center">
-                                    <div
-                                        @click="selectService(service.id)"
-                                        v-for="service in allServices"
-                                        :key="service.id"
-                                        class="service col-4"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="w-100 my-2"
-                                        >
-                                            {{ service.name }}
-                                        </button>
+                                    <div @click="selectService(service.id);" v-for="service in allServices" :key="service.id" class="service col-4">
+                                        <extraServiceButton :service="service"></extraServiceButton>
                                     </div>
                                 </div>
                             </div>
@@ -137,9 +127,17 @@
 </template>
 
 <script>
-import observable from "../../observable.js";
+    
+import observable from '../../observable';
+import extraServiceButton from '../microComponents/extraServiceButton.vue';
+
 export default {
     name: "filterSection",
+
+    components: {
+        extraServiceButton,
+    },
+
     data() {
         return {
             observable,
@@ -233,6 +231,9 @@ small {
         &:hover {
             background-color: $primary-green-dark;
         }
+    }
+    .active {
+        background-color: $primary-green-dark;
     }
 }
 .modal-footer {
