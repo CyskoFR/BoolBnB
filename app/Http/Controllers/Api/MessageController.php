@@ -25,7 +25,7 @@ class MessageController extends Controller
             'full_name' => 'required|string|max:100',
             'text' => 'required|string|max:65535'
          ]);
-         
+         //dd($request);
          $data = $request->all();
          $newMessage = new Message();
 

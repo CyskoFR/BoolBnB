@@ -11,11 +11,19 @@
 </head>
 
 <body>
+
     <div id="root">
         {{-- app vue running --}}
     </div>
     {{-- script che inizializza Vue e esegue l'hook a #root --}}
+    <script>
+        window.Laravel = {!! json_encode([
+            'user' => Auth::user(),
+        ]) !!};
+    </script>
     <script src="{{asset('js/front.js')}}"></script>
+
 </body>
+
 
 </html>

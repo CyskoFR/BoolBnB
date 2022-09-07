@@ -5,7 +5,8 @@ export default Vue.observable({
     rooms: 1,
     distance: null,
     category_id: null,
-    services: "",
-
+    selectedServices: [],
+    //tutti, chiamata gener
+    services: [],
     apartments: [],
 });
