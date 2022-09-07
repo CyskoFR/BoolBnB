@@ -197,7 +197,6 @@ export default {
             observable.selectedServices = Array.from(this.tempServicesArray);
             this.selectedServicesString =
                 observable.selectedServices.toString();
-                console.log("TEMPSERV", this.tempServicesArray)
         },
     },
     created() {
