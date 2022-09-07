@@ -111,6 +111,7 @@
                                     @click="save()"
                                     type="button"
                                     class="btn btn-primary save_button"
+                                    data-dismiss="modal"
                                 >
                                     Salva
                                 </button>
@@ -196,6 +197,7 @@ export default {
             observable.selectedServices = Array.from(this.tempServicesArray);
             this.selectedServicesString =
                 observable.selectedServices.toString();
+                console.log("TEMPSERV", this.tempServicesArray)
         },
     },
     created() {
