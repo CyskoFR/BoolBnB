@@ -111,6 +111,7 @@
                                     @click="save()"
                                     type="button"
                                     class="btn btn-primary save_button"
+                                    data-dismiss="modal"
                                 >
                                     Salva
                                 </button>
