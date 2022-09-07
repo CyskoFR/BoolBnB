@@ -63,6 +63,7 @@
                                                 >Il tuo indirizzo email:</label
                                             >
                                             <input
+                                                required
                                                 v-model="messageForm.mail"
                                                 v-if="$user"
                                                 type="email"
@@ -70,6 +71,7 @@
                                                 id="email-text"
                                             />
                                             <input
+                                                required
                                                 v-else
                                                 v-model="messageForm.mail"
                                                 type="email"
@@ -82,6 +84,7 @@
                                                 >Il tuo nome completo:</label
                                             >
                                             <input
+                                                required
                                                 v-if="$user"
                                                 v-model="messageForm.full_name"
                                                 type="text"
@@ -89,6 +92,7 @@
                                                 id="email-text"
                                             />
                                             <input
+                                                required
                                                 v-model="messageForm.full_name"
                                                 v-else
                                                 type="text"
@@ -101,6 +105,7 @@
                                                 >Messaggio:</label
                                             >
                                             <textarea
+                                                required
                                                 v-model="messageForm.text"
                                                 class="form-control"
                                                 id="message-text"
@@ -194,8 +199,8 @@ export default {
             apartments: [],
             services: [],
             messageForm: {
-                mail: this.$user.email,
-                full_name: this.$user.first_name + " " + this.$user.last_name,
+                mail: "",
+                full_name: "",
                 text: "",
             },
         };
@@ -203,14 +208,9 @@ export default {
     methods: {
         sendMail() {
             axios
-                .post("/api/message/", {
-                    params: {
-                        apartment_id: this.apartments[0].id,
-                        mail: this.messageForm.mail,
-                        full_name: this.messageForm.full_name,
-                        text: this.messageForm.text,
-                    },
-                })
+                .post(
+                    `/api/message/?apartment_id=${this.apartments[0].id}&mail=${this.messageForm.mail}&full_name=${this.messageForm.full_name}&text=${this.messageForm.text}`
+                )
                 .then(function (response) {
                     console.log(response);
                 });
@@ -226,6 +226,10 @@ export default {
             .then((response) => {
                 this.apartments = response.data;
             });
+        if (this.$user) {
+            this.messageForm.mail = this.$user.email;
+            this.messageForm.full_name = `${this.$user.first_name} ${this.$user.last_name}`;
+        }
     },
 };
 </script>
