@@ -3,7 +3,7 @@
 <section id="index-sponsorships" class="p-5">
   <div class="container-fluid d-flex flex-column align-items-center text-center">
     @foreach ($sponsorships as $sponsorship)
-    <div class="sponsorship  {{$sponsorship->name}} d-flex justify-content-around mt-3 py-4">
+    <div class="sponsorship  {{strtolower($sponsorship->name)}} d-flex justify-content-around mt-3 py-4">
       <div class="hidden  mx-5">{{$sponsorship->name}}</div>
       <div class="rombo">
         <div class="label">{{$sponsorship->name}}</div>

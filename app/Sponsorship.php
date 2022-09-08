@@ -8,6 +8,6 @@ class Sponsorship extends Model
 {
     public function apartment(){
         
-        return $this->belongsTo('App\Apartment');
+        return $this->belongsToMany('App\Apartment');
     }
 }

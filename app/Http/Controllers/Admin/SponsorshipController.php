@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Apartment;
 use App\Sponsorship;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
  /**
      * Display a listing of the resource.
@@ -37,6 +39,9 @@ class SponsorshipController extends Controller
 
         $nonce = $request->payment_method_nonce;
 
+        //sponsorizzazione completata , da verificare il check sulla sponsorizzazione attiva
+        $apartment->sponsorships()->save($sponsorship, ['expiration_date'=>Carbon::now()->addHours($sponsorship['duration']) ]);
+        dd();
         $result = $gateway->transaction()->sale([
             'amount' => $sponsorship['price'],
             'paymentMethodNonce' => $nonce,
@@ -52,7 +57,9 @@ class SponsorshipController extends Controller
     
         if ($result->success) {
             $transaction = $result->transaction;
-            return view('admin.sponsorships.transactionResult',compact('transaction'));//->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
+            // aggiungi il messaggio nella pivot con expireday
+            $apartment->sponsorships()->save($sponsorship, ['expiration_date'=>Carbon::now()->addDay($sponsorship['duration']/24) ]);
+            return view('admin.sponsorships.transactionResult',compact('transaction'));
         } else {
             $errorString = "";
     
