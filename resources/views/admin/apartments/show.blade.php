@@ -42,12 +42,31 @@
             <button class="btn update_button mx-2">Indietro</button></a>
             <a href="{{route('admin.apartments.edit', $apartment)}}">
                 <button class="btn update_button">Modifica</button></a>
-            {{-- form per il destroy --}}
-            <form class="mx-2" action="{{route('admin.apartments.destroy', $apartment)}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button onclick="return confirm('Sei sicuro di voler eliminare questo annuncio?')" class="btn btn-danger">Elimina Appartamento</button>
-            </form>
+                <button class="btn btn-danger"data-toggle="modal" data-target="#deleteButton">Elimina Appartamento</button>
+                <!-- Save Confirm Modal -->
+                <div class="modal fade" id="deleteButton" tabindex="-1" role="dialog" aria-labelledby="deleteButtonLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center ">
+                                <b>Sei sicuro di voler eliminare questo annuncio?</b>
+                            </div>
+                            <div class="modal-footer">
+                                {{-- form per il destroy --}}
+                                <form class="mx-2" action="{{route('admin.apartments.destroy', $apartment)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger"data-toggle="modal" data-target="#deleteButton">Elimina</button>
+                                </form>            
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 </section>
