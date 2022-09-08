@@ -16,7 +16,7 @@
                     <h2>{{$apartment->name}}</h2>
                 </a>
 
-                <h3>{{$apartment->full_address}}</h3>
+                <h3 class="d-none d-md-block">{{$apartment->full_address}}</h3>
             </div>
             <div class="buttons">
                 <a href="{{route('admin.messages', $apartment)}}">
