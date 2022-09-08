@@ -1,6 +1,9 @@
 section#show-messages {
     max-width: 62.5rem;
     margin: auto;
+    a {
+        text-decoration: none;
+    }
     .message_container {
         border: 2px solid $primary-green;
         border-radius: .5rem;
@@ -21,6 +24,15 @@ section#show-messages {
         p {
             word-wrap: break-word;
             font-size: 1rem;
+        }
+    }
+    .back_button {
+        background-color: $bg-gray-light;
+        margin-right: .5rem;
+        &:hover {
+            color: $text-gray-light;
+            background-color: $bg-gray-dark;
+            border: 1px solid $primary-green-light;
         }
     }
 }
