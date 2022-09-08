@@ -121,17 +121,32 @@
                                     >
                                         Cancella
                                     </button>
-                                    <button
-                                        @click="sendMail()"
-                                        type="button"
-                                        class="modal_send_button btn"
-                                    >
+                                    <button type="button" class="btn modal_send_button" data-toggle="modal" data-target="#saveOutputModal" @click="sendMail()" data-dismiss="modal">
                                         Invia
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Save Confirm Modal -->
+                    <div class="modal fade" id="saveOutputModal" tabindex="-1" role="dialog" aria-labelledby="saveOutputModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    Il tuo messaggio é stato inviato con successo!
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 col-md-6 p-3">
