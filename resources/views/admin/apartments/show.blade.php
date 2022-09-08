@@ -35,7 +35,7 @@
         </ul>
         <iframe width="100%" height="300" style="border:0" loading="lazy" allowfullscreen
             referrerpolicy="no-referrer-when-downgrade" src="{{"
-            https://www.google.com/maps/embed/v1/view?key=AIzaSyCQ7RWBFjqduEmJrdQxabkp5w1nc0KXZeM&center={$apartment->latitude},{$apartment->longitude}&zoom=18&maptype=satellite"}}">
+            https://www.google.com/maps/embed/v1/place?q={$apartment->latitude},{$apartment->longitude}&key=AIzaSyCQ7RWBFjqduEmJrdQxabkp5w1nc0KXZeM&center={$apartment->latitude},{$apartment->longitude}&zoom=18&maptype=satellite"}}">
         </iframe>
         <div class="d-flex py-3" id="actions">
             <a href="{{route('admin.apartments.index')}}">
