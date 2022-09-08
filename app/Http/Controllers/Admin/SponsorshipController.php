@@ -55,18 +55,18 @@ class SponsorshipController extends Controller
         if ($result->success) {
             $transaction = $result->transaction;
             // header("Location: transaction.php?id=" . $transaction->id);
-    
-            return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
+
+            return view('admin.sponsorships.transactionResult',compact('transaction'));//->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
         } else {
             $errorString = "";
     
             foreach ($result->errors->deepAll() as $error) {
                 $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
             }
-    
+            $errorsArray = $result->errors;
             // $_SESSION["errors"] = $errorString;
             // header("Location: index.php");
-            return back()->withErrors('An error occurred with the message: '.$result->message);
+            return view('admin.sponsorships.transactionResult',compact('errorsArray'));
         }
 
         //return view('admin.sponsorships.checkout', compact('result'));
