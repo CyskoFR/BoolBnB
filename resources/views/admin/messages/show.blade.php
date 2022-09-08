@@ -13,6 +13,9 @@
             <p>{{$message->text}}</p>
         </div>
     </div>
+    <a href="{{ url()->previous() }}">
+        <button class="btn back_button"><b>Indietro</b></button>
+    </a>
     <button class="btn btn-danger"data-toggle="modal" data-target="#deleteButton">Elimina Messaggio</button>
     <!-- Delete Confirm Modal -->
     <div class="modal fade" id="deleteButton" tabindex="-1" role="dialog" aria-labelledby="deleteButtonLabel" aria-hidden="true">
