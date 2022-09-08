@@ -4,7 +4,7 @@
   <div class="container-fluid d-flex flex-column align-items-center text-center">
     @foreach ($sponsorships as $sponsorship)
     <div class="sponsorship gold d-flex justify-content-around mt-3 py-4">
-      <div class="hidden gold mx-5">{{$sponsorship->name}}</div>
+      <div class="hidden {{$sponsorship->name}} mx-5">{{$sponsorship->name}}</div>
       <div class="rombo">
         <div class="label">{{$sponsorship->name}}</div>
       </div>
@@ -16,25 +16,32 @@
 
     @endforeach
 
-    <a href="{{route('admin.apartments.show', $apartment)}}">
-      <button class="btn comeback_button my-3">Ci voglio ripensare</button></a>
-  </div>
-  <div class="content">
-    <form method="post" id="payment-form"
-      action="{{ route('admin.sponsorships.checkout',[$apartment, $sponsorships['0']]) }}">
-      @csrf
-      <section>
-        <div class="bt-drop-in-wrapper">
-          <div id="bt-dropin"></div>
-        </div>
-      </section>
-      <input id="nonce" name="payment_method_nonce" type="hidden" />
-      <button class="button" type="submit"><span>Test Transaction</span></button>
+
+    <div class="content">
+      <form method="post" id="payment-form"
+        action="{{ route('admin.sponsorships.checkout',[$apartment, $sponsorships['0']]) }}">
+        @csrf
+        <section>
+          <div class="bt-drop-in-wrapper">
+            <div id="bt-dropin"></div>
+          </div>
+        </section>
+        <input id="nonce" name="payment_method_nonce" type="hidden" />
+
+
+        <a href="{{route('admin.apartments.show', $apartment)}}">
+          <button class="btn comeback_button my-3">Ci voglio ripensare</button>
+        </a>
+        <button class="button  btn btn-primary" type="submit"><span>Conferma</span></button>
+    </div>
     </form>
   </div>
   </div>
   <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
   <script>
+    let sponsorships =  [...document.querySelectorAll(".sponsorship")];
+    sponsorships.forEach(e => console.log(e.classList))
+    //form di pagamento
     var form = document.querySelector('#payment-form');
         var client_token = "{{ $token }}";
         braintree.dropin.create({

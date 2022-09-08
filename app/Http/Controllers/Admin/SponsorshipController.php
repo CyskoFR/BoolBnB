@@ -35,8 +35,6 @@ class SponsorshipController extends Controller
             'privateKey' => env('BRAINTREE_PRIVATE_KEY')
         ]);
 
-        //dd($apartment,$sponsorship, $request);
-        //$amount = $request->amount;
         $nonce = $request->payment_method_nonce;
 
         $result = $gateway->transaction()->sale([
@@ -54,8 +52,6 @@ class SponsorshipController extends Controller
     
         if ($result->success) {
             $transaction = $result->transaction;
-            // header("Location: transaction.php?id=" . $transaction->id);
-
             return view('admin.sponsorships.transactionResult',compact('transaction'));//->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
         } else {
             $errorString = "";
@@ -64,8 +60,6 @@ class SponsorshipController extends Controller
                 $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
             }
             $errorsArray = $result->errors;
-            // $_SESSION["errors"] = $errorString;
-            // header("Location: index.php");
             return view('admin.sponsorships.transactionResult',compact('errorsArray'));
         }
 
