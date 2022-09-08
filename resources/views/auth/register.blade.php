@@ -99,8 +99,65 @@
                         </form>
                     </div>
                 </div>
+                <div class="col-12 p-0">
+                    <a href="/">
+                        <button class="btn back_button d-block"><b>Home</b></button>
+                    </a>                    
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+<script>
+    if ($("#register").length > 0) {
+        $("#register").validate({
+
+            rules: {
+                first_name: {
+                    required: true,
+                    maxlength: 50,
+                },
+                last_name: {
+                    required: true,
+                    maxlength: 50,
+                },
+                email: {
+                    required: true,
+                    maxlength: 50,
+                },
+                password: {
+                    required: true,
+                },
+                birth_date: {
+                    required: true,
+                },
+            },
+            messages: {
+                first_name: {
+                    required: "Inserisci il tuo nome",
+                    maxlength: 50,
+                },
+                last_name: {
+                    required: "Inserisci il tuo cognome",
+                    maxlength: 50,
+                },
+                email: {
+                    required: "Inserisci la tua email",
+                    maxlength: 50,
+                },
+                password: {
+                    required: "Inserisci una password",
+                },
+                birth_date: {
+                    required: "Inserisci la tua data di nascita",
+                },
+            },
+        })
+    } 
+</script>
+
 @endsection

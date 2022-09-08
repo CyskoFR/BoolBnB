@@ -34,6 +34,6 @@ Route::get('services', 'Api\ServiceController@index');
 Route::post('message' , 'Api\MessageController@store');
 
 //transazioni
-// Route::get('sponsorships/generate', 'Api\SponsorshipController@generate');
-// Route::post('sponsorships/make/payment', 'Api\SponsorshipController@makePayment');
+Route::get('sponsorships/generate', 'Api\SponsorshipController@generate');
+Route::post('sponsorships/make/payment', 'Api\SponsorshipController@makePayment');
 

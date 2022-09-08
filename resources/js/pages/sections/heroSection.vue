@@ -25,33 +25,32 @@
 
             <div class="hero_img_container d-none d-md-block col-md-7">
                 <div
-                    id="carouselExampleFade"
                     class="carousel slide carousel-fade"
                     data-ride="carousel"
                 >
                     <div class="carousel-inner">
-                        <div class="carousel-item active" data-interval="3000">
+                        <div class="carousel-item active" data-interval="4000">
                             <img
                                 src="../../../img/bnb-hero1.jpg"
                                 class="d-block w-100"
                                 alt="bnb-hero1"
                             />
                         </div>
-                        <div class="carousel-item" data-interval="3000">
+                        <div class="carousel-item" data-interval="4000">
                             <img
                                 src="../../../img/bnb-hero2.jpg"
                                 class="d-block w-100"
                                 alt="bnb-hero2"
                             />
                         </div>
-                        <div class="carousel-item" data-interval="3000">
+                        <div class="carousel-item" data-interval="4000">
                             <img
                                 src="../../../img/bnb-hero3.jpg"
                                 class="d-block w-100"
                                 alt="bnb-hero3"
                             />
                         </div>
-                        <div class="carousel-item" data-interval="3000">
+                        <div class="carousel-item" data-interval="4000">
                             <img
                                 src="../../../img/bnb-hero4.jpg"
                                 class="d-block w-100"
@@ -94,6 +93,16 @@ export default {
 
 .hero_section {
     padding: 0;
+}
+
+.carousel.carousel-fade .carousel-item {
+    display: block;
+    opacity: 0;
+    transition: opacity ease-out 1s;
+}
+
+.carousel.carousel-fade .carousel-item.active {
+    opacity: 1 !important;
 }
 
 .hero_row {

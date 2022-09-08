@@ -39,5 +39,13 @@ section#login {
             }
         }
     }
-
+    .back_button {
+        background-color: $bg-gray-light;
+        margin-top: .5rem;
+        &:hover {
+            color: $text-gray-light;
+            background-color: $bg-gray-dark;
+            border: 1px solid $primary-green-light;
+        }
+    }
 }
