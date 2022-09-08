@@ -3,7 +3,7 @@
         <div class="container footer_component py-3 ">
             <div class="row">
                 <div class="col-12 col-sm-6 col-lg-3 text-center text-sm-left">
-                    <h6>Assistenza</h6>
+                    <h5>Assistenza</h5>
                     <ul>
                         <li><a href="#">Centro Assistenza</a></li>
                         <li><a href="#">Accessibilità per tutti</a></li>
@@ -15,7 +15,7 @@
                     </ul>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-3 text-center text-sm-left">
-                    <h6>Community</h6>
+                    <h5>Community</h5>
                     <ul>
                         <li><a href="#">Boolbnb.org: un rifugio sicuro</a></li>
                         <li><a href="#">Supporta i rifugiati ukraini</a></li>
@@ -23,7 +23,7 @@
                     </ul>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-3 text-center text-sm-left">
-                    <h6>Ospitare</h6>
+                    <h5>Ospitare</h5>
                     <ul>
                         <li><a href="#">Prova a ospitare</a></li>
                         <li><a href="#">AirCover per gli host</a></li>
@@ -33,7 +33,7 @@
                     </ul>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-3 text-center text-sm-left">
-                    <h6>Boolbnb</h6>
+                    <h5>Boolbnb</h5>
                     <ul>
                         <li><a href="#">Newsroom</a></li>
                         <li><a href="#">Scopri le nuove funzionalità</a></li>
@@ -44,8 +44,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="row text-center text-md-left d-flex align-items-center">
-                <div class="col-12 col-md-6 mb-2">
+            <div class="row text-center text-md-left d-flex align-items-center py-3">
+                <div class="col-12 col-md-6 mb-1">
                     <small>© 2022 Boolbnb, Inc. · 
                         <a href="#">Privacy</a> · 
                         <a href="#">Termini</a> · 
@@ -53,7 +53,7 @@
                     </small>
                 </div>
                 <div class="social_media col-12 col-md-6 d-flex justify-content-center justify-content-md-end align-middle">
-                    Seguici sui social
+                    <small class="social_text">Seguici sui social:</small>
                     <a target="_blank" href="https://www.facebook.com/"><img src="../../../img/facebook.jpg" alt="facebook"></a>
                     <a target="_blank" href="https://www.instagram.com/"><img src="../../../img/instagram.jpg" alt="instagram"></a>
                     <a target="_blank" href="https://twitter.com/"><img src="../../../img/twitter.jpg" alt="twitter"></a>
@@ -86,7 +86,7 @@ export default {
 footer {
     background-color: $bg-secondary-dark;
     color: $text-gray-light;
-    border-top: 1px solid $text-gray-dark;
+    border-top: .0625rem solid $text-gray-dark;
 
     ul {
         list-style: none;
@@ -95,14 +95,14 @@ footer {
         li {
             cursor: pointer;
             margin-bottom: .25rem;
-            font-size: .75rem;
+            font-size: .9375rem;
         }
 
     }
 
     a {
         text-decoration: none;
-        color: $text-gray-dark;;
+        color: $text-gray-dark;
     }
 
     a:hover {
@@ -113,7 +113,7 @@ footer {
 
     img {
         width: 1.25rem;
-        border-radius: 4px;
+        border-radius: .25rem;
         cursor: pointer;
         margin: 0 .5rem;
         transition: 0.3s;
@@ -122,6 +122,10 @@ footer {
     img:hover {
         scale: 130%;
         transition: 0.3s;
+    }
+
+    .social_text {
+        margin: .1875rem;
     }
 }
 
