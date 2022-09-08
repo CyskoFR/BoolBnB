@@ -27,6 +27,9 @@ section#index-messages {
         color: $text-gray-light;
         border-bottom-right-radius: 10px;
         border-bottom-left-radius: 10px;
+        border-right: 1px dotted $text-gray-light;
+        border-bottom: 1px dotted $text-gray-light;
+        border-left: 1px dotted $text-gray-light;
     }
     button {
         font-size: .875rem;

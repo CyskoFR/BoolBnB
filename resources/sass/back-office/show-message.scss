@@ -1,0 +1,26 @@
+section#show-messages {
+    max-width: 62.5rem;
+    margin: auto;
+    .message_container {
+        border: 2px solid $primary-green;
+        border-radius: .5rem;
+        background-color: $bg-secondary-dark;
+    }
+    .owner_info_section {
+        h3, h5 {
+            color: $text-gray-light;
+        }
+        p {
+            color: $text-gray-dark;
+        }
+    }
+    .sender_info_section {
+        border: 1px dotted $text-gray-dark;
+        border-radius: .5rem;
+        background-color: $bg-gray-light;
+        p {
+            word-wrap: break-word;
+            font-size: 1rem;
+        }
+    }
+}
