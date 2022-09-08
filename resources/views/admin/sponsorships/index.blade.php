@@ -3,8 +3,8 @@
 <section id="index-sponsorships" class="p-5">
   <div class="container-fluid d-flex flex-column align-items-center text-center">
     @foreach ($sponsorships as $sponsorship)
-    <div class="sponsorship gold d-flex justify-content-around mt-3 py-4">
-      <div class="hidden {{$sponsorship->name}} mx-5">{{$sponsorship->name}}</div>
+    <div class="sponsorship  {{$sponsorship->name}} d-flex justify-content-around mt-3 py-4">
+      <div class="hidden  mx-5">{{$sponsorship->name}}</div>
       <div class="rombo">
         <div class="label">{{$sponsorship->name}}</div>
       </div>
@@ -39,8 +39,20 @@
   </div>
   <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
   <script>
+    let selectedSponsorship = new Set()
     let sponsorships =  [...document.querySelectorAll(".sponsorship")];
-    sponsorships.forEach(e => console.log(e.classList))
+    sponsorships.forEach(sponsorship => {
+      sponsorship.addEventListener('click', e =>{
+        if (selectedSponsorship.size == 0){
+          selectedSponsorship.has(sponsorship) ? selectedSponsorship.delete(sponsorship) : selectedSponsorship.add(sponsorship)
+        }else{
+          selectedSponsorship.forEach((item) => {
+            selectedSponsorship.delete(item)});
+          selectedSponsorship.add(sponsorship)
+        }
+        console.log(e.target.attributes, selectedSponsorship)
+      })
+    })
     //form di pagamento
     var form = document.querySelector('#payment-form');
         var client_token = "{{ $token }}";
