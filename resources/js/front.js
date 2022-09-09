@@ -13,11 +13,11 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 /* import specific icons */
-import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
+import { faUserSecret, faStar } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 
 /* add icons to the library */
-library.add(faUserSecret, faUser);
+library.add(faUserSecret, faUser, faStar);
 
 Vue.prototype.$user = window.Laravel.user;
 /* add font awesome icon component */
