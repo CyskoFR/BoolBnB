@@ -58,7 +58,7 @@
                     >
                         Servizi extra
                     </button>
-                    <button class="btn extra_button mx-2">Invio</button>
+                    <button class="btn extra_button mx-2">Cerca</button>
                 </div>
 
                 <!-- Modal -->
