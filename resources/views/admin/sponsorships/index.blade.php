@@ -20,7 +20,7 @@
 
     <div class="content">
       <form class="py-4" method="post" id="payment-form"
-        action="{{ route('admin.sponsorships.checkout',[$apartment, $sponsorships['0']]) }}">
+        action="{{ route('admin.sponsorships.checkout', $apartment )}}">
         @csrf
         <section>
           <div class="bt-drop-in-wrapper">

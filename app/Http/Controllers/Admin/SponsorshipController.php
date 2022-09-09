@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
      */
 class SponsorshipController extends Controller
 {
-    public function index(Apartment $apartment, Sponsorship $sponsorship)
+    public function index(Apartment $apartment )
     {
         $gateway = new \Braintree\Gateway([
             'environment' => env('BRAINTREE_ENV'),
@@ -28,7 +28,7 @@ class SponsorshipController extends Controller
         return view('admin.sponsorships.index', compact('apartment','token','sponsorships'));
     }
 
-    public function checkout(Apartment $apartment, Sponsorship $sponsorship , Request $request)
+    public function checkout(Apartment $apartment , Request $request)
     {
         $request->validate([
             'package' => 'required|min:1'
