@@ -1,6 +1,6 @@
 <template>
     <div
-        @click="observable.category_id = category.id"
+        @click="observable.category_id = category.id, observable.category_name = category.name"
         class="category_tag d-flex text-center"
     >
         <img
@@ -61,5 +61,10 @@ export default {
 .category_tag:hover {
     filter: brightness(110%);
     scale: 105%;
+}
+.active_tag {
+    .category_img {
+        background-color: rgb(255, 227, 116);
+    }
 }
 </style>
