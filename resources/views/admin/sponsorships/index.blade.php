@@ -29,11 +29,11 @@
         </section>
         <input class="d-none" type="text" name="package" id="package">
         <input id="nonce" name="payment_method_nonce" type="hidden" />
-        <a href="{{route('admin.apartments.show', $apartment)}}">
-          <button class="btn comeback_button my-3">Ci voglio ripensare</button>
-        </a>
         <button class="button  btn btn-primary" type="submit"><span>Conferma</span></button>
       </form>
+      <a href="{{route('admin.apartments.show', $apartment)}}">
+        <button class="btn update_button my-3 mx-1">Ci voglio ripensare</button>
+      </a>
     </div>
 
   </div>
