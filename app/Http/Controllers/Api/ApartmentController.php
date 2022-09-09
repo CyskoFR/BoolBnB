@@ -173,7 +173,7 @@ class ApartmentController extends Controller
               return $apartment;
          });
   
-        return $sponsored_apartments =  $sponsored_apartments->concat($apartments)->unique('apartment_id');   
+        return $sponsored_apartments =  $sponsored_apartments->concat($apartments)->unique('id');   
     }
 
 
