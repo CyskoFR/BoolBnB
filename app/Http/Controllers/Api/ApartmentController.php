@@ -96,11 +96,14 @@ class ApartmentController extends Controller
         })
         ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
         ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
-        ->with('category', 'user', 'services')
+        ->with('category', 'user', 'services', /*'sponsorships'*/)
         ->get();
 
+        // propvare le gli apartments with sposnsorships e finltrare da li ????
+        //insdd($apartments);
         //sponsorizzati
         $sponsored_apartments = Apartment::query()
+        // ->join('apartment_service', 'apartments.id', '=','apartment_service.apartment_id')
         ->join('apartment_sponsorship', 'apartments.id', '=','apartment_sponsorship.apartment_id')
         ->where('expiration_date', '>=', Carbon::now())
         ->when($rooms, function($query, $rooms){
@@ -114,24 +117,33 @@ class ApartmentController extends Controller
         })
         ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
         ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
-        ->with('category', 'user', 'services')
+        ->with('category', 'user')
+
         ->get();
-
-
-
+        //assegnazione corretta dei servizi agli sponsorizzati
+        foreach($sponsored_apartments as $elm){
+            $array_services = Apartment::query()
+            
+             ->join('apartment_service', 'apartments.id', '=','apartment_service.apartment_id')
+            ->where('apartment_service.apartment_id', $elm['apartment_id'])
+             ->join('services', 'apartment_service.service_id', '=','services.id')
+             ->select('services.id', 'services.name')
+             ->get();
+             
+            $elm['services']= $array_services;
+        };
         /* ----------
         check servizi
         -----------*/
-
+        
         if($services !== null){
         $apartments = $apartments->map(function ($apartment){
              foreach($this->services as $service){
                 if(!$apartment->services->contains($service)){
                     return ;
-                }else{
-                    return $apartment;
                 }
             }
+            return $apartment;
          })->filter(); 
         }
         //sponsorizzati
@@ -140,13 +152,12 @@ class ApartmentController extends Controller
                  foreach($this->services as $service){
                     if(!$apartment->services->contains($service)){
                         return ;
-                    }else{
-                        return $apartment;
                     }
                 }
+                return $apartment;
              })->filter(); 
             }
-
+        
         /* ----------
         sort by distance
         -----------*/
@@ -164,11 +175,14 @@ class ApartmentController extends Controller
                         pow(($apartment->longitude - $this->final_address_lon),2)
                     );
                 });
-
-        return $uniqe =  $sponsored_apartments->concat($apartments)->unique('apartment_id');
         
-        return $sponsored_apartments;
-        return $apartments;    
+        //fix mismatch apartment_ id to id in `apartment`.`id`
+         $sponsored_apartments = $sponsored_apartments->map(function($apartment){
+              $apartment['id'] = $apartment['apartment_id'];
+              return $apartment;
+         });
+  
+        return $sponsored_apartments =  $sponsored_apartments->concat($apartments)->unique('id');   
     }
 
 
