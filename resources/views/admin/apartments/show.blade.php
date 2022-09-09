@@ -15,7 +15,9 @@
             </div>
             @else
             <div>
-                La tua promozione e' attiva fino al: {{$checkSponsor->expiration_date }}
+                La tua promozione e' attiva fino al: <span class="d-block  "><b>{{ date('d-M-y',
+                        strtotime($checkSponsor->expiration_date)) }} alle {{ date('H:i ',
+                        strtotime($checkSponsor->expiration_date)) }} </b></span>
             </div>
 
             @endif
