@@ -50,28 +50,26 @@
       package.value = '';
       package.value = 'Bronze';
       console.log(package.value);
+      sponsorshipsTagBronze.classList.add('selected');
+      sponsorshipsTagSilver.classList.remove('selected');
+      sponsorshipsTagGold.classList.remove('selected');
     });
     sponsorshipsTagSilver.addEventListener('click', e =>{
       package.value = '';
       package.value = 'Silver';
       console.log(package.value);
+      sponsorshipsTagBronze.classList.remove('selected');
+      sponsorshipsTagSilver.classList.add('selected');
+      sponsorshipsTagGold.classList.remove('selected');
     })
     sponsorshipsTagGold.addEventListener('click', e =>{
       package.value = '';
       package.value = 'Gold';
       console.log(package.value);
+      sponsorshipsTagBronze.classList.remove('selected');
+      sponsorshipsTagSilver.classList.remove('selected');
+      sponsorshipsTagGold.classList.add('selected');
     })
-  //   sponsorshipsTag.forEach(sponsorshipTag => {
-  //     sponsorshipTag.addEventListener('click', (e, sponsorshipTag) =>{
-  //       sponsorshipsTag.forEach(e =>{
-
-  //        this.sponsporshipTag.classList.contains(e) ? packageValue = e : packageValue = '';
-  //     })
-  //   })
-  // })
-   // let sponsorships = { !! $sponsorships !!}
-    
-    //let selected = sponsorships[0];
     
     //form di pagamento
     var form = document.querySelector('#payment-form');
