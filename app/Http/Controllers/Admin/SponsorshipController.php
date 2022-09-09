@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Apartment;
 use App\Sponsorship;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
  /**
      * Display a listing of the resource.
@@ -35,10 +37,11 @@ class SponsorshipController extends Controller
             'privateKey' => env('BRAINTREE_PRIVATE_KEY')
         ]);
 
-        //dd($apartment,$sponsorship, $request);
-        //$amount = $request->amount;
         $nonce = $request->payment_method_nonce;
-
+        //sponsorizzazione completata , da verificare il check sulla sponsorizzazione attiva
+        $sponsorship = Sponsorship::query()->where('name',$request['package'])->first();
+        $apartment->sponsorships()->save($sponsorship, ['expiration_date'=>Carbon::now()->addHours($sponsorship['duration']) ]);
+        
         $result = $gateway->transaction()->sale([
             'amount' => $sponsorship['price'],
             'paymentMethodNonce' => $nonce,
@@ -54,19 +57,17 @@ class SponsorshipController extends Controller
     
         if ($result->success) {
             $transaction = $result->transaction;
-            // header("Location: transaction.php?id=" . $transaction->id);
-    
-            return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
+            // aggiungi il messaggio nella pivot con expireday
+            $apartment->sponsorships()->save($sponsorship, ['expiration_date'=>Carbon::now()->addDay($sponsorship['duration']/24) ]);
+            return view('admin.sponsorships.transactionResult',compact('transaction'));
         } else {
             $errorString = "";
     
             foreach ($result->errors->deepAll() as $error) {
                 $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
             }
-    
-            // $_SESSION["errors"] = $errorString;
-            // header("Location: index.php");
-            return back()->withErrors('An error occurred with the message: '.$result->message);
+            $errorsArray = $result->errors;
+            return view('admin.sponsorships.transactionResult',compact('errorsArray'));
         }
 
         //return view('admin.sponsorships.checkout', compact('result'));

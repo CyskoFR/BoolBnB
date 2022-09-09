@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 //models
 use App\Apartment;
+use Carbon\Carbon;
+use League\CommonMark\Extension\Table\Table;
 
 class ApartmentController extends Controller
 {   
@@ -97,6 +99,26 @@ class ApartmentController extends Controller
         ->with('category', 'user', 'services')
         ->get();
 
+        //sponsorizzati
+        $sponsored_apartments = Apartment::query()
+        ->join('apartment_sponsorship', 'apartments.id', '=','apartment_sponsorship.apartment_id')
+        ->where('expiration_date', '>=', Carbon::now())
+        ->when($rooms, function($query, $rooms){
+            return $query->where('rooms','>=', $rooms); 
+        })
+        ->when($beds, function($query, $beds){
+            return $query->where('beds','>=', $beds); 
+        })
+        ->when($category_id, function($query, $category_id){
+            return $query->where('category_id', $category_id); 
+        })
+        ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
+        ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
+        ->with('category', 'user', 'services')
+        ->get();
+
+
+
         /* ----------
         check servizi
         -----------*/
@@ -112,6 +134,18 @@ class ApartmentController extends Controller
             }
          })->filter(); 
         }
+        //sponsorizzati
+        if($services !== null){
+            $sponsored_apartments = $sponsored_apartments->map(function ($apartment){
+                 foreach($this->services as $service){
+                    if(!$apartment->services->contains($service)){
+                        return ;
+                    }else{
+                        return $apartment;
+                    }
+                }
+             })->filter(); 
+            }
 
         /* ----------
         sort by distance
@@ -123,7 +157,17 @@ class ApartmentController extends Controller
                     pow(($apartment->longitude - $this->final_address_lon),2)
                 );
             });
+        //sponsorizzati
+        $sponsored_apartments = $sponsored_apartments->sortBy(function($apartment){
+                return sqrt(
+                        pow(($apartment->latitude - $this->final_address_lat),2)+
+                        pow(($apartment->longitude - $this->final_address_lon),2)
+                    );
+                });
 
+        return $uniqe =  $sponsored_apartments->concat($apartments)->unique('apartment_id');
+        
+        return $sponsored_apartments;
         return $apartments;    
     }
 

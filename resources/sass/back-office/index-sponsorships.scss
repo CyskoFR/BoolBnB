@@ -28,17 +28,22 @@ section#index-sponsorships {
         font-size: large;
         font-weight: bold;
         cursor: pointer;
+        scale: 1;
+        transition: scale 0.2s ease-in-out;
+        &.selected {
+            background-color: $primary-green-light;
+            color: $text-gray-light;
+        }
     }
 
-    .sponsorship:hover{
-        background-color: $primary-green-light;
-        color: $text-gray-light;
+    .sponsorship:hover {
+        scale: 1.1;
     }
 
     @mixin rombo($diagonaleMaggiore, $angoloDiBase) {
-        width:$diagonaleMaggiore;
-        height:$diagonaleMaggiore; 
-        transform:rotate(45deg) skew($angoloDiBase, $angoloDiBase);
+        width: $diagonaleMaggiore;
+        height: $diagonaleMaggiore;
+        transform: rotate(45deg) skew($angoloDiBase, $angoloDiBase);
     }
 
     .rombo {
@@ -46,33 +51,55 @@ section#index-sponsorships {
         color: $text-blue-dark;
         position: relative;
         border-radius: 10px;
-        background: rgb(66,211,172);
-        background: linear-gradient(90deg, rgba(66,211,172,1) 23%, rgba(5,231,182,1) 40%, rgba(24,225,187,1) 51%, rgba(66,211,197,1) 76%);
+        background: rgb(66, 211, 172);
+        background: linear-gradient(
+            90deg,
+            rgba(66, 211, 172, 1) 23%,
+            rgba(5, 231, 182, 1) 40%,
+            rgba(24, 225, 187, 1) 51%,
+            rgba(66, 211, 197, 1) 76%
+        );
         display: flex;
         justify-content: center;
+        align-items: center;
     }
 
     .label {
         font-size: large;
         font-weight: bold;
-        transform:rotate(-45deg);
+        transform: rotate(-45deg);
         margin-top: 0.3125rem;
         margin-left: 0.25rem;
     }
 
     .gold .rombo {
-        background: rgb(253,187,45);
-        background: linear-gradient(0deg, rgba(253,187,45,1) 0%, rgba(238,181,58,1) 39%, rgba(189,152,72,1) 100%);
+        background: rgb(253, 187, 45);
+        background: linear-gradient(
+            0deg,
+            rgba(253, 187, 45, 1) 0%,
+            rgba(238, 181, 58, 1) 39%,
+            rgba(189, 152, 72, 1) 100%
+        );
     }
 
     .silver .rombo {
-        background: rgb(238,238,238);
-        background: linear-gradient(0deg, rgba(238,238,238,1) 0%, rgba(219,216,216,1) 27%, rgba(192,192,192,1) 56%);
+        background: rgb(238, 238, 238);
+        background: linear-gradient(
+            0deg,
+            rgba(238, 238, 238, 1) 0%,
+            rgba(219, 216, 216, 1) 27%,
+            rgba(192, 192, 192, 1) 56%
+        );
     }
 
     .bronze .rombo {
-        background: rgb(194,140,43);
-        background: linear-gradient(0deg, rgba(194,140,43,1) 0%, rgba(161,101,29,1) 42%, rgb(164, 83, 18) 94%);
+        background: rgb(194, 140, 43);
+        background: linear-gradient(
+            0deg,
+            rgba(194, 140, 43, 1) 0%,
+            rgba(161, 101, 29, 1) 42%,
+            rgb(164, 83, 18) 94%
+        );
     }
 
     .comeback_button {
@@ -84,7 +111,6 @@ section#index-sponsorships {
         background-color: $text-gray-light;
         color: $text-gray-dark;
     }
-
 
     @media screen and (max-width: 700px) {
         .sponsorship {
