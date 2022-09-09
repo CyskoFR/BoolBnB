@@ -115,16 +115,25 @@ class ApartmentController extends Controller
         })
         ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
         ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
-        ->with('category', 'user', 'services')
+        ->with('category', 'user')
 
         ->get();
         //return $sponsored_apartments;
-
-
+        foreach($sponsored_apartments as $elm){
+            $array_services = Apartment::query()
+            
+             ->join('apartment_service', 'apartments.id', '=','apartment_service.apartment_id')
+            ->where('apartment_service.apartment_id', $elm['apartment_id'])
+             ->join('services', 'apartment_service.service_id', '=','services.id')
+             ->select('services.id', 'services.name')
+             ->get();
+             
+            $elm['services']= $array_services;
+        };
         /* ----------
         check servizi
         -----------*/
-
+        
         if($services !== null){
         $apartments = $apartments->map(function ($apartment){
              foreach($this->services as $service){
@@ -148,7 +157,7 @@ class ApartmentController extends Controller
                 }
              })->filter(); 
             }
-
+        
         /* ----------
         sort by distance
         -----------*/
