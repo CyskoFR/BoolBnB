@@ -101,15 +101,24 @@ section#index-sponsorships {
             rgb(164, 83, 18) 94%
         );
     }
-
-    .comeback_button {
+    .update_button {
+        font-size: .875rem;
         background-color: $primary-green-light;
-        color: $text-gray-light;
-    }
+        border-radius: .75rem;
+        margin-right: .625rem;
+        &:hover {
+            color: $text-gray-light;
+            background-color: $primary-green-dark;
+            border: 1px solid $primary-green-light;
+        }
 
-    .comeback_button:hover {
-        background-color: $text-gray-light;
-        color: $text-gray-dark;
+        a {
+            text-decoration: none;
+            color: $text-blue-dark;
+            &:hover {
+                color: $text-gray-light;
+            }
+        }
     }
 
     @media screen and (max-width: 700px) {
