@@ -11,7 +11,7 @@ use App\Category;
 use App\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Carbon;
 class ApartmentController extends Controller
 {
     /**
@@ -112,7 +112,11 @@ class ApartmentController extends Controller
         if($apartment->user_id != Auth::id()){
             abort(403, 'non hai il permesso di entrare qui');
         }
-        return view('admin.apartments.show', compact('apartment'));
+        $checkSponsor = Apartment::query()->join('apartment_sponsorship', 'apartments.id', '=','apartment_sponsorship.apartment_id')
+        ->where('apartment_sponsorship.apartment_id', $apartment->id)
+        ->where('expiration_date', '>=', Carbon::now())->latest('expiration_date')->first();
+
+        return view('admin.apartments.show', compact('apartment','checkSponsor'));
     }
 
     /**
