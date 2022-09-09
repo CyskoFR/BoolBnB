@@ -30,6 +30,9 @@ class SponsorshipController extends Controller
 
     public function checkout(Apartment $apartment, Sponsorship $sponsorship , Request $request)
     {
+        $request->validate([
+            'package' => 'required|min:1'
+        ]);
         $gateway = new \Braintree\Gateway([
             'environment' => env('BRAINTREE_ENV'),
             'merchantId' => env('BRAINTREE_MERCHANT_ID'),

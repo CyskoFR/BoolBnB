@@ -101,6 +101,7 @@ class ApartmentController extends Controller
 
         //sponsorizzati
         $sponsored_apartments = Apartment::query()
+        // ->join('apartment_service', 'apartments.id', '=','apartment_service.apartment_id')
         ->join('apartment_sponsorship', 'apartments.id', '=','apartment_sponsorship.apartment_id')
         ->where('expiration_date', '>=', Carbon::now())
         ->when($rooms, function($query, $rooms){
@@ -115,8 +116,9 @@ class ApartmentController extends Controller
         ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
         ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
         ->with('category', 'user', 'services')
-        ->get();
 
+        ->get();
+        //return $sponsored_apartments;
 
 
         /* ----------
@@ -164,11 +166,14 @@ class ApartmentController extends Controller
                         pow(($apartment->longitude - $this->final_address_lon),2)
                     );
                 });
-
-        return $uniqe =  $sponsored_apartments->concat($apartments)->unique('apartment_id');
         
-        return $sponsored_apartments;
-        return $apartments;    
+        //fix mismatch apartment_ id to id in `apartment`.`id`
+         $sponsored_apartments = $sponsored_apartments->map(function($apartment){
+              $apartment['id'] = $apartment['apartment_id'];
+              return $apartment;
+         });
+  
+        return $sponsored_apartments =  $sponsored_apartments->concat($apartments)->unique('apartment_id');   
     }
 
 
