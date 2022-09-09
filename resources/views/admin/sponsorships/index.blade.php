@@ -1,65 +1,78 @@
 @extends('layouts.back')
 @section('content')
 <section id="index-sponsorships" class="p-5">
-    <div class="container-fluid d-flex flex-column align-items-center text-center">
-        <div class="sponsorship gold d-flex justify-content-around mt-3 py-4">
-            <div class="hidden gold mx-5">GOLD</div>
-            <div class="rombo">
-                <div class="label">Gold</div>
-            </div>
-            <div class="upgrade">
-                <div>Upgrade di 144 ore!</div>
-                <div>9,99 €</div>
-            </div>
-        </div>
-        <div class="sponsorship silver d-flex justify-content-around mt-3 py-4">
-            <div class="hidden silver mx-5">SILVER</div>
-            <div class="upgrade">
-                <div>Upgrade di 72 ore!</div>
-                <div>5,99 €</div>
-            </div>
-            <div class="rombo">
-                <div class="label">Silver</div>
-            </div>
-        </div>
-        <div class="sponsorship bronze d-flex justify-content-around mt-3 py-4">
-            <div class="hidden bronze mx-5">BRONZE</div>
-            <div class="rombo">
-                <div class="label">Bronze</div>
-            </div>
-            <div class="upgrade">
-                <div>Upgrade di 24 ore!</div>
-                <div>2,99 €</div>
-            </div>
-        </div>
-        <a href="{{route('admin.apartments.show', $apartment)}}">
-            <button class="btn comeback_button my-3">Ci voglio ripensare</button></a>
+  <div class="container-fluid d-flex flex-column align-items-center text-center">
+    @foreach ($sponsorships as $sponsorship)
+    <div class="sponsorship  {{strtolower($sponsorship->name)}} d-flex justify-content-around mt-3 py-4">
+      <div class="hidden  mx-5">{{$sponsorship->name}}</div>
+      <div class="rombo">
+        <div class="label">{{$sponsorship->name}}</div>
+      </div>
+      <div class="upgrade">
+        <div>Upgrade di {{$sponsorship->duration}} ore!</div>
+        <div>{{$sponsorship->price}} €</div>
+      </div>
     </div>
-    <div class="content">
-        <form method="post" id="payment-form"
-            action="{{ route('admin.sponsorships.checkout',[$apartment, $sponsorships['0']]) }}">
-            @csrf
-            <section>
-                {{-- <label for="amount">
-                    <span class="input-label">Amount</span>
-                    <div class="input-wrapper amount-wrapper">
-                        <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
-                    </div>
-                </label> --}}
 
-                <div class="bt-drop-in-wrapper">
-                    <div id="bt-dropin"></div>
-                </div>
-            </section>
-            <input id="nonce" name="payment_method_nonce" type="hidden" />
-            <button class="button" type="submit"><span>Test Transaction</span></button>
-        </form>
+
+    @endforeach
+
+
+    <div class="content">
+      <form method="post" id="payment-form"
+        action="{{ route('admin.sponsorships.checkout',[$apartment, $sponsorships['0']]) }}">
+        @csrf
+        <section>
+          <div class="bt-drop-in-wrapper">
+            <div id="bt-dropin"></div>
+          </div>
+        </section>
+        <input class="d-none" type="text" name="package" id="package">
+        <input id="nonce" name="payment_method_nonce" type="hidden" />
+        <a href="{{route('admin.apartments.show', $apartment)}}">
+          <button class="btn comeback_button my-3">Ci voglio ripensare</button>
+        </a>
+        <button class="button  btn btn-primary" type="submit"><span>Conferma</span></button>
+      </form>
     </div>
-    </div>
-    {{-- @dd($sponsorships['0']) --}}
-    <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
-    <script>
-        var form = document.querySelector('#payment-form');
+
+  </div>
+  </div>
+  <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
+  <script>
+    // let selectedSponsorship = new Set()
+    let package = document.querySelector('#package');
+    let sponsorships = [...{!! $sponsorships !!}].map(e => e.name.toLowerCase())
+    const sponsorshipsTagBronze =  document.querySelector(".sponsorship.bronze");
+    let sponsorshipsTagSilver =  document.querySelector(".sponsorship.silver");
+    let sponsorshipsTagGold =  document.querySelector(".sponsorship.gold");
+    sponsorshipsTagBronze.addEventListener('click', e =>{
+      package.value = '';
+      package.value = 'Bronze';
+      console.log(package.value);
+      sponsorshipsTagBronze.classList.add('selected');
+      sponsorshipsTagSilver.classList.remove('selected');
+      sponsorshipsTagGold.classList.remove('selected');
+    });
+    sponsorshipsTagSilver.addEventListener('click', e =>{
+      package.value = '';
+      package.value = 'Silver';
+      console.log(package.value);
+      sponsorshipsTagBronze.classList.remove('selected');
+      sponsorshipsTagSilver.classList.add('selected');
+      sponsorshipsTagGold.classList.remove('selected');
+    })
+    sponsorshipsTagGold.addEventListener('click', e =>{
+      package.value = '';
+      package.value = 'Gold';
+      console.log(package.value);
+      sponsorshipsTagBronze.classList.remove('selected');
+      sponsorshipsTagSilver.classList.remove('selected');
+      sponsorshipsTagGold.classList.add('selected');
+    })
+    
+    //form di pagamento
+    var form = document.querySelector('#payment-form');
         var client_token = "{{ $token }}";
         braintree.dropin.create({
           authorization: client_token,
@@ -82,6 +95,6 @@
             });
           });
         });
-    </script>
+  </script>
 </section>
 @endsection
