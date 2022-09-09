@@ -73,6 +73,5 @@ class SponsorshipController extends Controller
             return view('admin.sponsorships.transactionResult',compact('errorsArray'));
         }
 
-        //return view('admin.sponsorships.checkout', compact('result'));
     }
 }
