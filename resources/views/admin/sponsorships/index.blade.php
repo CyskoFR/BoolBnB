@@ -14,6 +14,7 @@
       </div>
     </div>
 
+
     @endforeach
 
 
@@ -26,33 +27,52 @@
             <div id="bt-dropin"></div>
           </div>
         </section>
+        <input class="d-none" type="text" name="package" id="package">
         <input id="nonce" name="payment_method_nonce" type="hidden" />
-
-
         <a href="{{route('admin.apartments.show', $apartment)}}">
           <button class="btn comeback_button my-3">Ci voglio ripensare</button>
         </a>
         <button class="button  btn btn-primary" type="submit"><span>Conferma</span></button>
+      </form>
     </div>
-    </form>
+
   </div>
   </div>
   <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
   <script>
-    let selectedSponsorship = new Set()
-    let sponsorships =  [...document.querySelectorAll(".sponsorship")];
-    sponsorships.forEach(sponsorship => {
-      sponsorship.addEventListener('click', e =>{
-        if (selectedSponsorship.size == 0){
-          selectedSponsorship.has(sponsorship) ? selectedSponsorship.delete(sponsorship) : selectedSponsorship.add(sponsorship)
-        }else{
-          selectedSponsorship.forEach((item) => {
-            selectedSponsorship.delete(item)});
-          selectedSponsorship.add(sponsorship)
-        }
-        console.log(e.target.attributes, selectedSponsorship)
-      })
+    // let selectedSponsorship = new Set()
+    let package = document.querySelector('#package');
+    let sponsorships = [...{!! $sponsorships !!}].map(e => e.name.toLowerCase())
+    const sponsorshipsTagBronze =  document.querySelector(".sponsorship.bronze");
+    let sponsorshipsTagSilver =  document.querySelector(".sponsorship.silver");
+    let sponsorshipsTagGold =  document.querySelector(".sponsorship.gold");
+    sponsorshipsTagBronze.addEventListener('click', e =>{
+      package.value = '';
+      package.value = 'Bronze';
+      console.log(package.value);
+    });
+    sponsorshipsTagSilver.addEventListener('click', e =>{
+      package.value = '';
+      package.value = 'Silver';
+      console.log(package.value);
     })
+    sponsorshipsTagGold.addEventListener('click', e =>{
+      package.value = '';
+      package.value = 'Gold';
+      console.log(package.value);
+    })
+  //   sponsorshipsTag.forEach(sponsorshipTag => {
+  //     sponsorshipTag.addEventListener('click', (e, sponsorshipTag) =>{
+  //       sponsorshipsTag.forEach(e =>{
+
+  //        this.sponsporshipTag.classList.contains(e) ? packageValue = e : packageValue = '';
+  //     })
+  //   })
+  // })
+   // let sponsorships = { !! $sponsorships !!}
+    
+    //let selected = sponsorships[0];
+    
     //form di pagamento
     var form = document.querySelector('#payment-form');
         var client_token = "{{ $token }}";
