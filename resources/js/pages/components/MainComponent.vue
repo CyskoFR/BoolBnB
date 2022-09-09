@@ -2,7 +2,7 @@
     <section class="main">
         <CategorySection />
         <HeroSection />
-        <!-- <ApartmentSection/> -->
+        <SponsoredSection />
     </section>
 </template>
 
@@ -10,6 +10,7 @@
 import CategorySection from "../sections/categorySection.vue";
 // import ApartmentSection from "../sections/apartmentSection.vue";
 import HeroSection from "../sections/heroSection.vue";
+import SponsoredSection from "../sections/sponsoredSection.vue";
 
 export default {
     name: "MainComponent",
@@ -17,6 +18,7 @@ export default {
     components: {
         CategorySection,
         HeroSection,
+        SponsoredSection,
     },
 };
 </script>

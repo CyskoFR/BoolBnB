@@ -199,6 +199,12 @@ class ApartmentController extends Controller
 
         return $apartment;
     }
+
+    public function sponsored(){
+        $apartments = Apartment::query()->join('apartment_sponsorship', 'apartments.id', '=','apartment_sponsorship.apartment_id')
+        ->where('expiration_date', '>=', Carbon::now())->get();
+        return $apartments;
+    }
     
     //HELPERS
 
