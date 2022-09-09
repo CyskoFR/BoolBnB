@@ -1,0 +1,25 @@
+section#transaction-result {
+    h2 {
+        color: $text-gray-light;
+    }
+
+    .update_button {
+        font-size: .875rem;
+        background-color: $primary-green-light;
+        border-radius: .75rem;
+        margin-right: .625rem;
+        &:hover {
+            color: $text-gray-light;
+            background-color: $primary-green-dark;
+            border: 1px solid $primary-green-light;
+        }
+
+        a {
+            text-decoration: none;
+            color: $text-blue-dark;
+            &:hover {
+                color: $text-gray-light;
+            }
+        }
+    }
+}
