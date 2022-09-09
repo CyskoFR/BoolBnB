@@ -282,6 +282,7 @@ small {
         background-color: $primary-green-dark;
         border: 1px solid $primary-green-light;
     }
+}
 .active_filters {
     color: $text-gray-light;
     border-top: 1px solid $text-gray-dark;
