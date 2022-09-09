@@ -64,5 +64,7 @@ export default {
 
 .apartment_section {
     flex-wrap: wrap;
+    border-top: 1px solid $text-gray-dark;
+    min-height: 18.75rem;
 }
 </style>

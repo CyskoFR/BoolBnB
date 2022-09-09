@@ -1,8 +1,11 @@
 <template>
-    <button @click="toggleButton()" :class="{'active': isActive}" type="button" class="w-100 my-2">{{ service.name }}</button>
+    <button @click="toggleButton(service.name)" :class="{'active': isActive}" type="button" class="w-100 my-2">{{ service.name }}</button>
 </template>
 
 <script>
+
+import observable from "../../observable";
+
 export default {
     name: "extraServiceButton",
 
@@ -13,12 +16,17 @@ export default {
     data: function() {
         return {
             isActive: false,
+            observable,
         }
     },
     
-    methods: {
-        toggleButton: function() {
-            this.isActive = !this.isActive;    
+    methods: {     // BUG 
+        toggleButton: function(name) {
+            this.isActive = !this.isActive;
+            observable.selectedServicesNames.includes(name)
+                ? observable.selectedServicesNames.pop(name)
+                : observable.selectedServicesNames.push(name);
+                console.log(this.observable.selectedServicesNames)
         }
     }
 }

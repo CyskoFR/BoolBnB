@@ -13,7 +13,7 @@
                     />
                 </div>
                 <div
-                    class="input-group row align-items-center justify-content-center  my-2 mx-0"
+                    class="input-group row align-items-center justify-content-center mt-2 mb-4 mx-0"
                 >
                     <div class="col-6 col-md-4 my-2">
                         <small class="d-block" for="stanze">Stanze</small>
@@ -49,6 +49,18 @@
                         />
                     </div>
                 </div>
+                
+                <!-- Riepilogo filtri applicati -->
+                <div class="active_filters my-3">
+                    <h3 class="mt-2">Stai cercando:</h3>
+                    <p>Indirizzo: <b>{{observable.full_address}}</b></p>
+                    <p>Numero di letti: <b>{{observable.beds}}</b></p>
+                    <p>Numero di stanze: <b>{{observable.rooms}}</b></p>
+                    <p>Distanza dal punto di ricerca: <b>{{observable.distance}}</b></p>
+                    <p v-show="observable.category_name.length > 0">Categoria: <b>{{observable.category_name}}</b></p>
+                    <p v-show="observable.selectedServicesNames.length > 0">Servizi extra selezionati: <b>{{observable.selectedServicesNames}}</b></p>
+                </div>
+
                 <div class="col d-flex justify-content-center py-2 my-2">
                     <button
                         type="button"
@@ -94,7 +106,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row align-items-center">
-                                    <div @click="selectService(service.id);" v-for="service in allServices" :key="service.id" class="service col-4">
+                                    <div @click="selectService(service.id)" v-for="service in allServices" :key="service.id" class="service col-4">
                                         <extraServiceButton :service="service"></extraServiceButton>
                                     </div>
                                 </div>
@@ -269,5 +281,11 @@ small {
         }
     }
 
-
+.active_filters {
+    color: $text-gray-light;
+    border-top: 1px solid $text-gray-dark;
+    b {
+        text-transform: uppercase;
+    }
+}
 </style>
