@@ -5,6 +5,7 @@
                 <div class="input-group d-flex flex-column my-2">
                     <small for="indirizzo">Indirizzo</small>
                     <input
+                        required
                         class="py-2 px-3"
                         name="indirizzo"
                         v-model="observable.full_address"
@@ -13,7 +14,7 @@
                     />
                 </div>
                 <div
-                    class="input-group row align-items-center justify-content-center  my-2 mx-0"
+                    class="input-group row align-items-center justify-content-center my-2 mx-0"
                 >
                     <div class="col-6 col-md-4 my-2">
                         <small class="d-block" for="stanze">Stanze</small>
@@ -22,6 +23,7 @@
                             v-model="observable.rooms"
                             type="number"
                             placeholder="stanze"
+                            required
                             min="1"
                             step="1"
                         />
@@ -29,6 +31,7 @@
                     <div class="col-6 col-md-4 flex justify-tems-center my-2">
                         <small class="d-block" for="stanze">Letti</small>
                         <input
+                            required
                             class="py-1 px-2 w-100"
                             v-model="observable.beds"
                             type="number"
@@ -40,6 +43,7 @@
                     <div class="col-12 col-md-4 my-2">
                         <small class="d-block" for="stanze">Raggio in km</small>
                         <input
+                            required
                             class="py-1 px-2 w-100"
                             v-model="observable.distance"
                             type="number"
@@ -94,8 +98,15 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row align-items-center">
-                                    <div @click="selectService(service.id);" v-for="service in allServices" :key="service.id" class="service col-4">
-                                        <extraServiceButton :service="service"></extraServiceButton>
+                                    <div
+                                        @click="selectService(service.id)"
+                                        v-for="service in allServices"
+                                        :key="service.id"
+                                        class="service col-4"
+                                    >
+                                        <extraServiceButton
+                                            :service="service"
+                                        ></extraServiceButton>
                                     </div>
                                 </div>
                             </div>
@@ -128,9 +139,8 @@
 </template>
 
 <script>
-    
-import observable from '../../observable';
-import extraServiceButton from '../microComponents/extraServiceButton.vue';
+import observable from "../../observable";
+import extraServiceButton from "../microComponents/extraServiceButton.vue";
 
 export default {
     name: "filterSection",
@@ -218,7 +228,7 @@ export default {
 
 input {
     border: 2px solid $primary-green;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
 }
 small {
     color: $text-gray-dark;
@@ -227,7 +237,7 @@ small {
     button {
         background-color: $bg-primary-light;
         color: $text-gray-light;
-        border-radius: .25rem;
+        border-radius: 0.25rem;
         word-wrap: break-word;
         &:hover {
             background-color: $primary-green-dark;
@@ -241,17 +251,17 @@ small {
     .save_button {
         background-color: $primary-green-light;
         &:hover {
-        color: $text-gray-light;
-        background-color: $primary-green-dark;
-        border: 1px solid $primary-green-light;
+            color: $text-gray-light;
+            background-color: $primary-green-dark;
+            border: 1px solid $primary-green-light;
         }
     }
 }
 .extra_button {
-    font-size: .875rem;
+    font-size: 0.875rem;
     background-color: $primary-green-light;
-    border-radius: .75rem;
-    margin-right: .625rem;
+    border-radius: 0.75rem;
+    margin-right: 0.625rem;
     &:hover {
         color: $text-gray-light;
         background-color: $primary-green-dark;
@@ -259,15 +269,13 @@ small {
     }
 }
 .home_button {
-        font-size: 0.875rem;
-        background-color: $primary-green-light;
-        border-radius: 0.75rem;
-        &:hover {
-            color: $text-gray-light;
-            background-color: $primary-green-dark;
-            border: 1px solid $primary-green-light;
-        }
+    font-size: 0.875rem;
+    background-color: $primary-green-light;
+    border-radius: 0.75rem;
+    &:hover {
+        color: $text-gray-light;
+        background-color: $primary-green-dark;
+        border: 1px solid $primary-green-light;
     }
-
-
+}
 </style>
