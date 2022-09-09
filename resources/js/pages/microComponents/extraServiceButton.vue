@@ -1,9 +1,15 @@
 <template>
-    <button @click="toggleButton(service.name)" :class="{'active': isActive}" type="button" class="w-100 my-2">{{ service.name }}</button>
+    <button
+        @click="toggleButton(service.name)"
+        :class="{ active: isActive }"
+        type="button"
+        class="w-100 my-2"
+    >
+        {{ service.name }}
+    </button>
 </template>
 
 <script>
-
 import observable from "../../observable";
 
 export default {
@@ -13,26 +19,27 @@ export default {
         service: Object,
     },
 
-    data: function() {
+    data: function () {
         return {
             isActive: false,
             observable,
-        }
+        };
     },
-    
-    methods: {     // BUG 
-        toggleButton: function(name) {
+
+    methods: {
+        // BUG
+        toggleButton: function (name) {
             this.isActive = !this.isActive;
             observable.selectedServicesNames.includes(name)
-                ? observable.selectedServicesNames.pop(name)
+                ? observable.selectedServicesNames.splice(
+                      observable.selectedServicesNames.indexOf(name),
+                      1
+                  )
                 : observable.selectedServicesNames.push(name);
-                console.log(this.observable.selectedServicesNames)
-        }
-    }
-}
-
+            console.log(this.observable.selectedServicesNames);
+        },
+    },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
