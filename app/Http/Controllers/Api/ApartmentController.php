@@ -141,10 +141,9 @@ class ApartmentController extends Controller
              foreach($this->services as $service){
                 if(!$apartment->services->contains($service)){
                     return ;
-                }else{
-                    return $apartment;
                 }
             }
+            return $apartment;
          })->filter(); 
         }
         //sponsorizzati
@@ -153,10 +152,9 @@ class ApartmentController extends Controller
                  foreach($this->services as $service){
                     if(!$apartment->services->contains($service)){
                         return ;
-                    }else{
-                        return $apartment;
                     }
                 }
+                return $apartment;
              })->filter(); 
             }
         
