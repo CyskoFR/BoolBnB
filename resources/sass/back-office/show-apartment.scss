@@ -1,8 +1,13 @@
 section#show-apartment {
     background-color: $bg-primary-dark;
-    color: $text-gray-dark; 
-
-    h1, h2, h4 {
+    color: $text-gray-dark;
+    b {
+        font-size: 1.5rem;
+        color: $primary-green-light;
+    }
+    h1,
+    h2,
+    h4 {
         color: $text-gray-light;
         margin-bottom: 0;
     }
@@ -10,17 +15,16 @@ section#show-apartment {
     img {
         max-height: 20rem;
         object-fit: cover;
-        border-radius: .5rem;
+        border-radius: 0.5rem;
         outline: 1px solid $primary-green-dark;
-        outline-offset: .125rem;
-
+        outline-offset: 0.125rem;
     }
 
     .update_button {
-        font-size: .875rem;
+        font-size: 0.875rem;
         background-color: $primary-green-light;
-        border-radius: .75rem;
-        margin-right: .625rem;
+        border-radius: 0.75rem;
+        margin-right: 0.625rem;
         &:hover {
             color: $text-gray-light;
             background-color: $primary-green-dark;
@@ -29,9 +33,9 @@ section#show-apartment {
     }
 
     @mixin rombo($diagonaleMaggiore, $angoloDiBase) {
-        width:$diagonaleMaggiore;
-        height:$diagonaleMaggiore; 
-        transform:rotate(45deg) skew($angoloDiBase, $angoloDiBase);
+        width: $diagonaleMaggiore;
+        height: $diagonaleMaggiore;
+        transform: rotate(45deg) skew($angoloDiBase, $angoloDiBase);
     }
     .rombo {
         @include rombo(80px, 3deg);
@@ -39,12 +43,18 @@ section#show-apartment {
         margin-top: 30px;
         border-radius: 10px;
         border: 1px solid $yellow;
-        background: rgb(66,211,172);
-        background: linear-gradient(90deg, rgba(66,211,172,1) 23%, rgba(5,231,182,1) 40%, rgba(24,225,187,1) 51%, rgba(66,211,197,1) 76%);
+        background: rgb(66, 211, 172);
+        background: linear-gradient(
+            90deg,
+            rgba(66, 211, 172, 1) 23%,
+            rgba(5, 231, 182, 1) 40%,
+            rgba(24, 225, 187, 1) 51%,
+            rgba(66, 211, 197, 1) 76%
+        );
 
         .upgrade {
             position: absolute;
-            transform:rotate(-45deg); 
+            transform: rotate(-45deg);
             margin-top: 20px;
 
             a {
@@ -56,10 +66,8 @@ section#show-apartment {
         }
     }
     iframe {
-        border-radius: .75rem;
+        border-radius: 0.75rem;
         outline: 1px solid $text-gray-dark;
         outline-offset: 1px;
     }
 }
-
-
