@@ -1,5 +1,5 @@
 @extends('layouts.back')
 
 @section('content')
-@dd($transaction);
+{{$transaction}}
 @endsection

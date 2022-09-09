@@ -43,7 +43,6 @@ class SponsorshipController extends Controller
         $nonce = $request->payment_method_nonce;
         //sponsorizzazione completata , da verificare il check sulla sponsorizzazione attiva
         $sponsorship = Sponsorship::query()->where('name',$request['package'])->first();
-        $apartment->sponsorships()->save($sponsorship, ['expiration_date'=>Carbon::now()->addHours($sponsorship['duration']) ]);
         
         $result = $gateway->transaction()->sale([
             'amount' => $sponsorship['price'],
