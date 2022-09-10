@@ -53,16 +53,30 @@
                         />
                     </div>
                 </div>
-                
+
                 <!-- Riepilogo filtri applicati -->
                 <div class="active_filters my-3">
                     <h3 class="mt-2">Stai cercando:</h3>
-                    <p>Indirizzo: <b>{{observable.full_address}}</b></p>
-                    <p>Numero di letti: <b>{{observable.beds}}</b></p>
-                    <p>Numero di stanze: <b>{{observable.rooms}}</b></p>
-                    <p>Distanza dal punto di ricerca: <b>{{observable.distance}}</b></p>
-                    <p v-show="observable.category_name.length > 0">Categoria: <b>{{observable.category_name}}</b></p>
-                    <p v-show="observable.selectedServicesNames.length > 0">Servizi extra selezionati: <b>{{observable.selectedServicesNames}}</b></p>
+                    <p>
+                        Indirizzo: <b>{{ observable.full_address }}</b>
+                    </p>
+                    <p>
+                        Numero di letti: <b>{{ observable.beds }}</b>
+                    </p>
+                    <p>
+                        Numero di stanze: <b>{{ observable.rooms }}</b>
+                    </p>
+                    <p>
+                        Distanza dal punto di ricerca:
+                        <b>{{ observable.distance }}</b>
+                    </p>
+                    <p v-show="observable.category_name.length > 0">
+                        Categoria: <b>{{ observable.category_name }}</b>
+                    </p>
+                    <p v-show="observable.selectedServicesNames.length > 0">
+                        Servizi extra selezionati:
+                        <b>{{ observable.selectedServicesNames }}</b>
+                    </p>
                 </div>
 
                 <div class="col d-flex justify-content-center py-2 my-2">
@@ -110,8 +124,15 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row align-items-center">
-                                    <div @click="selectService(service.id)" v-for="service in allServices" :key="service.id" class="service col-4">
-                                        <extraServiceButton :service="service"></extraServiceButton>
+                                    <div
+                                        @click="selectService(service.id)"
+                                        v-for="service in allServices"
+                                        :key="service.id"
+                                        class="service col-4"
+                                    >
+                                        <extraServiceButton
+                                            :service="service"
+                                        ></extraServiceButton>
                                     </div>
                                 </div>
                             </div>
@@ -212,6 +233,7 @@ export default {
             observable.selectedServices = Array.from(this.tempServicesArray);
             this.selectedServicesString =
                 observable.selectedServices.toString();
+            this.fetchApartments();
         },
     },
     created() {

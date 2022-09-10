@@ -37,6 +37,9 @@ export default {
 @import "../../../sass/variables";
 
 .apartment-card {
+    a {
+        text-decoration: none;
+    }
     text-align: center;
     transition: 0.1s;
     &:hover {
