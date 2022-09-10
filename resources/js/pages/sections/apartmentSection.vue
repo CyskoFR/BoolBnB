@@ -20,7 +20,7 @@
         </section>
         <div class="py-4 cta d-flex justify-content-center">
             <button
-                v-if="stopLoad == false"
+                v-if="currPage < observable.last_page"
                 @click="nextPage"
                 class="btn btn-primary"
             >
@@ -46,7 +46,7 @@ export default {
         return {
             observable,
             currPage: 1,
-            stopLoad: false,
+            // stopLoad: false,
         };
     },
     //on startup
@@ -88,9 +88,17 @@ export default {
                             },
                         })
                         .then((response) => {
-                            console.log(response.data);
-                            observable.apartments =
-                                observable.apartments.push + response.data.data;
+                            let { ...tempOld } = observable.apartments;
+                            let tempAr = [];
+                            for (const key in tempOld) {
+                                tempAr.push(tempOld[key]);
+                            }
+                            let { ...tempNew } = response.data.data;
+                            for (const key in tempNew) {
+                                tempAr.push(tempNew[key]);
+                            }
+                            console.log(tempAr);
+                            observable.apartments = tempAr;
                         })
                         .catch(function (error) {
                             console.log(error);
@@ -105,14 +113,21 @@ export default {
                                 distance: observable.distance,
                                 category_id: observable.category_id,
                                 services: this.selectedServicesString,
+                                page: this.currPage,
                             },
                         })
                         .then((response) => {
-                            console.log(response);
-                            observable.apartments =
-                                observable.apartments.concat(
-                                    response.data.data
-                                );
+                            let { ...tempOld } = observable.apartments;
+                            let tempAr = [];
+                            for (const key in tempOld) {
+                                tempAr.push(tempOld[key]);
+                            }
+                            let { ...tempNew } = response.data.data;
+                            for (const key in tempNew) {
+                                tempAr.push(tempNew[key]);
+                            }
+                            console.log(tempAr);
+                            observable.apartments = tempAr;
                         })
                         .catch(function (error) {
                             console.log(error);
