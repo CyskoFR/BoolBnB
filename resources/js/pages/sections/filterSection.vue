@@ -77,7 +77,11 @@
                     </p>
                     <p v-show="observable.selectedServicesNames.length > 0">
                         Servizi extra selezionati:
-                        <b>{{ observable.selectedServicesNames }}</b>
+                        <b>{{
+                            observable.selectedServicesNames
+                                .toString()
+                                .toLowerCase()
+                        }}</b>
                     </p>
                 </div>
 

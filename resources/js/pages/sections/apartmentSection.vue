@@ -21,7 +21,7 @@
             </section>
             <div class="py-4 cta d-flex justify-content-center">
                 <button
-                    v-if="currPage < observable.last_page"
+                    v-if="observable.curr_page < observable.last_page"
                     @click="nextPage"
                     class="btn btn-primary"
                 >
