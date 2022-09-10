@@ -170,6 +170,7 @@ datalist {
         font-size: 3.5rem;
         text-align: start;
         margin-bottom: 1.25rem;
+        filter: drop-shadow(1px 1px 2px rgb(23, 23, 23));
 
         //color animation
         background: linear-gradient(224deg, #42b883, #155f3e, #3468a3, #aac8e4);
