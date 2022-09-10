@@ -189,18 +189,19 @@ export default {
         fetchApartments() {
             if (observable.selectedServices.length == 0) {
                 axios
-                    .get("/api/apartments/search", {
+                    .get("/api/apartments/search?", {
                         params: {
                             full_address: observable.full_address,
                             rooms: observable.rooms,
                             beds: observable.beds,
                             distance: observable.distance,
                             category_id: observable.category_id,
+                            page: 1,
                         },
                     })
                     .then((response) => {
-                        console.log(response);
-                        observable.apartments = response.data;
+                        console.log(response.data);
+                        observable.apartments = response.data.data;
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -219,7 +220,7 @@ export default {
                     })
                     .then((response) => {
                         console.log(response);
-                        observable.apartments = response.data;
+                        observable.apartments = response.data.data;
                     })
                     .catch(function (error) {
                         console.log(error);
