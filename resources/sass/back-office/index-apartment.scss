@@ -1,40 +1,83 @@
 section#index-apartment {
     color: $text-gray-dark;
     background-color: $bg-primary-dark;
+    
+    h1 {
+        word-wrap: break-word;
+    }
 
     .apartment {
-        height: 100px;
         border-radius: 20px;
         background-color: $bg-secondary-dark;
+        word-wrap: break-word;
+        border: 1px solid $bg-gray-dark;
 
         h2 {
             color: $primary-green-light;
+            font-size: 1.5rem;
+        }
+        h3 {
+            font-size: 1.125rem;
         }
 
         h2:hover {
             text-decoration: underline;
         }
-
-        .buttons {
-            min-width: 200px;
-        }
-
     }
 
-    button {
+    .buttons {
+        padding: 0;
+        padding-left: .5rem;
+    }
+
+    .btn {
         font-size: .875rem;
-        background-color: $primary-green-light;
         border-radius: .75rem;
         margin-right: .625rem;
+        margin-bottom: .625rem;
+        border: 1px solid $primary-green-dark;
         &:hover {
             color: $text-gray-light;
-            background-color: $primary-green-dark;
             border: 1px solid $primary-green-light;
         }
     }
 
+    .create_button {
+        background-color: $primary-green-light;
+        &:hover {
+            background-color: $primary-green-dark;
+        }
+    }
+
+    .modify_button {
+        background-size: 200% auto;
+        background-image: linear-gradient(to right, $bg-gray-light 0%, $primary-green-dark 51%, $bg-gray-light 100%);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        &:hover {
+            background-position: right center;
+            color: black;
+            text-shadow: 1px 1px $text-gray-light;
+        }
+    }
+
+    .message_button {
+        background-size: 200% auto;
+        background-image: linear-gradient(to right, rgb(109, 182, 251) 0%, $primary-blue-darker 51%, rgb(109, 182, 251) 100%);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        &:hover {
+            background-position: right center;
+            text-shadow: 1px 1px $bg-secondary-dark;
+        }
+    }
+
+    .home_button {
+        background-color: $primary-green-light;
+        &:hover {
+            background-color: $primary-green-dark;
+        }
+    }
+
     .buttons a {
-        min-width: 200px;
         text-decoration: none;
     }
 }
