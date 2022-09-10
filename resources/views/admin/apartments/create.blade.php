@@ -178,11 +178,12 @@
             </div>
             {{-- script autocomplete --}}
             <script>
-                const address_input = document.querySelector('#input-address')
-               address_input.addEventListener('keyup', e => {
+                const address_input = document.querySelector('#input-address');
 
-                    window.axios.get('https://api.tomtom.com/search/2/autocomplete/roma.json?key=RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2&language=it-IT');
-               })
+                address_input.addEventListener('keyup', e => {
+                    window.axios.get(`http://localhost:8000/api/autocomplete?address=${address_input.value}`)
+                    .then((res) => {console.log(res.data)});
+               });
             </script>
             {{-- input file immagine --}}
             <div class="input-group mb-3">
