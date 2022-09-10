@@ -6,7 +6,9 @@ section#create-apartment {
         display: block;
     }
     datalist option {
-        padding: 10px 0;
+        padding: 5px 5px;
+        border: 1px solid $primary-green-light;
+        border-radius: 2px;
     }
     label {
         color: $text-gray-light;
