@@ -97,7 +97,7 @@ class ApartmentController extends Controller
         ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
         ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
         ->with('category', 'user', 'services', /*'sponsorships'*/)
-        ->get();
+        ->paginate(2);
 
         // propvare le gli apartments with sposnsorships e finltrare da li ????
         //insdd($apartments);
@@ -119,7 +119,7 @@ class ApartmentController extends Controller
         ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
         ->with('category', 'user')
 
-        ->get();
+        ->paginate(2);
         //assegnazione corretta dei servizi agli sponsorizzati
         foreach($sponsored_apartments as $elm){
             $array_services = Apartment::query()

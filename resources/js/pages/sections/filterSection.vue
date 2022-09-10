@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <form class="my-2" @submit.prevent="fetchApartments()">
+            <form class="mb-2" @submit.prevent="fetchApartments()">
                 <div class="input-group d-flex flex-column my-2">
                     <small for="indirizzo">Indirizzo</small>
                     <input
@@ -55,7 +55,9 @@
                 </div>
 
                 <!-- Riepilogo filtri applicati -->
-                <div class="active_filters my-3">
+                <div
+                    class="active_filters my-3 d-flex justify-content-around align-items-end"
+                >
                     <h3 class="mt-2">Stai cercando:</h3>
                     <p>
                         Indirizzo: <b>{{ observable.full_address }}</b>
