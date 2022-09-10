@@ -122,10 +122,16 @@ export default {
 }
 
 datalist option {
+    cursor: pointer;
     margin: 1px 0;
     padding: 5px 10px;
     width: 100%;
     display: block;
+    &:hover {
+        filter: brightness(105%);
+        background-color: $primary-green-dark;
+        color: $text-gray-light;
+    }
 }
 datalist {
     display: block;

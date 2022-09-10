@@ -1,6 +1,6 @@
 <template>
     <section class="main">
-        <CategorySection />
+        <!-- <CategorySection /> -->
         <HeroSection />
         <SponsoredSection />
     </section>

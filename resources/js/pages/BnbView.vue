@@ -240,6 +240,7 @@ export default {
     },
     methods: {
         sendMail() {
+            Submit();
             axios
                 .post(
                     `/api/message/?apartment_id=${this.apartments[0].id}&mail=${this.messageForm.mail}&full_name=${this.messageForm.full_name}&text=${this.messageForm.text}`
@@ -247,6 +248,15 @@ export default {
                 .then(function (response) {
                     console.log(response);
                 });
+        },
+        validateMessage() {
+            if (
+                this.messageForm.mail &&
+                this.messageForm.full_name &&
+                this.messageForm.text
+            ) {
+                console.log("non valido");
+            }
         },
     },
     created() {
