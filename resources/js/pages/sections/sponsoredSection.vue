@@ -1,10 +1,10 @@
 <template>
     <section class="sponsored">
         <div
-            class="apartment_section d-flex justify-content-center flex-row p-3"
+            class="apartment_section row justify-content-center align-items-start container mx-auto"
         >
             <bnbCard
-                class="sponsored-apartments"
+                class="sponsored-apartments col-4"
                 :apartment="apartment"
                 v-for="apartment in sponsoredApartments"
                 :key="apartment.id"
@@ -36,6 +36,5 @@ export default {
 
 <style lang="scss" scoped>
 .apartment_section {
-    flex-wrap: wrap;
 }
 </style>

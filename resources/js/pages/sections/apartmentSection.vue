@@ -3,9 +3,10 @@
     <div>
         <section
             v-if="observable.apartments"
-            class="apartment_section d-flex justify-content-center flex-row p-3"
+            class="apartment_section row justify-content-center align-items-start container mx-auto"
         >
             <bnbCard
+                class="col-4"
                 :apartment="apartment"
                 v-for="apartment in observable.apartments"
                 :key="apartment.id"
@@ -63,7 +64,6 @@ export default {
 @import "../../../sass/variables";
 
 .apartment_section {
-    flex-wrap: wrap;
     border-top: 1px solid $text-gray-dark;
     min-height: 18.75rem;
 }
