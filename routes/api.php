@@ -39,3 +39,6 @@ Route::post('message' , 'Api\MessageController@store');
 Route::get('sponsorships/generate', 'Api\SponsorshipController@generate');
 Route::post('sponsorships/make/payment', 'Api\SponsorshipController@makePayment');
 
+//autocomplete
+
+Route::get('autocomplete','Api\Autocomplete@autocomplete');
