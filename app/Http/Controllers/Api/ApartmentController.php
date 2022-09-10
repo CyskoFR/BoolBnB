@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 //models
 use App\Apartment;
+use App\Helpers\PaginationHelper;
 use Carbon\Carbon;
 use League\CommonMark\Extension\Table\Table;
 
@@ -97,7 +98,7 @@ class ApartmentController extends Controller
         ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
         ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
         ->with('category', 'user', 'services', /*'sponsorships'*/)
-        ->paginate(2);
+        ->get();
 
         // propvare le gli apartments with sposnsorships e finltrare da li ????
         //insdd($apartments);
@@ -119,7 +120,7 @@ class ApartmentController extends Controller
         ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
         ->with('category', 'user')
 
-        ->paginate(2);
+        ->get();
         //assegnazione corretta dei servizi agli sponsorizzati
         foreach($sponsored_apartments as $elm){
             $array_services = Apartment::query()
@@ -182,7 +183,8 @@ class ApartmentController extends Controller
               return $apartment;
          });
 
-        return $sponsored_apartments =  $sponsored_apartments->concat($apartments)->unique('id');   
+         $sponsored_apartments =  $sponsored_apartments->concat($apartments)->unique('id');   
+        return $result = PaginationHelper::paginate($sponsored_apartments,2);
     }
 
 
