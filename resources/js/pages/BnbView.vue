@@ -121,7 +121,14 @@
                                     >
                                         Cancella
                                     </button>
-                                    <button type="button" class="btn modal_send_button" data-toggle="modal" data-target="#saveOutputModal" @click="sendMail()" data-dismiss="modal">
+                                    <button
+                                        type="button"
+                                        class="btn modal_send_button"
+                                        data-toggle="modal"
+                                        data-target="#saveOutputModal"
+                                        @click="sendMail()"
+                                        data-dismiss="modal"
+                                    >
                                         Invia
                                     </button>
                                 </div>
@@ -130,23 +137,34 @@
                     </div>
 
                     <!-- Save Confirm Modal -->
-                    <div class="modal fade" id="saveOutputModal" tabindex="-1" role="dialog" aria-labelledby="saveOutputModalLabel" aria-hidden="true">
+                    <div
+                        class="modal fade"
+                        id="saveOutputModal"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="saveOutputModalLabel"
+                        aria-hidden="true"
+                    >
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                    <button
+                                        type="button"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        aria-label="Close"
+                                    >
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body text-center">
-                                    Il tuo messaggio é stato inviato con successo!
+                                    Il tuo messaggio é stato inviato con
+                                    successo!
                                 </div>
-                                <div class="modal-footer">
-                                </div>
+                                <div class="modal-footer"></div>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 col-md-6 p-3">
@@ -290,7 +308,26 @@ section {
             color: $text-blue-dark;
         }
     }
-
+    .modal {
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+    }
+    .modal-body {
+        background-color: $bg-secondary-dark;
+        color: $primary-green-light;
+        & input,
+        textarea {
+            color: $text-blue-dark;
+            border-color: $primary-green-light;
+            background-color: $bg-gray-light;
+        }
+    }
+    .modal-header,
+    .modal-footer {
+        border-color: $primary-green-dark;
+        background-color: $bg-primary-dark;
+        color: $primary-green-light;
+    }
     .modal_delete_button {
         font-size: 0.875rem;
         background-color: #ff5757;
