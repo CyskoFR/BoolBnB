@@ -36,7 +36,7 @@ export default {
                       1
                   )
                 : observable.selectedServicesNames.push(name);
-            console.log(this.observable.selectedServicesNames);
+            // console.log(this.observable.selectedServicesNames);
         },
     },
 };
