@@ -188,6 +188,7 @@ export default {
     methods: {
         fetchApartments() {
             if (observable.selectedServices.length == 0) {
+                observable.ready = false;
                 observable.apartments = [];
                 for (let i = 1; i <= observable.curr_page; i++) {
                     axios
@@ -217,8 +218,12 @@ export default {
                         .catch(function (error) {
                             console.log(error);
                         });
+                    i == observable.curr_page
+                        ? (observable.ready = true)
+                        : (observable.ready = false);
                 }
             } else {
+                observable.ready = false;
                 observable.apartments = [];
                 for (let i = 1; i <= observable.curr_page; i++) {
                     axios
@@ -249,6 +254,9 @@ export default {
                         .catch(function (error) {
                             console.log(error);
                         });
+                    i == observable.curr_page
+                        ? (observable.ready = true)
+                        : (observable.ready = false);
                 }
             }
         },

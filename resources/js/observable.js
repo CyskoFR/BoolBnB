@@ -14,4 +14,5 @@ export default Vue.observable({
     //sentinella
     last_page: 0,
     curr_page: 0,
+    ready: false,
 });
