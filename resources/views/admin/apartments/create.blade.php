@@ -164,7 +164,7 @@
             {{-- Input Text: full_address --}}
             <div class="form-group py-3">
                 <label for="input-address">Indirizzo completo:</label>
-                <input type="text" name="full_address" value="{{old('full_address')}}"
+                <input type="input" name="full_address" value="{{old('full_address')}}"
                     class=" wrapper-input form-control @error('full_address') is-invalid @enderror" id="input-address"
                     placeholder="Inserisci qui l' indirizzo del locale...">
                 {{-- Datalist autocomplete --}}
@@ -179,10 +179,33 @@
             {{-- script autocomplete --}}
             <script>
                 const address_input = document.querySelector('#input-address');
-
-                address_input.addEventListener('keyup', e => {
-                    window.axios.get(`http://localhost:8000/api/autocomplete?address=${address_input.value}`)
-                    .then((res) => {console.log(res.data)});
+                const huge_list = document.getElementById('address_list');
+                let count = 0;
+                
+                address_input.addEventListener('keyup', e => {   
+                        count > 2 ? count = 0 : count++;
+                        if(address_input.value && count >=2  ){
+                        window.axios.get(`http://localhost:8000/api/autocomplete?address=${address_input.value}`)
+                        .then((res) => {
+                            huge_list.innerHTML = "";
+                            res.data.forEach(e =>{
+                            console.log(e);
+                            let option = document.createElement('option');
+                            option.value = e;
+                            option.innerText = e;
+                            option.addEventListener('click', opt =>{
+                                console.log(opt.value)
+                                address_input.value = e;
+                                huge_list.innerHTML = "";
+                                })
+                            huge_list.appendChild(option);
+                            })
+                        }) 
+                    }else if(address_input.value && count <5  ){
+                        
+                    }else{
+                        huge_list.innerHTML='';
+                    }
                });
             </script>
             {{-- input file immagine --}}
