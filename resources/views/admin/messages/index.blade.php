@@ -2,6 +2,7 @@
 @section('content')
 <section id="index-messages" class="p-3">
     <div class="container text-capitalize d-flex flex-column" id="index">
+        @if (count($messages)>0)
         <h1 class="text-center mt-2 mb-4">Ecco l'elenco dei messaggi per il tuo appartamento</h1>
         @foreach ($messages as $message)
         <div class="message_container mb-3">
@@ -25,9 +26,21 @@
 
         @endforeach
 
-        <a href="/">
-            <button class="btn mt-2"><b>Home</b></button>
-        </a>
+        @else
+        <h1 class="text-center mt-2 mb-4">Sembra che tu non abbia nessun nuovo messaggio!</h1>
+        <h3 class="text-center mt-2 mb-4">aumenta le probabilita di essere contattato sponsorizzando il tuo annuncio!
+        </h3>
+        @endif
+        <div class="d-flex justify-content-center">
+            <a href="/">
+                <button class="btn mt-2"><b>Home</b></button>
+            </a>
+            <a href="{{route('admin.sponsorships', request()->route()->parameters['apartment'])}}">
+                <button class="btn btn-primary mt-2 bg-primary"><b>Upgrade!</b></button>
+            </a>
+
+        </div>
+
     </div>
 </section>
 @endsection
