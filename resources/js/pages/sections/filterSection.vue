@@ -240,7 +240,7 @@ export default {
         axios
             .get("/api/services")
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 this.allServices = response.data;
             })
             .catch(function (error) {
