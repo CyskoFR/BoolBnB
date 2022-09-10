@@ -116,7 +116,7 @@
                     @enderror
                 </div>
                 @endforeach
-                
+
                 <div id="servizi_error_box" class="col-12 mt-2">Inserire almeno un servizio</div>
 
                 <script>
@@ -167,15 +167,29 @@
                 <input type="text" name="full_address" value="{{old('full_address')}}"
                     class=" wrapper-input form-control @error('full_address') is-invalid @enderror" id="input-address"
                     placeholder="Inserisci qui l' indirizzo del locale...">
+                {{-- Datalist autocomplete --}}
+                <datalist id="address_list">
+
+                </datalist>
                 {{-- <button id="check-address">Controlla Indirizzo</button> --}}
                 @error('full_address')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
+            {{-- script autocomplete --}}
+            <script>
+                const address_input = document.querySelector('#input-address')
+               address_input.addEventListener('keyup', e => {
+
+                    window.axios.get('https://api.tomtom.com/search/2/autocomplete/roma.json?key=RYIXIrvLjWrNeQyGjLi5JoEGgH0IPDU2&language=it-IT');
+               })
+            </script>
             {{-- input file immagine --}}
             <div class="input-group mb-3">
                 <label for="image">Scegli l'immagine di copertina del tuo annuncio:</label>
-                <input type="file" class="form-control-file wrapper-input rounded-lg @error('image') is-invalid @enderror" id="image" name="image" value="{{old('image')}}">
+                <input type="file"
+                    class="form-control-file wrapper-input rounded-lg @error('image') is-invalid @enderror" id="image"
+                    name="image" value="{{old('image')}}">
             </div>
             @error('image')
             <div class="alert alert-danger">{{ $message }}</div>
