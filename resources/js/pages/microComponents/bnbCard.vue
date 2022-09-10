@@ -1,6 +1,6 @@
 <template>
     <div class="apartment-card">
-        <div class="img-container">
+        <div class="img-container mx-auto">
             <div v-if="apartment.expiration_date">
                 <font-awesome-icon icon="fa-solid fa-star " />
                 <font-awesome-icon icon="fa-solid fa-star " id="up" />
@@ -8,15 +8,17 @@
 
             <a :href="`/bnb-view/data/${apartment.id}`">
                 <img
-                    class="apartment_img"
+                    class="apartment_img img-fluid"
                     :src="`/storage/${apartment.image}`"
                     :alt="apartment.name"
                 />
             </a>
         </div>
-        <h5 class="apartment_name">
-            {{ apartment.name }}
-        </h5>
+        <a :href="`/bnb-view/data/${apartment.id}`">
+            <h5 class="apartment_name">
+                {{ apartment.name }}
+            </h5>
+        </a>
         <p class="apartment_address">{{ apartment.full_address }}</p>
     </div>
 </template>
@@ -35,7 +37,7 @@ export default {
 @import "../../../sass/variables";
 
 .apartment-card {
-    margin: 0.75rem;
+    text-align: center;
     transition: 0.1s;
     &:hover {
         scale: 102%;

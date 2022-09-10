@@ -203,6 +203,11 @@ class ApartmentController extends Controller
     public function sponsored(){
         $apartments = Apartment::query()->join('apartment_sponsorship', 'apartments.id', '=','apartment_sponsorship.apartment_id')
         ->where('expiration_date', '>=', Carbon::now())->get();
+
+        $apartments = $apartments->map(function($apartment){
+            $apartment['id'] = $apartment['apartment_id'];
+            return $apartment;
+       });
         return $apartments;
     }
     
