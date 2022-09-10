@@ -66,6 +66,7 @@ export default {
             .then((response) => {
                 observable.apartments = response.data.data;
                 observable.last_page = response.data.last_page;
+                observable.curr_page = response.data.current_page;
                 console.log(response.data);
             })
             .catch(function (error) {
@@ -74,7 +75,7 @@ export default {
     },
     methods: {
         nextPage() {
-            if (observable.last_page > this.currPage++) {
+            if (observable.last_page > observable.curr_page++) {
                 if (observable.selectedServices.length == 0) {
                     axios
                         .get("/api/apartments/search?", {
@@ -84,7 +85,7 @@ export default {
                                 beds: observable.beds,
                                 distance: observable.distance,
                                 category_id: observable.category_id,
-                                page: this.currPage,
+                                page: observable.curr_page,
                             },
                         })
                         .then((response) => {

@@ -188,43 +188,68 @@ export default {
     methods: {
         fetchApartments() {
             if (observable.selectedServices.length == 0) {
-                axios
-                    .get("/api/apartments/search?", {
-                        params: {
-                            full_address: observable.full_address,
-                            rooms: observable.rooms,
-                            beds: observable.beds,
-                            distance: observable.distance,
-                            category_id: observable.category_id,
-                            page: 1,
-                        },
-                    })
-                    .then((response) => {
-                        console.log(response.data);
-                        observable.apartments = response.data.data;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                observable.apartments = [];
+                for (let i = 1; i <= observable.curr_page; i++) {
+                    axios
+                        .get("/api/apartments/search?", {
+                            params: {
+                                full_address: observable.full_address,
+                                rooms: observable.rooms,
+                                beds: observable.beds,
+                                distance: observable.distance,
+                                category_id: observable.category_id,
+                                page: i,
+                            },
+                        })
+                        .then((response) => {
+                            let { ...tempOld } = observable.apartments;
+                            let tempAr = [];
+                            for (const key in tempOld) {
+                                tempAr.push(tempOld[key]);
+                            }
+                            let { ...tempNew } = response.data.data;
+                            for (const key in tempNew) {
+                                tempAr.push(tempNew[key]);
+                            }
+                            console.log(tempAr);
+                            observable.apartments = tempAr;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
             } else {
-                axios
-                    .get("/api/apartments/search", {
-                        params: {
-                            full_address: observable.full_address,
-                            rooms: observable.rooms,
-                            beds: observable.beds,
-                            distance: observable.distance,
-                            category_id: observable.category_id,
-                            services: this.selectedServicesString,
-                        },
-                    })
-                    .then((response) => {
-                        console.log(response);
-                        observable.apartments = response.data.data;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                observable.apartments = [];
+                for (let i = 1; i <= observable.curr_page; i++) {
+                    axios
+                        .get("/api/apartments/search", {
+                            params: {
+                                full_address: observable.full_address,
+                                rooms: observable.rooms,
+                                beds: observable.beds,
+                                distance: observable.distance,
+                                category_id: observable.category_id,
+                                services: this.selectedServicesString,
+                                page: i,
+                            },
+                        })
+                        .then((response) => {
+                            let { ...tempOld } = observable.apartments;
+                            let tempAr = [];
+                            for (const key in tempOld) {
+                                tempAr.push(tempOld[key]);
+                            }
+                            let { ...tempNew } = response.data.data;
+                            for (const key in tempNew) {
+                                tempAr.push(tempNew[key]);
+                            }
+                            console.log(tempAr);
+                            observable.apartments = tempAr;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
             }
         },
         selectService(id) {

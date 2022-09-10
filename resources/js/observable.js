@@ -13,4 +13,5 @@ export default Vue.observable({
     apartments: [],
     //sentinella
     last_page: 0,
+    curr_page: 0,
 });
