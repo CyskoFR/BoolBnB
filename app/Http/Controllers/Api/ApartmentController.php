@@ -181,7 +181,7 @@ class ApartmentController extends Controller
               $apartment['id'] = $apartment['apartment_id'];
               return $apartment;
          });
-  
+
         return $sponsored_apartments =  $sponsored_apartments->concat($apartments)->unique('id');   
     }
 
@@ -202,12 +202,13 @@ class ApartmentController extends Controller
 
     public function sponsored(){
         $apartments = Apartment::query()->join('apartment_sponsorship', 'apartments.id', '=','apartment_sponsorship.apartment_id')
-        ->where('expiration_date', '>=', Carbon::now())->get();
-
+        ->where('expiration_date', '>=', Carbon::now())
+        ->paginate(2);
         $apartments = $apartments->map(function($apartment){
             $apartment['id'] = $apartment['apartment_id'];
             return $apartment;
        });
+    //    $apartments->paginate(15);
         return $apartments;
     }
     
