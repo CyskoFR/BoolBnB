@@ -10,8 +10,13 @@ section#create-apartment {
         border: 1px solid $primary-green-light;
         border-radius: 2px;
     }
+    .red_text {
+        color: #ff646a;
+    }
     label {
         color: $text-gray-light;
+        margin-bottom: 1px;
+        margin-left: 2px;
     }
     .wrapper-input {
         border: 2px solid $primary-green-light !important;

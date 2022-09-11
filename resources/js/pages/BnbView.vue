@@ -209,8 +209,9 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row mb-3">
-                    <div class="col-12 col-md-6 p-3">
+                    <div class="p-3">
                         <img
                             class="apartment_img"
                             :src="`/storage/${apartment.image}`"
@@ -218,12 +219,13 @@
                         />
                     </div>
 
-                    <div class="col-12 col-md-6 p-3">
+                    <div class="col-12 my-2">
                         <h5>Informazioni su questo spazio</h5>
                         <p>{{ apartment.description }}</p>
                         <div class="d-flex info">
                             <div>
                                 <h5>
+                                    {{ apartment.category.name }} |
                                     {{ apartment.rooms }} camere |
                                     {{ apartment.beds }} letti |
                                     {{ apartment.bathrooms }} bagni |
@@ -245,6 +247,7 @@
                 </div>
 
                 <!-- iframe google maps -->
+                <h4>Dove ti troverai</h4>
                 <iframe
                     class="mb-3"
                     width="100%"
@@ -337,12 +340,11 @@ section {
 
     .bnb_container {
         background-color: $bg-secondary-dark;
-        margin: 3.125rem auto;
+        margin: 1rem auto;
         display: flex;
         flex-direction: column;
         border-radius: 0.5rem;
         border: 1px solid $bg-primary-light;
-        max-width: 120rem;
     }
 
     .apartment_title_box {
@@ -407,7 +409,7 @@ section {
     }
 
     .apartment_img {
-        max-height: 32rem;
+        max-height: 20rem;
         object-fit: cover;
         width: 100%;
         border-radius: 0.5rem;
@@ -425,6 +427,7 @@ section {
 
     h1,
     h3,
+    h4,
     h5,
     p,
     li {
