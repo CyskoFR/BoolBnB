@@ -1,10 +1,9 @@
-<
 <template>
-    <div>
+    <div class="apartment_bg">
         <div v-if="observable.ready">
             <section
                 v-if="observable.apartments"
-                class="apartment_section row justify-content-center align-items-start container mx-auto"
+                class="apartment_section row justify-content-center align-items-start container mx-auto pt-4"
             >
                 <bnbCard
                     class="col-12 col-md-6 col-xl-3"
