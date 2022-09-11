@@ -1,6 +1,9 @@
 <template>
     <div class="apartment-card">
-        <div class="img-container">
+        <div
+            class="img-container"
+            :class="{ sponsored: apartment.expiration_date }"
+        >
             <div v-if="apartment.expiration_date">
                 <font-awesome-icon icon="fa-solid fa-star " />
                 <font-awesome-icon icon="fa-solid fa-star " id="up" />
@@ -54,7 +57,7 @@ export default {
         height: 100%;
         border-radius: 20px;
         background-color: $bg-primary-light;
-        border: 1px solid $primary-green;
+        border: 2px solid $primary-green;
         overflow: hidden;
         .fa-star {
             font-size: 1.5rem;
@@ -83,6 +86,9 @@ export default {
     .apartment_address {
         color: $text-gray-dark;
         font-size: 1rem;
+    }
+    .img-container.sponsored {
+        border: 3px solid rgb(255, 196, 0);
     }
 }
 </style>
