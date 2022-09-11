@@ -14,7 +14,9 @@
                             placeholder="Indirizzo"
                         />
                     </div>
-                    <div class="input-group row align-items-end justify-content-center mt-2 mb-4 mx-0">
+                    <div
+                        class="input-group row align-items-end justify-content-center mt-2 mb-4 mx-0"
+                    >
                         <div class="col-6 col-md-4 my-2">
                             <small class="d-block" for="stanze">Stanze</small>
                             <input
@@ -27,7 +29,9 @@
                                 step="1"
                             />
                         </div>
-                        <div class="col-6 col-md-4 flex justify-tems-center my-2">
+                        <div
+                            class="col-6 col-md-4 flex justify-tems-center my-2"
+                        >
                             <small class="d-block" for="stanze">Letti</small>
                             <input
                                 required
@@ -40,7 +44,9 @@
                             />
                         </div>
                         <div class="col-12 col-md-4 my-2">
-                            <small class="d-block" for="stanze">Raggio in km</small>
+                            <small class="d-block" for="stanze"
+                                >Raggio in km</small
+                            >
                             <input
                                 required
                                 class="px-2 w-100"
@@ -56,34 +62,44 @@
 
                 <!-- Riepilogo filtri applicati -->
                 <div class="col-12 col-md-6">
-                    <hr class="m-0 d-md-none">
-                    <div class="active_filters container-fluid my-2 p-0 justify-content-around align-items-end">
+                    <hr class="m-0 d-md-none" />
+                    <div
+                        class="active_filters container-fluid my-2 p-0 justify-content-around align-items-end"
+                    >
                         <h5 class="text-center">Stai cercando:</h5>
                         <div class="row">
                             <div class="col-6">
                                 <p>
-                                    Indirizzo: <b>{{ observable.full_address }}</b>
+                                    Indirizzo:
+                                    <b>{{ observable.full_address }}</b>
                                 </p>
                                 <p>
-                                    Numero di letti: <b>{{ observable.beds }}</b>
+                                    Numero di letti:
+                                    <b>{{ observable.beds }}</b>
                                 </p>
                                 <p>
-                                    Numero di stanze: <b>{{ observable.rooms }}</b>
+                                    Numero di stanze:
+                                    <b>{{ observable.rooms }}</b>
                                 </p>
                                 <p>
                                     Distanza dal punto di ricerca:
                                     <b>{{ observable.distance }}</b>
                                 </p>
                                 <p v-show="observable.category_name.length > 0">
-                                    Categoria: <b>{{ observable.category_name }}</b>
+                                    Categoria:
+                                    <b>{{ observable.category_name }}</b>
                                 </p>
                             </div>
                             <div class="col-6">
-                                <p v-show="observable.selectedServicesNames.length > 0">
+                                <p
+                                    v-show="
+                                        observable.selectedServicesNames
+                                            .length > 0
+                                    "
+                                >
                                     Servizi extra selezionati:
                                     <b>{{
-                                        observable.selectedServicesNames
-                                            .toString()
+                                        observable.selectedServicesNames.toString()
                                     }}</b>
                                 </p>
                             </div>
@@ -100,7 +116,9 @@
                     >
                         Servizi extra
                     </button>
-                    <button class="btn extra_button search_button">Cerca</button>
+                    <button class="btn extra_button search_button">
+                        Cerca
+                    </button>
                 </div>
 
                 <!-- Modal -->
@@ -200,74 +218,76 @@ export default {
             if (observable.selectedServices.length == 0) {
                 observable.ready = false;
                 observable.apartments = [];
-                for (let i = 1; i <= observable.curr_page; i++) {
-                    axios
-                        .get("/api/apartments/search?", {
-                            params: {
-                                full_address: observable.full_address,
-                                rooms: observable.rooms,
-                                beds: observable.beds,
-                                distance: observable.distance,
-                                category_id: observable.category_id,
-                                page: i,
-                            },
-                        })
-                        .then((response) => {
-                            let { ...tempOld } = observable.apartments;
-                            let tempAr = [];
-                            for (const key in tempOld) {
-                                tempAr.push(tempOld[key]);
-                            }
-                            let { ...tempNew } = response.data.data;
-                            for (const key in tempNew) {
-                                tempAr.push(tempNew[key]);
-                            }
-                            console.log(tempAr);
-                            observable.apartments = tempAr;
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                    i == observable.curr_page
-                        ? (observable.ready = true)
-                        : (observable.ready = false);
-                }
+                // for (let i = 1; i <= observable.curr_page; i++) {
+                axios
+                    .get("/api/apartments/search?", {
+                        params: {
+                            full_address: observable.full_address,
+                            rooms: observable.rooms,
+                            beds: observable.beds,
+                            distance: observable.distance,
+                            category_id: observable.category_id,
+                            page: 1,
+                        },
+                    })
+                    .then((response) => {
+                        let { ...tempOld } = observable.apartments;
+                        let tempAr = [];
+                        for (const key in tempOld) {
+                            tempAr.push(tempOld[key]);
+                        }
+                        let { ...tempNew } = response.data.data;
+                        for (const key in tempNew) {
+                            tempAr.push(tempNew[key]);
+                        }
+                        console.log(tempAr);
+                        observable.apartments = tempAr;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                observable.curr_page = 1;
+                observable.ready = true;
+                //     : (observable.ready = false);
+                //     }
+                // }
             } else {
                 observable.ready = false;
                 observable.apartments = [];
-                for (let i = 1; i <= observable.curr_page; i++) {
-                    axios
-                        .get("/api/apartments/search", {
-                            params: {
-                                full_address: observable.full_address,
-                                rooms: observable.rooms,
-                                beds: observable.beds,
-                                distance: observable.distance,
-                                category_id: observable.category_id,
-                                services: this.selectedServicesString,
-                                page: i,
-                            },
-                        })
-                        .then((response) => {
-                            let { ...tempOld } = observable.apartments;
-                            let tempAr = [];
-                            for (const key in tempOld) {
-                                tempAr.push(tempOld[key]);
-                            }
-                            let { ...tempNew } = response.data.data;
-                            for (const key in tempNew) {
-                                tempAr.push(tempNew[key]);
-                            }
-                            console.log(tempAr);
-                            observable.apartments = tempAr;
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                    i == observable.curr_page
-                        ? (observable.ready = true)
-                        : (observable.ready = false);
-                }
+                // for (let i = 1; i <= observable.curr_page; i++) {
+                axios
+                    .get("/api/apartments/search", {
+                        params: {
+                            full_address: observable.full_address,
+                            rooms: observable.rooms,
+                            beds: observable.beds,
+                            distance: observable.distance,
+                            category_id: observable.category_id,
+                            services: this.selectedServicesString,
+                            page: 1,
+                        },
+                    })
+                    .then((response) => {
+                        let { ...tempOld } = observable.apartments;
+                        let tempAr = [];
+                        for (const key in tempOld) {
+                            tempAr.push(tempOld[key]);
+                        }
+                        let { ...tempNew } = response.data.data;
+                        for (const key in tempNew) {
+                            tempAr.push(tempNew[key]);
+                        }
+                        console.log(tempAr);
+                        observable.apartments = tempAr;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                // i == observable.curr_page
+                observable.curr_page = 1;
+                observable.ready = true;
+                //     : (observable.ready = false);
+                // }
             }
         },
         selectService(id) {
@@ -300,12 +320,12 @@ export default {
 @import "~/resources/sass/_variables";
 
 p {
-    margin-bottom: .375rem;
+    margin-bottom: 0.375rem;
 }
 
 input {
     border: 2px solid $primary-green;
-    border-radius: .375rem;
+    border-radius: 0.375rem;
     font-weight: 600;
 }
 
@@ -317,7 +337,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
     -moz-appearance: textfield;
 }
 
@@ -353,7 +373,7 @@ small {
 .extra_button {
     font-size: 0.875rem;
     background-color: $primary-green-light;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     margin-right: 0.625rem;
     padding: 2px 8px;
     font-weight: 600;
@@ -365,15 +385,20 @@ small {
 }
 
 .search_button {
-        background-size: 200% auto;
-        background-image: linear-gradient(to right, $bg-gray-light 0%, $primary-green-dark 51%, $bg-gray-light 100%);
-        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-        &:hover {
-            background-position: right center;
-            color: black;
-            text-shadow: 1px 1px $text-gray-light;
-        }
+    background-size: 200% auto;
+    background-image: linear-gradient(
+        to right,
+        $bg-gray-light 0%,
+        $primary-green-dark 51%,
+        $bg-gray-light 100%
+    );
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    &:hover {
+        background-position: right center;
+        color: black;
+        text-shadow: 1px 1px $text-gray-light;
     }
+}
 
 .home_button {
     font-size: 0.875rem;
@@ -393,15 +418,15 @@ hr {
 }
 .active_filters {
     color: $text-gray-dark;
-    h5, b {
+    h5,
+    b {
         color: $text-gray-light;
     }
     b {
         text-transform: uppercase;
     }
     .col-6 {
-    word-wrap: break-word;
+        word-wrap: break-word;
     }
 }
-
 </style>
