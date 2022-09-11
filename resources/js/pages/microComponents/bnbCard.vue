@@ -59,6 +59,9 @@ export default {
         background-color: $bg-primary-light;
         border: 2px solid $primary-green;
         overflow: hidden;
+        box-shadow: 3px 3px 3px -2px rgba(103, 186, 113, 0.67);
+        -webkit-box-shadow: 3px 3px 3px -2px rgba(103, 186, 113, 0.67);
+        -moz-box-shadow: 3px 3px 3px -2px rgba(103, 186, 113, 0.67);
         .fa-star {
             font-size: 1.5rem;
             color: rgba(0, 0, 0, 0.445);
@@ -68,7 +71,7 @@ export default {
             scale: 1.3;
         }
         #up {
-            color: rgb(255, 196, 0);
+            color: rgb(211, 166, 19);
             scale: 1.1;
         }
         img {
@@ -88,7 +91,10 @@ export default {
         font-size: 1rem;
     }
     .img-container.sponsored {
-        border: 3px solid rgb(255, 196, 0);
+        border: 2px solid #bf953f;
+        box-shadow: 3px 3px 3px -2px rgba(255, 239, 89, 0.67);
+        -webkit-box-shadow: 3px 3px 3px -2px rgba(255, 239, 89, 0.67);
+        -moz-box-shadow: 3px 3px 3px -2px rgba(255, 239, 89, 0.67);
     }
 }
 </style>
