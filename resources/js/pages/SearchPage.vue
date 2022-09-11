@@ -1,7 +1,7 @@
 <template>
     <div class="search_page flex-grow-1">
         <category-section></category-section>
-        <filter-section class="py-5"></filter-section>
+        <filter-section></filter-section>
         <apartment-section></apartment-section>
     </div>
 </template>

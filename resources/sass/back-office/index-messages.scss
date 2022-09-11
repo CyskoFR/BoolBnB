@@ -3,6 +3,7 @@ section#index-messages {
     background-color: $bg-primary-dark;
     h1 {
         color: $text-gray-light;
+        text-transform: none;
     }
     .message-header {
         height: 100px;
@@ -42,7 +43,14 @@ section#index-messages {
             border: 1px solid $primary-green-light;
         }
     }
-
+    .back_button {
+        background-color: $bg-gray-light;
+        &:hover {
+            color: $text-gray-light;
+            background-color: $bg-gray-dark;
+            border: 1px solid $primary-green-light;
+        }
+    }
     .buttons {
         min-width: 200px;
     }

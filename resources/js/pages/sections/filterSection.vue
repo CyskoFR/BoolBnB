@@ -1,91 +1,97 @@
 <template>
-    <div>
+    <div class="filter_section py-3">
         <div class="container">
-            <form class="mb-2" @submit.prevent="fetchApartments()">
-                <div class="input-group d-flex flex-column my-2">
-                    <small for="indirizzo">Indirizzo</small>
-                    <input
-                        required
-                        class="py-2 px-3"
-                        name="indirizzo"
-                        v-model="observable.full_address"
-                        type="text"
-                        placeholder="indirizzo"
-                    />
-                </div>
-                <div
-                    class="input-group row align-items-center justify-content-center mt-2 mb-4 mx-0"
-                >
-                    <div class="col-6 col-md-4 my-2">
-                        <small class="d-block" for="stanze">Stanze</small>
+            <form class="row" @submit.prevent="fetchApartments()">
+                <div class="col-12 col-md-6">
+                    <div class="input-group d-flex flex-column my-2">
+                        <small for="indirizzo">Indirizzo</small>
                         <input
-                            class="py-1 px-2 w-100"
-                            v-model="observable.rooms"
-                            type="number"
-                            placeholder="stanze"
                             required
-                            min="1"
-                            step="1"
+                            class="px-2"
+                            name="indirizzo"
+                            v-model="observable.full_address"
+                            type="text"
+                            placeholder="Indirizzo"
                         />
                     </div>
-                    <div class="col-6 col-md-4 flex justify-tems-center my-2">
-                        <small class="d-block" for="stanze">Letti</small>
-                        <input
-                            required
-                            class="py-1 px-2 w-100"
-                            v-model="observable.beds"
-                            type="number"
-                            placeholder="letti"
-                            min="1"
-                            step="1"
-                        />
-                    </div>
-                    <div class="col-12 col-md-4 my-2">
-                        <small class="d-block" for="stanze">Raggio in km</small>
-                        <input
-                            required
-                            class="py-1 px-2 w-100"
-                            v-model="observable.distance"
-                            type="number"
-                            placeholder="raggio di ricerca"
-                            min="1"
-                            step="1"
-                        />
+                    <div class="input-group row align-items-end justify-content-center mt-2 mb-4 mx-0">
+                        <div class="col-6 col-md-4 my-2">
+                            <small class="d-block" for="stanze">Stanze</small>
+                            <input
+                                class="px-2 w-100"
+                                v-model="observable.rooms"
+                                type="number"
+                                placeholder="stanze"
+                                required
+                                min="1"
+                                step="1"
+                            />
+                        </div>
+                        <div class="col-6 col-md-4 flex justify-tems-center my-2">
+                            <small class="d-block" for="stanze">Letti</small>
+                            <input
+                                required
+                                class="px-2 w-100"
+                                v-model="observable.beds"
+                                type="number"
+                                placeholder="letti"
+                                min="1"
+                                step="1"
+                            />
+                        </div>
+                        <div class="col-12 col-md-4 my-2">
+                            <small class="d-block" for="stanze">Raggio in km</small>
+                            <input
+                                required
+                                class="px-2 w-100"
+                                v-model="observable.distance"
+                                type="number"
+                                placeholder="raggio di ricerca"
+                                min="1"
+                                step="1"
+                            />
+                        </div>
                     </div>
                 </div>
 
                 <!-- Riepilogo filtri applicati -->
-                <div
-                    class="active_filters my-3 d-flex justify-content-around align-items-end"
-                >
-                    <h3 class="mt-2">Stai cercando:</h3>
-                    <p>
-                        Indirizzo: <b>{{ observable.full_address }}</b>
-                    </p>
-                    <p>
-                        Numero di letti: <b>{{ observable.beds }}</b>
-                    </p>
-                    <p>
-                        Numero di stanze: <b>{{ observable.rooms }}</b>
-                    </p>
-                    <p>
-                        Distanza dal punto di ricerca:
-                        <b>{{ observable.distance }}</b>
-                    </p>
-                    <p v-show="observable.category_name.length > 0">
-                        Categoria: <b>{{ observable.category_name }}</b>
-                    </p>
-                    <p v-show="observable.selectedServicesNames.length > 0">
-                        Servizi extra selezionati:
-                        <b>{{
-                            observable.selectedServicesNames
-                                .toString()
-                                .toLowerCase()
-                        }}</b>
-                    </p>
+                <div class="col-12 col-md-6">
+                    <hr class="m-0 d-md-none">
+                    <div class="active_filters container-fluid my-2 p-0 justify-content-around align-items-end">
+                        <h5 class="text-center">Stai cercando:</h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>
+                                    Indirizzo: <b>{{ observable.full_address }}</b>
+                                </p>
+                                <p>
+                                    Numero di letti: <b>{{ observable.beds }}</b>
+                                </p>
+                                <p>
+                                    Numero di stanze: <b>{{ observable.rooms }}</b>
+                                </p>
+                                <p>
+                                    Distanza dal punto di ricerca:
+                                    <b>{{ observable.distance }}</b>
+                                </p>
+                                <p v-show="observable.category_name.length > 0">
+                                    Categoria: <b>{{ observable.category_name }}</b>
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <p v-show="observable.selectedServicesNames.length > 0">
+                                    Servizi extra selezionati:
+                                    <b>{{
+                                        observable.selectedServicesNames
+                                            .toString()
+                                    }}</b>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="col d-flex justify-content-center py-2 my-2">
+                <div class="col d-flex justify-content-center mt-2">
                     <button
                         type="button"
                         class="btn extra_button"
@@ -94,7 +100,7 @@
                     >
                         Servizi extra
                     </button>
-                    <button class="btn extra_button mx-2">Cerca</button>
+                    <button class="btn extra_button search_button">Cerca</button>
                 </div>
 
                 <!-- Modal -->
@@ -163,9 +169,9 @@
                     </div>
                 </div>
             </form>
-            <a href="/">
+            <!-- <a href="/">
                 <button class="home_button btn mt-2"><b>Home</b></button>
-            </a>
+            </a> -->
         </div>
     </div>
 </template>
@@ -293,12 +299,32 @@ export default {
 <style lang="scss" scoped>
 @import "~/resources/sass/_variables";
 
+p {
+    margin-bottom: .375rem;
+}
+
 input {
     border: 2px solid $primary-green;
-    border-radius: 0.25rem;
+    border-radius: .375rem;
+    font-weight: 600;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 small {
     color: $text-gray-dark;
+    margin-bottom: 2px;
+    padding-left: 4px;
 }
 .modal-body {
     button {
@@ -327,14 +353,28 @@ small {
 .extra_button {
     font-size: 0.875rem;
     background-color: $primary-green-light;
-    border-radius: 0.75rem;
+    border-radius: .5rem;
     margin-right: 0.625rem;
+    padding: 2px 8px;
+    font-weight: 600;
     &:hover {
         color: $text-gray-light;
         background-color: $primary-green-dark;
         border: 1px solid $primary-green-light;
     }
 }
+
+.search_button {
+        background-size: 200% auto;
+        background-image: linear-gradient(to right, $bg-gray-light 0%, $primary-green-dark 51%, $bg-gray-light 100%);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        &:hover {
+            background-position: right center;
+            color: black;
+            text-shadow: 1px 1px $text-gray-light;
+        }
+    }
+
 .home_button {
     font-size: 0.875rem;
     background-color: $primary-green-light;
@@ -345,11 +385,23 @@ small {
         border: 1px solid $primary-green-light;
     }
 }
+
+hr {
+    height: 1px;
+    background-color: $text-gray-dark;
+    border: none;
+}
 .active_filters {
-    color: $text-gray-light;
-    border-top: 1px solid $text-gray-dark;
+    color: $text-gray-dark;
+    h5, b {
+        color: $text-gray-light;
+    }
     b {
         text-transform: uppercase;
     }
+    .col-6 {
+    word-wrap: break-word;
+    }
 }
+
 </style>

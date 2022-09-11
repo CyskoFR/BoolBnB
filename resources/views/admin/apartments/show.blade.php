@@ -3,17 +3,21 @@
 @section('content')
 <section id="show-apartment">
     <div class="container text-capitalize">
-        <div class="d-flex justify-content-between align-items-center py-3">
-            <div class="title_addres">
+        <div class="d-flex row justify-content-between align-items-center py-3 mr-1">
+            <div class="title_address col-9">
                 <h2 class="pt-4">{{$apartment->name}}</h2>
                 <h5 class="text-start flex-wrap">{{$apartment->full_address}}</h5>
-
             </div>
             @if ($checkSponsor == null)
-            <div class="rombo">
-                <div class="upgrade"><a href="{{route('admin.sponsorships', $apartment)}}">upgrade!</a></div>
+            {{-- upgrade button --}}
+            <div class="upgrade_container col-2">
+                <a class="upgrade_button" href="{{route('admin.sponsorships', $apartment)}}">
+                    <div class="rombo"></div>
+                </a>    
+                <div class="upgrade_text">Upgrade!</div>
             </div>
             @else
+            {{-- sponsorship time display --}}
             <div>
                 La tua promozione e' attiva fino al: <span class="d-block  "><b>{{ date('d-M-y',
                         strtotime($checkSponsor->expiration_date)) }} alle {{ date('H:i ',
@@ -35,15 +39,15 @@
             <li class="px-2">{{$service->name}}</li>
             @endforeach
         </ul>
-        <h4>Posizione</h4>
-        <ul>
+        <h4>Dove ti troverai</h4>
+        {{-- <ul>
             <li>
                 latitudine {{$apartment->latitude}}
             </li>
             <li>
                 longitudine {{$apartment->longitude}}
             </li>
-        </ul>
+        </ul> --}}
         <iframe width="100%" height="300" style="border:0" loading="lazy" allowfullscreen
             referrerpolicy="no-referrer-when-downgrade" src="{{"
             https://www.google.com/maps/embed/v1/place?q={$apartment->latitude},{$apartment->longitude}&key=AIzaSyCQ7RWBFjqduEmJrdQxabkp5w1nc0KXZeM&center={$apartment->latitude},{$apartment->longitude}&zoom=18&maptype=satellite"}}">
