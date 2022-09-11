@@ -1,6 +1,6 @@
 <template>
     <div class="apartment-card">
-        <div class="img-container mx-auto">
+        <div class="img-container">
             <div v-if="apartment.expiration_date">
                 <font-awesome-icon icon="fa-solid fa-star " />
                 <font-awesome-icon icon="fa-solid fa-star " id="up" />
@@ -8,7 +8,8 @@
 
             <a :href="`/bnb-view/data/${apartment.id}`">
                 <img
-                    class="apartment_img img-fluid"
+                    height="250"
+                    class="apartment_img"
                     :src="`/storage/${apartment.image}`"
                     :alt="apartment.name"
                 />
@@ -37,6 +38,7 @@ export default {
 @import "../../../sass/variables";
 
 .apartment-card {
+    min-height: 200px;
     a {
         text-decoration: none;
     }
@@ -48,8 +50,8 @@ export default {
 
     .img-container {
         position: relative;
-        width: 300px;
-        height: 300px;
+        width: 100%;
+        height: 100%;
         border-radius: 20px;
         background-color: $bg-primary-light;
         border: 1px solid $primary-green;
@@ -67,9 +69,9 @@ export default {
             scale: 1.1;
         }
         img {
-            max-width: 100%;
-            height: 100%;
+            width: 100%;
             object-fit: cover;
+            object-position: center;
         }
     }
 

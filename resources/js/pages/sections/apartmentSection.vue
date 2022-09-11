@@ -1,23 +1,56 @@
 <
 <template>
     <div>
-        <section
-            v-if="observable.apartments"
-            class="apartment_section row justify-content-center align-items-start container mx-auto"
-        >
-            <bnbCard
-                class="col-4"
-                :apartment="apartment"
-                v-for="apartment in observable.apartments"
-                :key="apartment.id"
-            />
-        </section>
-        <section
-            v-else
-            class="apartment_section d-flex justify-content-center flex-row p-3"
-        >
-            cerca un indirizzo decente
-        </section>
+        <div v-if="observable.ready">
+            <section
+                v-if="observable.apartments"
+                class="apartment_section row justify-content-center align-items-start container mx-auto"
+            >
+                <bnbCard
+                    class="col-12 col-md-6 col-xl-3"
+                    :apartment="apartment"
+                    v-for="apartment in observable.apartments"
+                    :key="apartment.id"
+                />
+            </section>
+            <section
+                v-else
+                class="apartment_section d-flex justify-content-center flex-row p-3"
+            >
+                cerca un indirizzo decente
+            </section>
+            <div class="py-4 cta d-flex justify-content-center">
+                <button
+                    v-if="observable.curr_page < observable.last_page"
+                    @click="nextPage"
+                    class="btn btn-primary"
+                >
+                    Carica altro
+                </button>
+                <button
+                    v-else
+                    disabled
+                    @click="nextPage"
+                    class="btn btn-primary"
+                >
+                    Hai esaurito gli annunci
+                </button>
+            </div>
+        </div>
+        <div v-else>
+            <div class="center">
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -33,6 +66,8 @@ export default {
     data() {
         return {
             observable,
+            currPage: 1,
+            // stopLoad: false,
         };
     },
     //on startup
@@ -42,6 +77,7 @@ export default {
             .get("/api/apartments/search", {
                 params: {
                     full_address: observable.full_address,
+                    page: 1,
                     // rooms: observable.rooms,
                     // beds: observable.beds,
                     // distance: observable.distance,
@@ -49,12 +85,79 @@ export default {
                 },
             })
             .then((response) => {
-                observable.apartments = response.data;
-                console.log(response);
+                observable.apartments = response.data.data;
+                observable.last_page = response.data.last_page;
+                observable.curr_page = response.data.current_page;
+                console.log(response.data);
+                observable.ready = true;
             })
             .catch(function (error) {
                 console.log(error);
             });
+    },
+    methods: {
+        nextPage() {
+            if (observable.last_page > observable.curr_page++) {
+                if (observable.selectedServices.length == 0) {
+                    axios
+                        .get("/api/apartments/search?", {
+                            params: {
+                                full_address: observable.full_address,
+                                rooms: observable.rooms,
+                                beds: observable.beds,
+                                distance: observable.distance,
+                                category_id: observable.category_id,
+                                page: observable.curr_page,
+                            },
+                        })
+                        .then((response) => {
+                            let { ...tempOld } = observable.apartments;
+                            let tempAr = [];
+                            for (const key in tempOld) {
+                                tempAr.push(tempOld[key]);
+                            }
+                            let { ...tempNew } = response.data.data;
+                            for (const key in tempNew) {
+                                tempAr.push(tempNew[key]);
+                            }
+                            console.log(tempAr);
+                            observable.apartments = tempAr;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                } else {
+                    axios
+                        .get("/api/apartments/search", {
+                            params: {
+                                full_address: observable.full_address,
+                                rooms: observable.rooms,
+                                beds: observable.beds,
+                                distance: observable.distance,
+                                category_id: observable.category_id,
+                                services: this.selectedServicesString,
+                                page: this.currPage,
+                            },
+                        })
+                        .then((response) => {
+                            let { ...tempOld } = observable.apartments;
+                            let tempAr = [];
+                            for (const key in tempOld) {
+                                tempAr.push(tempOld[key]);
+                            }
+                            let { ...tempNew } = response.data.data;
+                            for (const key in tempNew) {
+                                tempAr.push(tempNew[key]);
+                            }
+                            console.log(tempAr);
+                            observable.apartments = tempAr;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
+            }
+        },
     },
     //when data changes
 };
@@ -66,5 +169,59 @@ export default {
 .apartment_section {
     border-top: 1px solid $text-gray-dark;
     min-height: 18.75rem;
+}
+.center {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $bg-primary-dark;
+}
+.wave {
+    width: 5px;
+    height: 100px;
+    background: linear-gradient(45deg, cyan, #fff);
+    margin: 10px;
+    animation: wave 1s linear infinite;
+    border-radius: 20px;
+}
+.wave:nth-child(2) {
+    animation-delay: 0.1s;
+}
+.wave:nth-child(3) {
+    animation-delay: 0.2s;
+}
+.wave:nth-child(4) {
+    animation-delay: 0.3s;
+}
+.wave:nth-child(5) {
+    animation-delay: 0.4s;
+}
+.wave:nth-child(6) {
+    animation-delay: 0.5s;
+}
+.wave:nth-child(7) {
+    animation-delay: 0.6s;
+}
+.wave:nth-child(8) {
+    animation-delay: 0.7s;
+}
+.wave:nth-child(9) {
+    animation-delay: 0.8s;
+}
+.wave:nth-child(10) {
+    animation-delay: 0.9s;
+}
+
+@keyframes wave {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
 }
 </style>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 //models
 use App\Apartment;
+use App\Helpers\PaginationHelper;
 use Carbon\Carbon;
 use League\CommonMark\Extension\Table\Table;
 
@@ -181,8 +182,9 @@ class ApartmentController extends Controller
               $apartment['id'] = $apartment['apartment_id'];
               return $apartment;
          });
-  
-        return $sponsored_apartments =  $sponsored_apartments->concat($apartments)->unique('id');   
+
+         $sponsored_apartments =  $sponsored_apartments->concat($apartments)->unique('id');   
+        return $result = PaginationHelper::paginate($sponsored_apartments,2);
     }
 
 
@@ -202,12 +204,13 @@ class ApartmentController extends Controller
 
     public function sponsored(){
         $apartments = Apartment::query()->join('apartment_sponsorship', 'apartments.id', '=','apartment_sponsorship.apartment_id')
-        ->where('expiration_date', '>=', Carbon::now())->get();
-
+        ->where('expiration_date', '>=', Carbon::now())
+        ->paginate(2);
         $apartments = $apartments->map(function($apartment){
             $apartment['id'] = $apartment['apartment_id'];
             return $apartment;
        });
+    //    $apartments->paginate(15);
         return $apartments;
     }
     
