@@ -5,12 +5,13 @@
 <section id="create-apartment">
     <div class="container p-3">
         <h1 class="text-center">Crea il tuo appartamento</h1>
+        <div class="my-2 text-right small">Campo obbligatorio <span class="red_text">*</span></div>
         <form id="form_create" method="POST" action="{{route('admin.apartments.store')}}" enctype="multipart/form-data">
             @csrf
 
             {{-- text input : titolo --}}
             <div class="form-group">
-                <label for="input-name">Titolo dell'annuncio:</label>
+                <label for="input-name">Titolo dell'annuncio<span class="red_text">*</span></label>
                 <input type="text" name="name" value="{{ old('name') }}" class="wrapper-input form-control"
                     id="input-name" placeholder="Inserisci qui il titolo dell'annuncio..."
                     class="@error('name') is-invalid @enderror">
@@ -22,7 +23,7 @@
             {{-- select: category_id --}}
             <div class="input-group mb-3 wrapper-input rounded-lg d-flex">
                 <div class="input-group-prepend rounded-0">
-                    <label class="input-group-text border-0" for="category_id">Categoria</label>
+                    <label class="input-group-text border-0" for="category_id">Categoria <span class="red_text">*</span></label>
                 </div>
                 <select name="category_id" required
                     class="border-0 custom-select @error('category_id') is-invalid @enderror" id="category_id">
@@ -42,7 +43,7 @@
                 {{-- Number: Numero Stanze min="1" step="1" --}}
                 <div class="row pb-2 ">
                     <div class="col">
-                        <label for="input-rooms">Stanze</label>
+                        <label for="input-rooms">Stanze <span class="red_text">*</span></label>
                         <input type="number" value="{{ old('rooms') }}" min="1" name="rooms"
                             class=" wrapper-input form-control @error('rooms') is-invalid @enderror" id="input-rooms"
                             placeholder="Inserisci il numero delle stanze...">
@@ -54,7 +55,7 @@
 
                     {{-- Number: Numero Letti --}}
                     <div class="col">
-                        <label for="input-beds">Letti</label>
+                        <label for="input-beds">Letti <span class="red_text">*</span></label>
                         <input type="number" value="{{ old('beds') }}" min="1" name="beds"
                             class=" wrapper-input form-control @error('beds') is-invalid @enderror" id="input-beds"
                             placeholder="Inserisci il numero dei letti...">
@@ -67,7 +68,7 @@
                 </div>
                 <div class="row pt-2">
                     <div class="col">
-                        <label for="input-bathrooms">Bagni</label>
+                        <label for="input-bathrooms">Bagni <span class="red_text">*</span></label>
                         <input type="number" value="{{ old('bathrooms') }}" min="1" name="bathrooms"
                             class="wrapper-input form-control @error('bathrooms') is-invalid @enderror"
                             id="input-bathrooms" placeholder="Inserisci il numero dei bagni...">
@@ -78,7 +79,7 @@
                     </div>
                     {{-- Number: Dimensione --}}
                     <div class="col">
-                        <label for="input-size">Dimensioni in metri quadrati</label>
+                        <label for="input-size">Dimensioni in metri quadrati <span class="red_text">*</span></label>
                         <input type="number" value="{{ old('size') }}" min="10" name="size"
                             class=" wrapper-input form-control @error('size') is-invalid @enderror" id="input-size"
                             placeholder="Inserisci la dimensione del locale...">
@@ -93,7 +94,7 @@
             </div>
             {{-- Textarea: Descrizione appartamento --}}
             <div class="form-group">
-                <label for="description">Descrizione del locale:</label>
+                <label for="description">Descrizione del locale <span class="red_text">*</span></label>
                 <textarea name="description" placeholder="Inserire la descrizione dell'appartmento..."
                     class=" wrapper-input form-control @error('description') is-invalid @enderror" id="description"
                     rows="5">{{ old('description')  != null ? old('description') : ""}}</textarea>
@@ -163,7 +164,7 @@
 
             {{-- Input Text: full_address --}}
             <div class="form-group py-3">
-                <label for="input-address">Indirizzo completo:</label>
+                <label for="input-address">Indirizzo completo <span class="red_text">*</span></label>
                 <input type="input" name="full_address" value="{{old('full_address')}}"
                     class=" wrapper-input form-control @error('full_address') is-invalid @enderror" id="input-address"
                     placeholder="Inserisci qui l' indirizzo del locale...">
@@ -206,11 +207,11 @@
                     }else{
                         huge_list.innerHTML='';
                     }
-               });
+                });
             </script>
             {{-- input file immagine --}}
             <div class="input-group mb-3">
-                <label for="image">Scegli l'immagine di copertina del tuo annuncio:</label>
+                <label for="image">Scegli l'immagine di copertina del tuo annuncio <span class="red_text">*</span></label>
                 <input type="file"
                     class="form-control-file wrapper-input rounded-lg @error('image') is-invalid @enderror" id="image"
                     name="image" value="{{old('image')}}">

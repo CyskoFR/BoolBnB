@@ -28,15 +28,15 @@
 
         @else
         <h1 class="text-center mt-2 mb-4">Sembra che tu non abbia nessun nuovo messaggio!</h1>
-        <h3 class="text-center mt-2 mb-4">aumenta le probabilita di essere contattato sponsorizzando il tuo annuncio!
+        <h3 class="text-center mt-2 mb-4">Aumenta le probabilita di essere contattato sponsorizzando il tuo annuncio!
         </h3>
         @endif
         <div class="d-flex justify-content-center">
-            <a href="/">
-                <button class="btn mt-2"><b>Home</b></button>
-            </a>
+            <a href="{{route('admin.apartments.index')}}">
+                <button class="btn back_button"><b>Indietro</b></button>
+            </a>    
             <a href="{{route('admin.sponsorships', request()->route()->parameters['apartment'])}}">
-                <button class="btn btn-primary mt-2 bg-primary"><b>Upgrade!</b></button>
+                <button class="btn btn-primary bg-primary"><b>Upgrade!</b></button>
             </a>
 
         </div>
