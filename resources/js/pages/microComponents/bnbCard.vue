@@ -77,7 +77,7 @@ export default {
 
     .apartment_name {
         color: $text-gray-light;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         margin: 0.5rem 0 0;
     }
     .apartment_address {
