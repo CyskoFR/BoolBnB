@@ -16,6 +16,10 @@ section#show-messages {
         p {
             color: $text-gray-dark;
         }
+        .sender_mail {
+            text-decoration: underline;
+            color: $primary-green;
+        }
     }
     .sender_info_section {
         border: 1px dotted $text-gray-dark;
