@@ -7,7 +7,7 @@
                 class="apartment_section row justify-content-center align-items-start container mx-auto"
             >
                 <bnbCard
-                    class="col-4"
+                    class="col-12 col-md-6 col-xl-3"
                     :apartment="apartment"
                     v-for="apartment in observable.apartments"
                     :key="apartment.id"
