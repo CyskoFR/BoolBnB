@@ -159,7 +159,13 @@
                                     </button>
                                     <button
                                         type="button"
-                                        :disabled="valid"
+                                        :disabled="
+                                            messageForm.text == '' ||
+                                            messageForm.full_name == '' ||
+                                            !messageForm.mail.includes(
+                                                '@' && '.'
+                                            )
+                                        "
                                         class="btn modal_send_button"
                                         data-toggle="modal"
                                         data-target="#saveOutputModal"

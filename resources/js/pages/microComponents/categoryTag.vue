@@ -1,9 +1,10 @@
 <template>
     <div
-        @click="observable.category_id = category.id, observable.category_name = category.name"
+        @click="clickCategory(category)"
         class="category_tag d-flex text-center"
     >
         <img
+            :class="{ click: observable.category_id == category.id }"
             class="category_img"
             :src="category.image_src"
             :alt="category.name"
@@ -24,6 +25,17 @@ export default {
         return {
             observable,
         };
+    },
+    methods: {
+        clickCategory(cat) {
+            if (observable.category_id == this.category.id) {
+                observable.category_id = null;
+                observable.category_name = "";
+            } else {
+                observable.category_id = this.category.id;
+                observable.category_name = this.category.name;
+            }
+        },
     },
 };
 </script>
@@ -48,6 +60,9 @@ export default {
         border-radius: 50%;
         padding: 0.25rem;
         border: 2px solid $primary-green-dark;
+    }
+    .category_img.click {
+        background-color: $primary-green-dark;
     }
 
     p {
