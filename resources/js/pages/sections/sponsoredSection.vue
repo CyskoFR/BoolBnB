@@ -4,7 +4,7 @@
             class="apartment_section row justify-content-center align-items-start container mx-auto"
         >
             <bnbCard
-                class="sponsored-apartments col-4"
+                class="sponsored-apartments col-3"
                 :apartment="apartment"
                 v-for="apartment in sponsoredApartments"
                 :key="apartment.id"
