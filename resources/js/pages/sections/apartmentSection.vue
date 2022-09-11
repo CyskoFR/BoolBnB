@@ -65,7 +65,7 @@ export default {
     data() {
         return {
             observable,
-            currPage: 1,
+            // currPage: 1,
             // stopLoad: false,
         };
     },
@@ -87,7 +87,8 @@ export default {
                 observable.apartments = response.data.data;
                 observable.last_page = response.data.last_page;
                 observable.curr_page = response.data.current_page;
-                console.log(response.data);
+                // console.log(response.data);
+                // console.log(observable.curr_page, observable.last_page);
                 observable.ready = true;
             })
             .catch(function (error) {
@@ -119,7 +120,12 @@ export default {
                             for (const key in tempNew) {
                                 tempAr.push(tempNew[key]);
                             }
-                            console.log(tempAr);
+                            // console.log(tempAr);
+                            // console.log(
+                            //     observable.curr_page,
+                            //     observable.last_page
+                            // );
+
                             observable.apartments = tempAr;
                         })
                         .catch(function (error) {
@@ -135,7 +141,7 @@ export default {
                                 distance: observable.distance,
                                 category_id: observable.category_id,
                                 services: this.selectedServicesString,
-                                page: this.currPage,
+                                page: observable.curr_page,
                             },
                         })
                         .then((response) => {
@@ -148,7 +154,12 @@ export default {
                             for (const key in tempNew) {
                                 tempAr.push(tempNew[key]);
                             }
-                            console.log(tempAr);
+                            // console.log(tempAr);
+                            // console.log(
+                            //     observable.curr_page,
+                            //     observable.last_page
+                            // );
+
                             observable.apartments = tempAr;
                         })
                         .catch(function (error) {
