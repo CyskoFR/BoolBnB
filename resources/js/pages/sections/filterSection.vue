@@ -242,11 +242,13 @@ export default {
                         }
                         console.log(tempAr);
                         observable.apartments = tempAr;
+                        observable.last_page = response.data.last_page;
+                        observable.curr_page = response.data.current_page;
                     })
                     .catch(function (error) {
                         console.log(error);
                     });
-                observable.curr_page = 1;
+                // observable.curr_page = 1;
                 observable.ready = true;
                 //     : (observable.ready = false);
                 //     }
@@ -277,6 +279,8 @@ export default {
                         for (const key in tempNew) {
                             tempAr.push(tempNew[key]);
                         }
+                        observable.last_page = response.data.last_page;
+                        observable.curr_page = response.data.current_page;
                         console.log(tempAr);
                         observable.apartments = tempAr;
                     })
@@ -284,7 +288,7 @@ export default {
                         console.log(error);
                     });
                 // i == observable.curr_page
-                observable.curr_page = 1;
+                // observable.curr_page = 1;
                 observable.ready = true;
                 //     : (observable.ready = false);
                 // }
