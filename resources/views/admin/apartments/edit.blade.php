@@ -5,7 +5,8 @@
     {{-- @dd($categories, $services) --}}
     <div class="container">
         <h1 class="text-center">Modifica il tuo appartamento</h1>
-        <form id="form_edit" method="POST" action="{{route('admin.apartments.update', $apartment)}}" enctype="multipart/form-data">
+        <form id="form_edit" method="POST" action="{{route('admin.apartments.update', $apartment)}}"
+            enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -45,9 +46,9 @@
                 <div class="row pb-2 ">
                     <div class="col">
                         <label for="input-rooms">Stanze</label>
-                        <input type="number" value="{{ old('rooms') ? old('rooms') : $apartment->rooms }}" min="1" name="rooms"
-                            class=" wrapper-input form-control @error('rooms') is-invalid @enderror" id="input-rooms"
-                            min="1" step="1" placeholder="Inserisci il numero delle stanze...">
+                        <input type="number" value="{{ old('rooms') ? old('rooms') : $apartment->rooms }}" min="1"
+                            name="rooms" class=" wrapper-input form-control @error('rooms') is-invalid @enderror"
+                            id="input-rooms" min="1" step="1" placeholder="Inserisci il numero delle stanze...">
                         @error('rooms')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -56,9 +57,9 @@
                     {{-- Number: Numero Letti --}}
                     <div class="col">
                         <label for="input-beds">Letti</label>
-                        <input type="number" value="{{ old('beds') ? old('beds') : $apartment->beds  }}" min="1" name="beds"
-                            class=" wrapper-input form-control @error('beds') is-invalid @enderror" id="input-beds"
-                            min="1" step="1" placeholder="Inserisci il numero dei letti...">
+                        <input type="number" value="{{ old('beds') ? old('beds') : $apartment->beds  }}" min="1"
+                            name="beds" class=" wrapper-input form-control @error('beds') is-invalid @enderror"
+                            id="input-beds" min="1" step="1" placeholder="Inserisci il numero dei letti...">
                         @error('beds')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -79,9 +80,9 @@
                     {{-- Number: Dimensione --}}
                     <div class="col">
                         <label for="input-size">Dimensioni in metri quadrati</label>
-                        <input type="number" value="{{  old('size') ? old('size') : $apartment->size }}" min="10" name="size"
-                            class=" wrapper-input form-control @error('size') is-invalid @enderror" id="input-size"
-                            min="1" step="1" placeholder="Immetti la dimensione...">
+                        <input type="number" value="{{  old('size') ? old('size') : $apartment->size }}" min="10"
+                            name="size" class=" wrapper-input form-control @error('size') is-invalid @enderror"
+                            id="input-size" min="1" step="1" placeholder="Immetti la dimensione...">
                         @error('size')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -104,7 +105,8 @@
                 @foreach ($services as $service)
                 <div class="custom-control custom-checkbox col-6 col-md-4 col-lg-2">
                     <input type="checkbox" class="custom-control-input cb @error('services') is-invalid @enderror"
-                        name="services[]" {{ in_array( $service->id , old('services', $apartmentServices)) ? "checked" : ""}}
+                        name="services[]" {{ in_array( $service->id , old('services', $apartmentServices)) ? "checked" :
+                    ""}}
                     value="{{$service->id}}"
                     id="{{$service->id}}">
                     <label class="custom-control-label" for="{{$service->id}}">{{$service->name}}</label>
@@ -163,10 +165,46 @@
                 <input type="text" name="full_address" value="{{old('full_address', $apartment->full_address)}}"
                     class=" wrapper-input form-control @error('full_address') is-invalid @enderror" id="input-address"
                     placeholder="Inserisci qui l' indirizzo del locale...">
+                {{-- Datalist autocomplete --}}
+                <datalist id="address_list">
+
+                </datalist>
                 @error('full_address')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
+            {{-- script autocomplete --}}
+            <script>
+                const address_input = document.querySelector('#input-address');
+                            const huge_list = document.getElementById('address_list');
+                            let count = 0;
+                            
+                            address_input.addEventListener('keyup', e => {   
+                                    count > 2 ? count = 0 : count++;
+                                    if(address_input.value && count >=2  ){
+                                    window.axios.get(`http://localhost:8000/api/autocomplete?address=${address_input.value}`)
+                                    .then((res) => {
+                                        huge_list.innerHTML = "";
+                                        res.data.forEach(e =>{
+                                        console.log(e);
+                                        let option = document.createElement('option');
+                                        option.value = e;
+                                        option.innerText = e;
+                                        option.addEventListener('click', opt =>{
+                                            console.log(opt.value)
+                                            address_input.value = e;
+                                            huge_list.innerHTML = "";
+                                            })
+                                        huge_list.appendChild(option);
+                                        })
+                                    }) 
+                                }else if(address_input.value && count <5  ){
+                                    
+                                }else{
+                                    huge_list.innerHTML='';
+                                }
+                           });
+            </script>
             <img class="img-fluid d-block mb-3" src="{{ asset('storage/'.$apartment->image)}} " alt="apartment photo">
             {{-- input file immagine --}}
             <span class="d-block pb-1">Scegli l'immagine di copertina del tuo annuncio:</span>

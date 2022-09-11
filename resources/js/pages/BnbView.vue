@@ -62,43 +62,71 @@
                                                 class="col-form-label"
                                                 >Il tuo indirizzo email:</label
                                             >
-                                            <input
-                                                required
-                                                v-model="messageForm.mail"
-                                                v-if="$user"
-                                                type="email"
-                                                class="form-control"
-                                                id="email-text"
-                                            />
-                                            <input
-                                                required
-                                                v-else
-                                                v-model="messageForm.mail"
-                                                type="email"
-                                                class="form-control"
-                                                id="email-text"
-                                            />
+                                            <div>
+                                                <input
+                                                    required
+                                                    v-model="messageForm.mail"
+                                                    v-if="$user"
+                                                    type="email"
+                                                    class="form-control"
+                                                    id="email-text"
+                                                />
+                                                <input
+                                                    required
+                                                    v-else
+                                                    v-model="messageForm.mail"
+                                                    type="email"
+                                                    class="form-control"
+                                                    id="email-text"
+                                                />
+                                            </div>
+                                            <label
+                                                class="error d-block text-danger"
+                                                >{{
+                                                    !messageForm.mail.includes(
+                                                        "@ " && "."
+                                                    )
+                                                        ? "Inserire email"
+                                                        : ""
+                                                }}</label
+                                            >
+
                                             <label
                                                 for="email-text"
                                                 class="col-form-label"
                                                 >Il tuo nome completo:</label
                                             >
-                                            <input
-                                                required
-                                                v-if="$user"
-                                                v-model="messageForm.full_name"
-                                                type="text"
-                                                class="form-control"
-                                                id="email-text"
-                                            />
-                                            <input
-                                                required
-                                                v-model="messageForm.full_name"
-                                                v-else
-                                                type="text"
-                                                class="form-control"
-                                                id="email-text"
-                                            />
+                                            <div>
+                                                <input
+                                                    required
+                                                    v-if="$user"
+                                                    v-model="
+                                                        messageForm.full_name
+                                                    "
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="email-text"
+                                                />
+                                                <input
+                                                    required
+                                                    v-model="
+                                                        messageForm.full_name
+                                                    "
+                                                    v-else
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="email-text"
+                                                />
+                                            </div>
+                                            <label
+                                                class="error d-block text-danger"
+                                                >{{
+                                                    messageForm.full_name == ""
+                                                        ? "Campo obbligatorio "
+                                                        : ""
+                                                }}</label
+                                            >
+
                                             <label
                                                 for="message-text"
                                                 class="col-form-label"
@@ -110,6 +138,14 @@
                                                 class="form-control"
                                                 id="message-text"
                                             ></textarea>
+                                            <label
+                                                class="error d-block text-danger"
+                                                >{{
+                                                    messageForm.text == ""
+                                                        ? "Campo obbligatorio "
+                                                        : ""
+                                                }}</label
+                                            >
                                         </div>
                                     </form>
                                 </div>
@@ -121,7 +157,21 @@
                                     >
                                         Cancella
                                     </button>
-                                    <button type="button" class="btn modal_send_button" data-toggle="modal" data-target="#saveOutputModal" @click="sendMail()" data-dismiss="modal">
+                                    <button
+                                        type="button"
+                                        :disabled="
+                                            messageForm.text == '' ||
+                                            messageForm.full_name == '' ||
+                                            !messageForm.mail.includes(
+                                                '@' && '.'
+                                            )
+                                        "
+                                        class="btn modal_send_button"
+                                        data-toggle="modal"
+                                        data-target="#saveOutputModal"
+                                        @click="sendMail()"
+                                        data-dismiss="modal"
+                                    >
                                         Invia
                                     </button>
                                 </div>
@@ -130,23 +180,34 @@
                     </div>
 
                     <!-- Save Confirm Modal -->
-                    <div class="modal fade" id="saveOutputModal" tabindex="-1" role="dialog" aria-labelledby="saveOutputModalLabel" aria-hidden="true">
+                    <div
+                        class="modal fade"
+                        id="saveOutputModal"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="saveOutputModalLabel"
+                        aria-hidden="true"
+                    >
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                    <button
+                                        type="button"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        aria-label="Close"
+                                    >
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body text-center">
-                                    Il tuo messaggio é stato inviato con successo!
+                                    Il tuo messaggio é stato inviato con
+                                    successo!
                                 </div>
-                                <div class="modal-footer">
-                                </div>
+                                <div class="modal-footer"></div>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 col-md-6 p-3">
@@ -213,6 +274,8 @@ export default {
             Id: this.$route.params.id,
             apartments: [],
             services: [],
+            regexMail: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+            valid: false,
             messageForm: {
                 mail: "",
                 full_name: "",
@@ -222,13 +285,22 @@ export default {
     },
     methods: {
         sendMail() {
-            axios
-                .post(
-                    `/api/message/?apartment_id=${this.apartments[0].id}&mail=${this.messageForm.mail}&full_name=${this.messageForm.full_name}&text=${this.messageForm.text}`
-                )
-                .then(function (response) {
-                    console.log(response);
-                });
+            if (
+                this.messageForm.mail &&
+                this.messageForm.full_name &&
+                this.messageForm.text
+            ) {
+                axios
+                    .post(
+                        `/api/message/?apartment_id=${this.apartments[0].id}&mail=${this.messageForm.mail}&full_name=${this.messageForm.full_name}&text=${this.messageForm.text}`
+                    )
+                    .then(function (response) {
+                        console.log(response);
+                    });
+                this.valid = false;
+            } else {
+                this.valid = true;
+            }
         },
     },
     created() {
@@ -290,7 +362,26 @@ section {
             color: $text-blue-dark;
         }
     }
-
+    .modal {
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+    }
+    .modal-body {
+        background-color: $bg-secondary-dark;
+        color: $primary-green-light;
+        & input,
+        textarea {
+            color: $text-blue-dark;
+            border-color: $primary-green-light;
+            background-color: $bg-gray-light;
+        }
+    }
+    .modal-header,
+    .modal-footer {
+        border-color: $primary-green-dark;
+        background-color: $bg-primary-dark;
+        color: $primary-green-light;
+    }
     .modal_delete_button {
         font-size: 0.875rem;
         background-color: #ff5757;

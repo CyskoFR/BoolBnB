@@ -6,6 +6,7 @@
                 <nav class="navbar navbar-light bg-light">
                     <form class="hero_searchbar_box form-inline d-flex">
                         <input
+                            @keyup="autocomplete()"
                             v-model="search"
                             class="hero_searchbar form-control"
                             type="search"
@@ -20,14 +21,21 @@
                             Cerca
                         </button>
                     </form>
+                    <datalist v-if="search" id="address_list">
+                        <option
+                            @click="select(suggestion)"
+                            v-for="suggestion in suggested"
+                            :key="suggestion"
+                            value="suggestion"
+                        >
+                            {{ suggestion }}
+                        </option>
+                    </datalist>
                 </nav>
             </div>
 
             <div class="hero_img_container d-none d-md-block col-md-7">
-                <div
-                    class="carousel slide carousel-fade"
-                    data-ride="carousel"
-                >
+                <div class="carousel slide carousel-fade" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active" data-interval="4000">
                             <img
@@ -76,6 +84,8 @@ export default {
         return {
             observable,
             search: "",
+            suggested: [],
+            count: 0,
         };
     },
 
@@ -83,6 +93,22 @@ export default {
         submit() {
             observable.full_address = this.search;
             this.$router.push("/search-page/data/" + this.search);
+        },
+        autocomplete() {
+            this.count > 2 ? (this.count = 0) : this.count++;
+            if (this.search && this.count >= 2) {
+                axios
+                    .get(
+                        `http://localhost:8000/api/autocomplete?address=${this.search}`
+                    )
+                    .then((res) => {
+                        console.log(res.data);
+                        this.suggested = res.data;
+                    });
+            }
+        },
+        select(val) {
+            this.search = val;
         },
     },
 };
@@ -93,6 +119,29 @@ export default {
 
 .hero_section {
     padding: 0;
+}
+
+datalist option {
+    cursor: pointer;
+    margin: 1px 0;
+    padding: 5px 10px;
+    width: 100%;
+    display: block;
+    &:hover {
+        filter: brightness(105%);
+        background-color: $primary-green-dark;
+        color: $text-gray-light;
+    }
+}
+datalist {
+    display: block;
+    background-color: $bg-primary-light;
+    color: $primary-green-light;
+    width: 100%;
+    border: 1px solid $primary-green-light;
+    margin-top: 5px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .carousel.carousel-fade .carousel-item {
@@ -121,6 +170,7 @@ export default {
         font-size: 3.5rem;
         text-align: start;
         margin-bottom: 1.25rem;
+        filter: drop-shadow(1px 1px 2px rgb(23, 23, 23));
 
         //color animation
         background: linear-gradient(224deg, #42b883, #155f3e, #3468a3, #aac8e4);
