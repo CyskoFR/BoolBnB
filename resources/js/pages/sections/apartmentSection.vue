@@ -88,7 +88,7 @@ export default {
                 observable.last_page = response.data.last_page;
                 observable.curr_page = response.data.current_page;
                 // console.log(response.data);
-                console.log(observable.curr_page, observable.last_page);
+                // console.log(observable.curr_page, observable.last_page);
                 observable.ready = true;
             })
             .catch(function (error) {
@@ -121,10 +121,10 @@ export default {
                                 tempAr.push(tempNew[key]);
                             }
                             // console.log(tempAr);
-                            console.log(
-                                observable.curr_page,
-                                observable.last_page
-                            );
+                            // console.log(
+                            //     observable.curr_page,
+                            //     observable.last_page
+                            // );
 
                             observable.apartments = tempAr;
                         })
@@ -155,10 +155,10 @@ export default {
                                 tempAr.push(tempNew[key]);
                             }
                             // console.log(tempAr);
-                            console.log(
-                                observable.curr_page,
-                                observable.last_page
-                            );
+                            // console.log(
+                            //     observable.curr_page,
+                            //     observable.last_page
+                            // );
 
                             observable.apartments = tempAr;
                         })
