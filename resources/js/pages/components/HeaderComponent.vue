@@ -44,7 +44,12 @@
                         <a class="dropdown-item" href="/admin/apartments"
                             >Area personale</a
                         >
-                        <a class="dropdown-item" href="/" @click.prevent="logout">Logout</a>
+                        <a
+                            class="dropdown-item"
+                            href="/"
+                            @click.prevent="logout"
+                            >Logout</a
+                        >
                         <!-- <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Logout</a> -->
                     </div>
@@ -80,17 +85,17 @@ export default {
     components: {},
 
     methods: {
-        logout(){
-            axios.post('logout').then(response => {
-                if (response.status === 302 || 401) {
-                    location.reload();
-                }
-                else {
-                    // throw error and go to catch block
-                }
-                }).catch(error => {
-
-            });
+        logout() {
+            axios
+                .post("/logout")
+                .then((response) => {
+                    if (response.status === 302 || 401) {
+                        location.reload();
+                    } else {
+                        // throw error and go to catch block
+                    }
+                })
+                .catch((error) => {});
         },
     },
 };
@@ -134,5 +139,4 @@ header {
 .fa-user {
     color: $primary-green;
 }
-
 </style>
