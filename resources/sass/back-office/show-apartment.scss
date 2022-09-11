@@ -1,6 +1,7 @@
 section#show-apartment {
     background-color: $bg-primary-dark;
     color: $text-gray-dark;
+    padding: 1rem;
     b {
         font-size: 1.5rem;
         color: $primary-green-light;
@@ -11,6 +12,11 @@ section#show-apartment {
         color: $text-gray-light;
         margin-bottom: 0;
         text-transform: none;
+    }
+    .container {
+        background-color: $bg-secondary-dark;
+        border-radius: 0.5rem;
+        border: 1px solid $bg-primary-light;
     }
     .title_address {
         word-wrap: break-word;
@@ -24,10 +30,18 @@ section#show-apartment {
         outline-offset: 0.125rem;
     }
 
+    .back_button {
+        background-color: $bg-gray-light;
+        &:hover {
+            color: $text-gray-light;
+            background-color: $bg-gray-dark;
+            border: 1px solid $primary-green-light;
+        }
+    }
+
     .update_button {
         font-size: 0.875rem;
         background-color: $primary-green-light;
-        border-radius: 0.75rem;
         margin-right: 0.625rem;
         &:hover {
             color: $text-gray-light;

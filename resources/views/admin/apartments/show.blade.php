@@ -54,7 +54,7 @@
         </iframe>
         <div class="d-flex py-3" id="actions">
             <a href="{{route('admin.apartments.index')}}">
-                <button class="btn update_button mx-2">Indietro</button></a>
+                <button class="btn back_button mx-2">Indietro</button></a>
             <a href="{{route('admin.apartments.edit', $apartment)}}">
                 <button class="btn update_button">Modifica</button>
             </a>
