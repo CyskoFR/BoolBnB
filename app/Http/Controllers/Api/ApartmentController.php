@@ -97,6 +97,7 @@ class ApartmentController extends Controller
         })
         ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
         ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
+        ->where('is_visible',1)
         ->with('category', 'user', 'services', /*'sponsorships'*/)
         ->get();
 
@@ -118,6 +119,7 @@ class ApartmentController extends Controller
         })
         ->whereBetween('latitude', array($boundries['lat']['0'],$boundries['lat']['1']))
         ->whereBetween('longitude', array($boundries['log']['0'],$boundries['log']['1'])) 
+        ->where('is_visible',1)
         ->with('category', 'user')
 
         ->get();
@@ -127,6 +129,7 @@ class ApartmentController extends Controller
             
              ->join('apartment_service', 'apartments.id', '=','apartment_service.apartment_id')
             ->where('apartment_service.apartment_id', $elm['apartment_id'])
+            
              ->join('services', 'apartment_service.service_id', '=','services.id')
              ->select('services.id', 'services.name')
              ->get();
@@ -184,7 +187,7 @@ class ApartmentController extends Controller
          });
 
          $sponsored_apartments =  $sponsored_apartments->concat($apartments)->unique('id');   
-        return $result = PaginationHelper::paginate($sponsored_apartments,2);
+        return $result = PaginationHelper::paginate($sponsored_apartments,8);
     }
 
 
@@ -205,12 +208,13 @@ class ApartmentController extends Controller
     public function sponsored(){
         $apartments = Apartment::query()->join('apartment_sponsorship', 'apartments.id', '=','apartment_sponsorship.apartment_id')
         ->where('expiration_date', '>=', Carbon::now())
-        ->paginate(2);
+        ->where('is_visible',1)
+        ->paginate(4);
         $apartments = $apartments->map(function($apartment){
             $apartment['id'] = $apartment['apartment_id'];
             return $apartment;
        });
-    //    $apartments->paginate(15);
+
         return $apartments;
     }
     
