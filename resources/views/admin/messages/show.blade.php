@@ -7,6 +7,7 @@
             <h3>Messaggio su: <b>{{$message->apartment->name}}</b></h3>
             <h5>in: <b>{{$message->apartment->full_address}}</b></h5>
             <p>del {{date('d-M-y h:i', strtotime($message->created_at))}}</p>
+            <h5>da parte di: <b class="sender_mail">{{$message->mail}}</b></h5>
         </div>
         <div class="sender_info_section p-3 pb-4">
             <h4><b>{{$message->full_name}}</b> scrive:</h4>

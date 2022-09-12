@@ -18,8 +18,8 @@
             </div>
             @else
             {{-- sponsorship time display --}}
-            <div>
-                La tua promozione e' attiva fino al: <span class="d-block  "><b>{{ date('d-M-y',
+            <div class="col-3">
+                La tua promozione e' attiva fino al: <span class="d-block sponsorship_time"><b>{{ date('d-M-y',
                         strtotime($checkSponsor->expiration_date)) }} alle {{ date('H:i ',
                         strtotime($checkSponsor->expiration_date)) }} </b></span>
             </div>
