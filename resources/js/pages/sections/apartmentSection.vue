@@ -2,7 +2,7 @@
     <div class="apartment_bg">
         <div v-if="observable.ready">
             <section
-                v-if="observable.apartments"
+                v-if="Object.keys(observable.apartments).length > 0"
                 class="apartment_section row justify-content-center align-items-start container mx-auto pt-4"
             >
                 <bnbCard
@@ -16,7 +16,10 @@
                 v-else
                 class="apartment_section d-flex justify-content-center flex-row p-3"
             >
-                cerca un indirizzo decente
+                <h2>
+                    Nessun risultato trovato, prova modificare i filtri di
+                    ricerca
+                </h2>
             </section>
             <div class="py-4 cta d-flex justify-content-center">
                 <button
@@ -175,7 +178,15 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../sass/variables";
-
+h2 {
+    opacity: 0;
+    text-align: center;
+    color: $text-gray-light;
+    transition: opacity 1s ease-in-out;
+}
+h2:hover {
+    opacity: 1;
+}
 .apartment_section {
     border-top: 1px solid $text-gray-dark;
     min-height: 18.75rem;
