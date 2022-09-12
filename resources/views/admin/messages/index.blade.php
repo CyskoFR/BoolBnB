@@ -25,13 +25,13 @@
                 </p>
             </div>
         </div>
+        @endforeach
+        
         <div class="d-flex justify-content-center">
             <a href="{{route('admin.apartments.index')}}">
                 <button class="btn back_button"><b>Indietro</b></button>
             </a>
         </div>
-
-        @endforeach
 
         @else
         <h1 class="text-center mt-2 mb-4">Sembra che tu non abbia nessun nuovo messaggio!</h1>
