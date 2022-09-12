@@ -41,8 +41,8 @@
             <a href="{{route('admin.apartments.index')}}">
                 <button class="btn back_button"><b>Indietro</b></button>
             </a>
-            <a href="{{route('admin.sponsorships', request()->route()->parameters['apartment'])}}">
-                <button class="btn btn-primary bg-primary"><b>Upgrade!</b></button>
+            <a href="{{route('admin.apartments.show', request()->route()->parameters['apartment'])}}">
+                <button class="btn btn-primary bg-primary"><b>Vai alla pagina dell' appartamento</b></button>
             </a>
 
         </div>
