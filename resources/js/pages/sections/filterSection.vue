@@ -6,6 +6,7 @@
                     <div class="input-group d-flex flex-column my-2">
                         <small for="indirizzo">Indirizzo</small>
                         <input
+                            @keyup="autocomplete"
                             required
                             class="px-2"
                             name="indirizzo"
@@ -14,6 +15,20 @@
                             placeholder="Indirizzo"
                         />
                     </div>
+                    <datalist
+                        :class="{ 'd-none ': !toogleDatalist }"
+                        v-if="observable.full_address"
+                        id="address_list"
+                    >
+                        <option
+                            @click="select(suggestion)"
+                            v-for="suggestion in suggested"
+                            :key="suggestion"
+                            value="suggestion"
+                        >
+                            {{ suggestion }}
+                        </option>
+                    </datalist>
                     <div
                         class="input-group row align-items-end justify-content-center mt-2 mb-4 mx-0"
                     >
@@ -207,13 +222,30 @@ export default {
 
     data() {
         return {
+            suggested: [],
+            toogleDatalist: false,
             observable,
             selectedServicesString: "",
             allServices: {},
+            count: 0,
             tempServicesArray: new Set(),
         };
     },
     methods: {
+        autocomplete() {
+            this.toogleDatalist = true;
+            this.count > 2 ? (this.count = 0) : this.count++;
+            if (observable.full_address && this.count >= 2) {
+                axios
+                    .get(
+                        `http://localhost:8000/api/autocomplete?address=${observable.full_address}`
+                    )
+                    .then((res) => {
+                        console.log(res.data);
+                        this.suggested = res.data;
+                    });
+            }
+        },
         fetchApartments() {
             if (observable.selectedServices.length == 0) {
                 observable.ready = false;
@@ -305,6 +337,10 @@ export default {
                 observable.selectedServices.toString();
             this.fetchApartments();
         },
+        select(val) {
+            this.toogleDatalist = false;
+            this.observable.full_address = val;
+        },
     },
     created() {
         axios
@@ -322,6 +358,29 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/resources/sass/_variables";
+
+datalist option {
+    cursor: pointer;
+    margin: 1px 0;
+    padding: 5px 10px;
+    width: 100%;
+    display: block;
+    &:hover {
+        filter: brightness(105%);
+        background-color: $primary-green-dark;
+        color: $text-gray-light;
+    }
+}
+datalist {
+    display: block;
+    background-color: $bg-primary-light;
+    color: $primary-green-light;
+    width: 100%;
+    border: 1px solid $primary-green-light;
+    margin-top: 5px;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
 p {
     margin-bottom: 0.375rem;
